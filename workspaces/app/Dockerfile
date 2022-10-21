@@ -37,4 +37,4 @@ WORKDIR /app
 
 RUN yarn add serve
 COPY --from=build /src/workspaces/app/dist dist
-CMD yarn serve -n dist/
+CMD yarn serve -p 8080 -n dist/ 
