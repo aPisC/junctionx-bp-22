@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.deployment.name }}-{{ .Values.api.name }}-service
 spec:
   selector:
-    app: {{ .Values.deployment.name }}-{{ .Values.api.name }}-deployment
+    app: {{ .Values.deployment.name }}-{{ .Values.api.name }}
   ports:
   - name: http
     protocol: TCP
