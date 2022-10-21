@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}-{{ .Values.file.name }}-deployment
+  labels:
+    app: {{ .Values.deployment.name }}-{{ .Values.file.name }}
+spec:
+  replicas: {{ .Values.file.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}-{{ .Values.file.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}-{{ .Values.file.name }}
+    spec:
+      volumes:
+        - name: content-volume
+          hostPath:
+            path: {{ .Values.file.location }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.deployment.repository }}/{{ .Values.file.image }}:{{ .Values.file.tag }}"
+          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
+          volumeMounts:
+            - name: content-volume
+              mountPath: /www/data
+          ports:
+            - name: http
+              containerPort: {{ .Values.file.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.file.resources | nindent 12 }}
