@@ -1,7 +1,7 @@
 deployment:
   name: junctionx-bp-22
   repository: localhost:32000
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
 
 ingress:
   host: junctionx-bp-22.apisc.host
@@ -14,4 +14,10 @@ api:
   port: 8080
   resources: {}
 
-
+app:
+  name: app
+  image: junctionx-bp-22/app
+  tag: latest
+  replicas: 1
+  port: 8080
+  resources: {}

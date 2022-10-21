@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      appImageTag:
+        default: latest
+        required: true
+      apiImageTag:
+        default: latest
+        required: true
+
+jobs:
+  exec:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v3
+      - name: run helm
+        run: |
+          helm upgrade \
+            test-stack \
+            compose/chart \
+            --install \
+            --wait \
+            --set api.tag=${{inputs.apiImageTag}} \
+            --set app.tag=${{inputs.appImageTag}} \
+            --create-namespace \
+            --namespace junctionx-bp-22
