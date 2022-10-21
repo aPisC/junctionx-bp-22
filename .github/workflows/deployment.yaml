@@ -19,7 +19,8 @@ jobs:
         run: |
           helm uninstall \
             junctionx-bp-22 \ 
-            --namespace junctionx-bp-22
+            --namespace junctionx-bp-22 \
+            || true
           helm upgrade \
             junctionx-bp-22 \
             compose/chart \
