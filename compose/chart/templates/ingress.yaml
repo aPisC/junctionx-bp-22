@@ -26,7 +26,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.deployment.name }}-app-ingress 
+  name: {{ .Values.deployment.name }}-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
@@ -39,6 +39,16 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
+          - path: /files            
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.deployment.name}}-{{ .Values.file.name }}-service
+                port:
+                  number: {{ .Values.file.port }}
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:
@@ -46,3 +56,4 @@ spec:
                 name: {{ .Values.deployment.name}}-{{ .Values.app.name }}-service
                 port:
                   number: {{ .Values.app.port }}
+
