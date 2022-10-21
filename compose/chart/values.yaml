@@ -21,8 +21,8 @@ app:
   replicas: 1
   port: 8080
   resources: {}
-  
-app:
+
+file:
   name: file
   image: junctionx-bp-22/file
   tag: latest
