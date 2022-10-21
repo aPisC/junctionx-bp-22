@@ -1,0 +1,42 @@
+name: File CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      customTag:
+        default: latest
+        required: true
+#  push:
+#    branches: [ "development" ]
+#  pull_request:
+#    branches: [ "development" ]
+
+env:
+  DOCKER_REPOSITORY: 'registry.container-registry:5000'
+  DOCKER_IMAGE: 'junctionx-bp-22/file'
+
+jobs:
+  build_and_push:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build ${{ env.DOCKER_IMAGE }} Docker image
+        run: |
+          docker build . \
+          --file ./workspaces/file/Dockerfile \
+          --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID \
+          --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:${{ inputs.customTag }}
+
+      - name: Push ${{ env.DOCKER_IMAGE }} image
+        run: |
+          docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID
+          docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:${{ inputs.customTag }}
+
+      - name: Create build summary
+        run: |
+          echo "# Build summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Image name: $DOCKER_IMAGE" >> $GITHUB_STEP_SUMMARY
+          echo "- Image tag: $GITHUB_RUN_ID" >> $GITHUB_STEP_SUMMARY
+          echo "- Date: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
