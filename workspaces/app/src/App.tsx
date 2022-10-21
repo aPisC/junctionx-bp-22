@@ -23,19 +23,7 @@ export const DropInAnimation = {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="w-full h-full flex items-center justify-center">
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        variants={DropInAnimation}
-        className="w-10 h-10 bg-slate-500"
-      ></motion.div>
-    </div>
-  )
+  return <div className="w-full h-full bg-slate-500"></div>
 }
 
 export default App
