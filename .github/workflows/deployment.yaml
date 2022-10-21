@@ -22,5 +22,5 @@ jobs:
             --wait \
             --set api.tag=${{inputs.apiImageTag}} \
             --set app.tag=${{inputs.appImageTag}} \
-            --create-namespace
+            --create-namespace \
             --namespace junctionx-bp-22
