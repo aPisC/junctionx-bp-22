@@ -9,6 +9,9 @@ on:
       apiImageTag:
         default: latest
         required: true
+      fileImageTag:
+        default: latest
+        required: true
 
 jobs:
   exec:
@@ -25,5 +28,6 @@ jobs:
             --wait \
             --set api.tag=${{inputs.apiImageTag}} \
             --set app.tag=${{inputs.appImageTag}} \
+            --set file.tag=${{inputs.fileImageTag}} \
             --create-namespace \
             --namespace junctionx-bp-22
