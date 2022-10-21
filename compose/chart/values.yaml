@@ -4,11 +4,11 @@ deployment:
   imagePullPolicy: IfNotPresent
 
 ingress:
-  host: test-stack.apisc.host
+  host: junctionx-bp-22.apisc.host
 
 api:
   name: api
-  image: test-stack/api
+  image: junctionx-bp-22/api
   tag: latest
   replicas: 1
   port: 80
