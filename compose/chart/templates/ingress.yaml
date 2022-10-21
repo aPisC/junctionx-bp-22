@@ -20,4 +20,4 @@ spec:
               service:
                 name: {{ .Values.deployment.name}}-{{ .Values.api.name }}-service
                 port:
-                  number: 443
+                  number: 8080
