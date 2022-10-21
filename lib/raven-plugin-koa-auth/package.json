@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "raven-plugin-koa-auth",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "koa-jwt": "^4.0.3",
+    "raven": "*",
+    "raven-plugin-koa": "*",
+    "tsyringe": "*"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/koa-jwt": "^3.3.0",
+    "typescript": "^4.7.4"
+  }
+}

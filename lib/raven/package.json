@@ -1,0 +1,33 @@
+{
+  "name": "raven",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/aPisC/raven.git",
+  "author": "Bendeguz Cseresnyes <cser.bende@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo done",
+    "build": "tsc -b",
+    "watch": "tsc -w",
+    "test": "jest"
+  },
+  "dependencies": {
+    "flattenizer": "^1.1.1",
+    "glob": "^8.0.3",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.7.0",
+    "yaml": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^28.1.8",
+    "@types/supertest": "^2.0.12",
+    "@types/yaml": "^1.9.7",
+    "jest": "^28",
+    "jest-theories": "^1.5.1",
+    "supertest": "^6.2.4",
+    "ts-jest": "^28.0.8",
+    "ts-mockito": "^2.6.1"
+  }
+}

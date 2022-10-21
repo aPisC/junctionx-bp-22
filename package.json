@@ -1,0 +1,23 @@
+{
+  "name": "template-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "lib/*",
+    "workspaces/*",
+    "compose/standalone"
+  ],
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "dev": "docker-compose -f compose/docker-compose.yaml -f compose/docker-compose.dev.yaml up --build",
+    "pkg": "yarn workspace standalone pkg",
+    "start": "docker-compose -f compose/docker-compose.yaml -f compose/docker-compose.prod.yaml up --build",
+    "deploy": "docker-compose -f compose/docker-compose.yaml -f compose/docker-compose.prod.yaml up --build -d",
+    "destroy": "docker-compose -f compose/docker-compose.yaml -f compose/docker-compose.prod.yaml down"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}

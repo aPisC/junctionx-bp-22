@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  ingress: 
+    build:
+      context: ingress
+    ports:
+      - "8080:8080"
+  api:
+    build:
+      context: ..
+      dockerfile: ./workspaces/api/Dockerfile
+  app:
+    build: 
+      context: ..
+      dockerfile: ./workspaces/app/Dockerfile

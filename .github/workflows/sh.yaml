@@ -1,0 +1,23 @@
+name: Shell script
+
+on:
+  workflow_dispatch:
+    inputs:
+      apiImageTag:
+        required: true
+  
+jobs:
+  exec:
+    runs-on: [self-hosted]
+    steps:
+    - uses: actions/checkout@v3
+    - name: run helm
+      run: |
+        helm upgrade \
+          test-stack \
+          compose/chart \
+          --install \
+          --wait \
+          --set api.tag=${{inputs.apiImageTag}}
+          -n test-stack 
+          

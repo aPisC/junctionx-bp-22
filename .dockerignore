@@ -1,0 +1,7 @@
+**/Dockerfile
+**/tsconfig.tsbuildinfo
+**/k8s
+**/node_modules
+**/dist
+**/bin
+.dockerignore

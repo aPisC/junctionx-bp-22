@@ -1,0 +1,17 @@
+deployment:
+  name: test-stack
+  repository: localhost:32000
+  imagePullPolicy: IfNotPresent
+
+ingress:
+  host: test-stack.apisc.host
+
+api:
+  name: api
+  image: test-stack/api
+  tag: latest
+  replicas: 1
+  port: 80
+  resources: {}
+
+

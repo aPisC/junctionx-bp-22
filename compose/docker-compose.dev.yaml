@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  api:
+    build:
+      target: development
+    volumes:
+      - ../workspaces/api:/src/workspaces/api
+    ports:
+      - 8080
+      - '9229:9229'
+  app:
+    build: 
+      target: development
+    volumes:
+      - ../workspaces/api:/src/workspaces/api
+    ports:
+      - 8080
+
