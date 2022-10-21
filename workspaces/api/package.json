@@ -25,7 +25,8 @@
     "raven-plugin-koa": "*",
     "raven-plugin-koa-auth": "*",
     "raven-plugin-sequelize": "*",
-    "sqlite3": "^5.0.11"
+    "sequelize-typescript": "*",
+    "tsyringe": "*"
   },
   "devDependencies": {
     "nodemon": "^2.0.19",
