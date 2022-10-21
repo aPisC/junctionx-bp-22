@@ -2,6 +2,10 @@ name: Api CI
 
 on:
   workflow_dispatch:
+    inputs:
+      customTag:
+        default: latest
+        required: true
 #  push:
 #    branches: [ "development" ]
 #  pull_request:
@@ -18,10 +22,16 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build ${{ env.DOCKER_IMAGE }} Docker image
-        run: docker build . --file ./workspaces/api/Dockerfile --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID
+        run: |
+          docker build . \
+          --file ./workspaces/api/Dockerfile \
+          --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID \
+          --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:${{ inputs.customTag }}
 
       - name: Push ${{ env.DOCKER_IMAGE }} image
-        run: docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID
+        run: |
+          docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID
+          docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:${{ inputs.customTag }}
 
       - name: Create build summary
         run: |

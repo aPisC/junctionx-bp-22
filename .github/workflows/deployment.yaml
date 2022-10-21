@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       appImageTag:
+        default: latest
         required: true
       apiImageTag:
+        default: latest
         required: true
 
 jobs:
@@ -22,5 +24,5 @@ jobs:
             --wait \
             --set api.tag=${{inputs.apiImageTag}} \
             --set app.tag=${{inputs.appImageTag}} \
-            --create-namespace
+            --create-namespace \
             --namespace junctionx-bp-22
