@@ -9,7 +9,7 @@ on:
 
 env:
   DOCKER_REPOSITORY: "registry.container-registry:5000"
-  DOCKER_IMAGE: "test-stack/api"
+  DOCKER_IMAGE: "junctionx-bp-22/api"
   
 
 jobs:
