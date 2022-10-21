@@ -11,7 +11,7 @@ api:
   image: junctionx-bp-22/api
   tag: latest
   replicas: 1
-  port: 80
+  port: 8080
   resources: {}
 
 
