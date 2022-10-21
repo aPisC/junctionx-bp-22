@@ -1,28 +1,39 @@
+import { motion } from 'framer-motion'
 import { useState } from 'react'
-import './App.css'
-import reactLogo from './assets/react.svg'
+
+export const DropInAnimation = {
+  hidden: {
+    y: '-100vh',
+    opacity: 0,
+  },
+  visible: {
+    y: '0',
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: 'spring',
+      damping: 25,
+      stiffness: 100,
+    },
+  },
+  exit: {
+    y: '100vh',
+    opacity: 0,
+  },
+}
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+    <div className="w-full h-full flex items-center justify-center">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={DropInAnimation}
+        className="w-10 h-10 bg-slate-500"
+      ></motion.div>
     </div>
   )
 }
