@@ -14,4 +14,10 @@ api:
   port: 8080
   resources: {}
 
-
+app:
+  name: app
+  image: junctionx-bp-22/app
+  tag: latest
+  replicas: 1
+  port: 8080
+  resources: {}

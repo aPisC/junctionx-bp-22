@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}-{{ .Values.app.name }}-deployment
+  labels:
+    app: {{ .Values.deployment.name }}-{{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}-{{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}-{{ .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.deployment.repository }}/{{ .Values.app.image }}:{{ .Values.app.tag }}"
+          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.app.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.app.resources | nindent 12 }}
