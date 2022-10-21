@@ -27,6 +27,6 @@ file:
   image: junctionx-bp-22/file
   tag: latest
   replicas: 1
-  port: 8080
+  port: 80
   location: /home/azureuser/service/junctionx-bp-22-files
   resources: {}
