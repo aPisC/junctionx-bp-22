@@ -25,6 +25,9 @@ def calc(exchange_rate_home: float,
     purchase the same amount of goods & services in foreign country in
     <feorign currency unit>
 
+    (Relation: ppp_foreign = 1/ppp_home)
+    (Note: Invert table values from here: https://appsso.eurostat.ec.europa.eu/nui/submitViewTableAction.do)
+
     Returns:
     price_ratio: ppp-adjusted prices between two countries
     i.e. overall price in <home_country> is <price_ratio>
