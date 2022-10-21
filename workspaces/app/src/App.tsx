@@ -1,5 +1,25 @@
+import React, { useState } from 'react'
+import LandingPage from './pages/landing'
+
+export const ModalPortalContext = React.createContext<any>(null)
+
 function App() {
-  return <div className="w-full h-full bg-slate-500 font-averta"></div>
+  const [modalPortalElement, setModalPortalElement] = useState<any>(null)
+  return (
+    <>
+      <div
+        id="modalPortal"
+        ref={(e) => {
+          setModalPortalElement(e)
+        }}
+      ></div>
+      <ModalPortalContext.Provider value={modalPortalElement}>
+        <div className="w-full h-full  relative">
+          <LandingPage />
+        </div>
+      </ModalPortalContext.Provider>
+    </>
+  )
 }
 
 export default App
