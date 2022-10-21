@@ -12,7 +12,9 @@ export interface MobileWrapperProps {
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     {isMobile ? (
-      <App />
+      <div className="w-screen h-screen overflow-auto">
+        <App />
+      </div>
     ) : (
       <AppWrapper>
         <App />
