@@ -1,5 +1,5 @@
 deployment:
-  name: test-stack
+  name: junctionx-bp-22
   repository: localhost:32000
   imagePullPolicy: IfNotPresent
 
