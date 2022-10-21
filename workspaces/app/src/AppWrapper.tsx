@@ -34,7 +34,7 @@ function AppWrapper({ children }: AppWrapperProps) {
       }}
       className="p-4"
     >
-      <div className={`w-full h-full relative rounded-lg border-x-4 overflow-hidden border-y-8 border-black`}>
+      <div className={`w-full h-full relative rounded-lg border-x-4 overflow-auto border-y-8 border-black`}>
         {children}
       </div>
     </div>
