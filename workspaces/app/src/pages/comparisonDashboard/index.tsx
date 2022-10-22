@@ -1,4 +1,4 @@
-import { FaUtensils } from 'react-icons/fa'
+import { FaBalanceScale, FaUtensils } from 'react-icons/fa'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
@@ -13,6 +13,7 @@ import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { InfoBox } from './InfoBox'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import SliderItem from './SliderItem'
+import Icon from '../../modules/icon'
 
 type Props = {}
 
@@ -40,7 +41,14 @@ export default function ComparisonDashboardPage({}: Props) {
         <Navigation />
         <div className="flex-grow overflow-hidden">
           <Scrollbars>
-            <InfoBox>asdf</InfoBox>
+            <InfoBox
+              icon={
+                <Icon>
+                  <FaBalanceScale className="text-5xl text-wise-navy-blue" />
+                </Icon>
+              }
+              title="Compare your living expenses!"
+            />
             <PieChart
               homeCountry={user.sourceCountry}
               targetCountry={user.targetCountry}
