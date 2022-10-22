@@ -14,6 +14,9 @@
   },
   "pkg": {
     "scripts": "dist/index.js",
+    "assets": [
+      "assets/**/*"
+    ],
     "targets": [
       "node16-linux-x64"
     ],
