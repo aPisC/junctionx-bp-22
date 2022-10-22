@@ -2,12 +2,15 @@ name: App CI
 
 on:
   workflow_dispatch:
-    inputs:
-      customTag:
-        default: latest
-        required: true
+#    inputs:
+#      customTag:
+#        default: latest
+#        required: true
   push:
     branches: [ "development" ]
+    paths:
+      - 'workspaces/app/**'
+      - '.github/workflows/app-CI.yml'
 #  pull_request:
 #    branches: [ "development" ]
 
@@ -26,12 +29,12 @@ jobs:
           docker build . \
           --file ./workspaces/app/Dockerfile \
           --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID \
-          --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:${{ inputs.customTag }}
+          --tag $DOCKER_REPOSITORY/$DOCKER_IMAGE:latest
 
       - name: Push ${{ env.DOCKER_IMAGE }} image
         run: |
           docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:$GITHUB_RUN_ID
-          docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:${{ inputs.customTag }}
+          docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:latest
 
       - name: Create build summary
         run: |
