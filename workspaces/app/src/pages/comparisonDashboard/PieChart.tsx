@@ -3,6 +3,8 @@ import { BACKEND_URL } from '../../config/backendUrl'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useRequest } from '../../utils/useRequest'
 import { MultiSeriesPieChartView, MultiSeriesPieChartViewProps } from './MultiSeriesPieChartView'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export interface PieChartProps extends MultiSeriesPieChartViewProps {
   homeCountry: string
@@ -11,9 +13,24 @@ export interface PieChartProps extends MultiSeriesPieChartViewProps {
 
 //wrapper height is also hardcoded in the MultiSeriesPieChartView
 export const PieChart = ({ data, labels, homeCountry, targetCountry }: PieChartProps) => {
+  const navigate = useNavigate()
   const flagsRequest = useRequest(() => FlagsRequest, [])
 
   useSpinnerOverlay(flagsRequest.isRunning)
+  const userRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
+  if (userRequest.isRunning) return null
+
+  const user: any = userRequest.data
 
   if (flagsRequest.isRunning) {
     return null
@@ -30,13 +47,16 @@ export const PieChart = ({ data, labels, homeCountry, targetCountry }: PieChartP
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${homeFlag?.image}`} />
             </div>
-            <div className="p-1">100 000 {homeFlag?.currency}</div>
+            <div className="p-1">
+              {user.accounts?.find((x: any) => x?.type === 'main')?.balance ?? 0}
+              {homeFlag?.currency}
+            </div>
           </div>
           <div className="flex items-center w-full justify-center text-wise-navy-blue">
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${targetFlag?.image}`} />
             </div>
-            <div className="p-1">100 000 {targetFlag?.currency}</div>
+            <div className="p-1">100 000 {homeFlag?.currency}</div>
           </div>
         </div>
       </div>

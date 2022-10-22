@@ -33,6 +33,7 @@ export default function ComparisonDashboardPage({}: Props) {
   if (userRequest.isRunning) return null
 
   const user: any = userRequest.data
+  //TODO implement foreign currency with conversation whenever the api is present
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -46,11 +47,17 @@ export default function ComparisonDashboardPage({}: Props) {
               data={[
                 {
                   backgroundColor: ['#37517e', 'transparent'],
-                  data: [79, 21],
+                  data: [
+                    user.accounts?.find((x: any) => x?.type === 'main')?.balance ?? 0,
+                    (user.accounts?.find((x: any) => x?.type === 'main')?.balance ?? 0) * 0.2,
+                  ],
                 },
                 {
                   backgroundColor: ['#A8AAAC', 'transparent'],
-                  data: [67, 33],
+                  data: [
+                    user.accounts?.find((x: any) => x?.type === 'main')?.balance ?? 0,
+                    (user.accounts?.find((x: any) => x?.type === 'main')?.balance ?? 0) * 0.2,
+                  ],
                 },
               ]}
             />
