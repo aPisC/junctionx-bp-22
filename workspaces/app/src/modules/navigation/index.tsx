@@ -7,9 +7,11 @@ export interface NavigationProps {}
 export const Navigation = ({}: NavigationProps) => {
   return (
     <div className="flex w-full justify-between">
-      <Icon>
-        <FaHouseUser />
-      </Icon>
+      <a href="/home">
+        <Icon>
+          <FaHouseUser />
+        </Icon>
+      </a>
       <H1 variant="medium" className="h-full text-center">
         Username
       </H1>

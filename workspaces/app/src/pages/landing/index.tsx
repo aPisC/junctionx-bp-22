@@ -9,7 +9,9 @@ export default function LandingPage({}: LandingPageProps) {
     <div className="p-4 w-full h-full flex flex-col justify-evenly items-center">
       <H1>Home Country</H1>
       <FlagSelector />
-      <Button rounded>Continue</Button>
+      <a href="/home">
+        <Button rounded>Continue</Button>
+      </a>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import HomePage from './pages/home'
 import HubPage from './pages/hub'
 import LandingPage from './pages/landing'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 export const ModalPortalContext = React.createContext<any>(null)
 
@@ -17,7 +18,13 @@ function App() {
       ></div>
       <ModalPortalContext.Provider value={modalPortalElement}>
         <div className="w-full h-full relative">
-          <LandingPage />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="home" element={<HomePage />} />
+              <Route path="hub" element={<HubPage />} />
+            </Routes>
+          </BrowserRouter>
         </div>
       </ModalPortalContext.Provider>
     </>
