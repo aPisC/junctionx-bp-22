@@ -46,7 +46,7 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
                   <FaCalendar className="text-5xl text-wise-navy-blue" />
                 </Icon>
               }
-              title="Arrived in the country!"
+              title="Start spending like a local!"
             />
             <div className="flex flex-col w-full justify-center">
               <PieChart
@@ -64,30 +64,44 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
                 ]}
               />
               <SliderGallery>
-                {Array.from(Array(7)).map((item, index) => (
-                  <SliderGalleryItem key={index}>
-                    <SliderItem
-                      icon={<FaUtensils />}
-                      labels={['Food']}
-                      datasets={[
-                        {
-                          label: 'Home',
-                          data: [100],
-                          barThickness: 10,
-                          borderRadius: 8,
-                          backgroundColor: '#37517e',
-                        },
-                        {
-                          label: 'Ex.',
-                          data: [350],
-                          barThickness: 10,
-                          borderRadius: 8,
-                          backgroundColor: '#A8AAAC',
-                        },
-                      ]}
-                    />
-                  </SliderGalleryItem>
-                ))}
+                {Array.from(Array(7)).map((item, index) => {
+                  const home = Math.floor(Math.random() * 200)
+                  const abroad = Math.floor(Math.random() * 200)
+                  return (
+                    <SliderGalleryItem key={index}>
+                      <SliderItem
+                        icon={<FaUtensils />}
+                        labels={['Food']}
+                        datasets={[
+                          {
+                            label: 'Home',
+                            data: [home],
+                            barThickness: 10,
+                            borderRadius: 8,
+                            backgroundColor: '#37517e',
+                            stack: 'stack0',
+                          },
+                          {
+                            label: 'Home',
+                            data: [Math.abs(home - abroad)],
+                            barThickness: 10,
+                            borderRadius: 8,
+                            backgroundColor: '#00b9ff',
+                            stack: `${home > abroad ? 'stack1' : 'stack0'}`,
+                          },
+                          {
+                            label: 'Ex.',
+                            data: [abroad],
+                            barThickness: 10,
+                            borderRadius: 8,
+                            backgroundColor: '#A8AAAC',
+                            stack: 'stack1',
+                          },
+                        ]}
+                      />
+                    </SliderGalleryItem>
+                  )
+                })}
               </SliderGallery>
             </div>
           </Scrollbars>
