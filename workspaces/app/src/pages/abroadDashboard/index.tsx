@@ -131,7 +131,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
           <Modal rounded blur>
             <ModalHandler>
               <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-home')}>
-                <H1>Whats next?</H1>
+                <H1>What's next?</H1>
               </Button>
             </ModalHandler>
             <ModalBody title="Recommendation">
