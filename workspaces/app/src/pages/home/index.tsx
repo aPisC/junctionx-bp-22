@@ -1,6 +1,17 @@
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars-2'
-import { FaUtensils } from 'react-icons/fa'
+import {
+  FaBath,
+  FaBrain,
+  FaBus,
+  FaDice,
+  FaLaptop,
+  FaPills,
+  FaQuestion,
+  FaSocks,
+  FaUtensils,
+  FaWineGlass,
+} from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
@@ -100,7 +111,7 @@ export default function HomePage({}: HomePageProps) {
                 <SliderGalleryItem>
                   <GalleryItem
                     max={summaryMax}
-                    icon={<FaUtensils />}
+                    icon={BarIconMap[sum.id] || <FaQuestion />}
                     labels={[sum.name]}
                     datasets={[
                       {
@@ -137,4 +148,16 @@ export default function HomePage({}: HomePageProps) {
       </div>
     </BasePage>
   )
+}
+
+const BarIconMap: { [key: string]: JSX.Element } = {
+  'food-non-alc': <FaUtensils />,
+  clothing: <FaSocks />,
+  health: <FaPills />,
+  'alc-tobaco': <FaWineGlass />,
+  education: <FaBrain />,
+  'util-bills': <FaBath />,
+  'it-tech': <FaLaptop />,
+  leisure: <FaDice />,
+  transport: <FaBus />,
 }

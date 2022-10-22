@@ -40,7 +40,7 @@ export default class UserController {
       id: uuidv4(),
       name: 'Base',
       currency: currency,
-      expense: initialTransactions.reduce((sum, tr) => sum + tr.amount, 0) * exchange,
+      expense: -initialTransactions.reduce((sum, tr) => sum + tr.amount, 0) * exchange,
       user: user.id,
       balance: 1000 * exchange,
       type: 'main',
