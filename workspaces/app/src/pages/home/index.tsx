@@ -1,22 +1,56 @@
+import axios from 'axios'
+import { Scrollbars } from 'react-custom-scrollbars-2'
+import { FaSocks, FaUtensils } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
-import Tabs, { TabsHeader, Tab, TabsBody, TabsPanel } from '../../modules/tabs'
-import { Scrollbars } from 'react-custom-scrollbars-2'
+import Tabs, { Tab, TabsBody, TabsHeader, TabsPanel } from '../../modules/tabs'
+import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
+import { useRequest } from '../../utils/useRequest'
 import BasePage from '../base'
 import BalanceView from './BalanceView'
-import { BarChartView } from './BarChartView'
-import TransactionItem from './TransactionItem'
-import { useNavigate } from 'react-router-dom'
-import { FaUtensils, FaSocks } from 'react-icons/fa'
 import { GalleryItem } from './GalleryItem'
-import Icon from '../../modules/icon'
+import TransactionItem from './TransactionItem'
 
 export interface HomePageProps {}
 
 export default function HomePage({}: HomePageProps) {
   const navigate = useNavigate()
+  const userRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
+  const transactionsRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/transaction/transactions/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
+  useSpinnerOverlay(userRequest.isRunning)
+  useSpinnerOverlay(transactionsRequest.isRunning)
+
+  if (userRequest.isRunning) return null
+
+  const user: any = userRequest.data
+  console.log(user)
+  const mainAccount = user.accounts.find((a: any) => a.type == 'main')
+  const saveAccount = user.accounts.find((a: any) => a.type == 'save')
+
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -140,12 +174,11 @@ export default function HomePage({}: HomePageProps) {
               </div>
             </div>
             <div className="p-2 flex flex-col gap-2">
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
+              {transactionsRequest.data
+                ?.filter((tr: any) => tr.amount < 0)
+                .map((tr: any) => (
+                  <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
+                ))}
             </div>
           </Scrollbars>
         </div>

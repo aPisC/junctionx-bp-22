@@ -9,7 +9,7 @@ Content-type: application/json
 POST http://localhost:8080/user/setTarget/fr/e9141004-a6b2-4665-ac96-b535de71b224  HTTP/1.1
 
 ###
-GET http://localhost:8080/user/0a47d4a3-76fc-4c03-9f1c-41e7adc09261 HTTP/1.1
+GET https://junctionx-bp-22.apisc.host/api/user/ccf9759d-f26a-4d9b-b301-debe121ae509 HTTP/1.1
 
 
 ###
