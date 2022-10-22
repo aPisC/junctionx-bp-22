@@ -20,17 +20,16 @@ export default function LandingPage({}: LandingPageProps) {
 
   const handleClick = () => {
     localStorage.setItem('flag', flag ? flag.country : '')
+    navigate('/home')
   }
 
   return (
     <div className="p-4 w-full h-full flex flex-col justify-evenly items-center">
       <H1>Home Country</H1>
       <FlagSelector flag={flag} setFlagCallback={setFlag} />
-      <a href="/home">
-        <Button disabled={flag == null} rounded onClick={() => handleClick()}>
-          Continue
-        </Button>
-      </a>
+      <Button disabled={flag == null} rounded onClick={() => handleClick()}>
+        Continue
+      </Button>
     </div>
   )
 }

@@ -5,11 +5,13 @@ import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import BasePage from '../base'
 import Button from '../../modules/button'
+import { useNavigate } from 'react-router-dom'
 
 export interface ComparisonSelectorPageProps {}
 
 export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) {
   const [flag, setFlag] = useState<typeof flags[0] | null>(null)
+  const navigate = useNavigate()
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -24,11 +26,15 @@ export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) 
             />
             <H1 className="text-center">Destination Country</H1>
             <FlagSelector flag={flag} setFlagCallback={setFlag} />
-            <a href="/comparison-dashboard">
-              <Button rounded onClick={() => {}}>
-                Continue
-              </Button>
-            </a>
+            <Button
+              disabled={flag == null}
+              rounded
+              onClick={() => {
+                navigate('/comparison-dashboard')
+              }}
+            >
+              Continue
+            </Button>
           </div>
         </div>
       </div>

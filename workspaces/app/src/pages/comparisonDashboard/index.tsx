@@ -6,10 +6,12 @@ import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
 import BasePage from '../base'
 import { BarChartView } from '../home/BarChartView'
 import { MultiSeriesPieChartView } from './MultiSeriesPieChartView'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 export default function ComparisonDashboardPage({}: Props) {
+  const navigate = useNavigate()
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -125,11 +127,9 @@ export default function ComparisonDashboardPage({}: Props) {
           </SliderGallery>
         </div>
         <div>
-          <a href="/travelplan">
-            <Button variant="hub" className="rounded-b-none">
-              <H1>Create travel plan!</H1>
-            </Button>
-          </a>
+          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/travelplan')}>
+            <H1>Create travel plan!</H1>
+          </Button>
         </div>
       </div>
     </BasePage>
