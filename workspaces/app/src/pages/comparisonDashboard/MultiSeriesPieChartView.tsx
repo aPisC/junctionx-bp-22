@@ -21,45 +21,50 @@ export const options = {
   },
 }
 
-export interface BarChartViewProps {
+export interface MultiSeriesPieChartViewProps {
   labels?: string[]
-  datasets?: any
+  data?: any
 }
 
-const data = {
-  labels: ['Overall Yay', 'Overall Nay'],
-  datasets: [
-    {
-      backgroundColor: ['#AAA', '#777'],
-      data: [21, 79],
-    },
-    {
-      backgroundColor: ['hsl(0, 100%, 60%)', 'hsl(0, 100%, 35%)'],
-      data: [33, 67],
-    },
-    {
-      backgroundColor: ['transparent'],
-      data: [],
-    },
-    {
-      backgroundColor: ['transparent'],
-      data: [],
-    },
-    {
-      backgroundColor: ['transparent'],
-      data: [],
-    },
-    {
-      backgroundColor: ['transparent'],
-      data: [],
-    },
-  ],
-}
+const emptydata = [
+  {
+    backgroundColor: ['transparent'],
+    data: [],
+  },
+  {
+    backgroundColor: ['transparent'],
+    data: [],
+  },
+  {
+    backgroundColor: ['transparent'],
+    data: [],
+  },
+  {
+    backgroundColor: ['transparent'],
+    data: [],
+  },
+  {
+    backgroundColor: ['transparent'],
+    data: [],
+  },
+  {
+    backgroundColor: ['transparent'],
+    data: [],
+  },
+]
 
-export const MultiSeriesPieChartView = ({}: BarChartViewProps) => {
+const data = {}
+
+export const MultiSeriesPieChartView = ({ labels, data }: MultiSeriesPieChartViewProps) => {
+  const populatedData = data.concat(emptydata)
+  const populatedLabels = labels?.concat(Array.from(populatedData.length).map((item) => ''))
+  const finalData = {
+    labels: populatedLabels,
+    datasets: populatedData,
+  }
   return (
-    <div className="w-full">
-      <Pie options={options} data={data} />
+    <div className="w-full h-[15rem]">
+      <Pie options={options} data={finalData} />
     </div>
   )
 }
