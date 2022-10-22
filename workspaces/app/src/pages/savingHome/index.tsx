@@ -1,11 +1,10 @@
-import React from 'react'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useNavigate } from 'react-router-dom'
+import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import BasePage from '../base'
 import BalanceView from '../home/BalanceView'
 import TransactionItem from '../home/TransactionItem'
-import { Scrollbars } from 'react-custom-scrollbars-2'
-import { H1 } from '../../modules/h1'
 import { LineChartView } from './LineChartView'
 
 interface SavingHomePageProps {}
@@ -22,7 +21,7 @@ export default function SavingHomePage({}: SavingHomePageProps) {
               <div className="p-2 rounded-lg">
                 <BalanceView currency="Magyar forint" title="Jar account" value={120000} />
               </div>
-              <div className="py-2 h-[15rem] overflow-hidden">
+              <div className="py-2 h-[15em] overflow-hidden">
                 <Scrollbars>
                   <div className="flex flex-col gap-2">
                     <TransactionItem shop="Spar megacorp." expense={38000} />

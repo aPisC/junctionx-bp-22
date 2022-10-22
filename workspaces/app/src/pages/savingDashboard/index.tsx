@@ -63,6 +63,11 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
                   },
                 ]}
               />
+              <div className="p-2">
+                <div className="flex w-full border-b-2 border-ui-grey-body">
+                  <H1 variant="large">Categories</H1>
+                </div>
+              </div>
               <SliderGallery>
                 {Array.from(Array(7)).map((item, index) => {
                   const home = Math.floor(Math.random() * 200)
