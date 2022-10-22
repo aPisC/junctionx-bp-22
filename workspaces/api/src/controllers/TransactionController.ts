@@ -65,6 +65,7 @@ export default class TransactionController {
       const predicted = predictor.getPrice(body.category, body.amount)
       if (predicted > body.amount) {
         mainAccount.balance -= predicted
+        mainAccount.expense += predicted
         await mainAccount.save()
         await this.transactionRepository.create({
           user: user.id,
@@ -84,6 +85,7 @@ export default class TransactionController {
         })
 
         saveAccount.balance += predicted - body.amount
+        saveAccount.expense -= predicted - body.amount
         await saveAccount.save()
         await this.transactionRepository.create({
           user: user.id,
@@ -99,6 +101,7 @@ export default class TransactionController {
     }
 
     mainAccount.balance -= body.amount
+    mainAccount.expense += body.amount
     await mainAccount.save()
     await this.transactionRepository.create({
       user: user.id,
