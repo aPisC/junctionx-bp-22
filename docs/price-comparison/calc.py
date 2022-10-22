@@ -54,7 +54,7 @@ def master_calculator(source_id: str,
                       category: str,
                       currencies_by_country: dict,
                       exchange_rate_info: list,
-                      country_category_ppp_data: pd.Dataframe):
+                      country_category_ppp_data: pd.Dataframe) -> float:
     """
     Function to calculate living costs in different countries
     
