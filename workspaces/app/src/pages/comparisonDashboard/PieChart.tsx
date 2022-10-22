@@ -43,7 +43,7 @@ export const PieChart = ({ data, labels, homeCountry, targetCountry }: PieChartP
       <MultiSeriesPieChartView labels={labels} data={data} />
       <div className="absolute flex top-0 left-0 w-full h-full text-black items-center justify-center">
         <div className="flex flex-col text-lg">
-          <div className="text-xs">Original country:</div>
+          <div className="text-xs text-dark-grey">Original country:</div>
           <div className="flex items-center w-full justify-center text-wise-navy-blue">
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${homeFlag?.image}`} />
@@ -53,8 +53,8 @@ export const PieChart = ({ data, labels, homeCountry, targetCountry }: PieChartP
               {homeFlag?.currency}
             </div>
           </div>
-          <div className="text-xs">Choosen country:</div>
-          <div className="flex items-center w-full justify-center text-dark-grey">
+          <div className="text-xs text-dark-grey">Choosen country:</div>
+          <div className="flex items-center w-full justify-center text-ui-grey-body">
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${targetFlag?.image}`} />
             </div>
