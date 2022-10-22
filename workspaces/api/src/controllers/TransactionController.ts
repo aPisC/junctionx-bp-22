@@ -24,7 +24,7 @@ export default class TransactionController {
   async getTransactions(ctx: any) {
     const userId = ctx.request.params.userId
     const transactions = await this.transactionRepository.findAll({
-      order: ['timestamp', 'DESC'],
+      order: [['timestamp', 'DESC']],
       where: { user: userId },
     })
     return transactions
@@ -40,7 +40,7 @@ export default class TransactionController {
 
     const predictor = new PPPPredictor(user.sourceCountry, user.targetCountry)
     const transactions = await this.transactionRepository.findAll({
-      order: ['timestamp', 'DESC'],
+      order: [['timestamp', 'DESC']],
       where: { user: userId },
     })
     const predictions = transactions.map((tr) => ({

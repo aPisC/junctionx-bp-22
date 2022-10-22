@@ -16,7 +16,7 @@ GET https://junctionx-bp-22.apisc.host/api/user/ccf9759d-f26a-4d9b-b301-debe121a
 GET http://localhost:8080/transaction/predictions/a766e6d6-15f5-45ac-8be4-a92b72fc9f12 HTTP/1.1
 
 ###
-GET http://localhost:8080/transaction/transactions/e9141004-a6b2-4665-ac96-b535de71b224 HTTP/1.1
+GET https://junctionx-bp-22.apisc.host/api/transaction/transactions/8b8a6ca1-63fa-4dab-8f5f-60c1f5d7a5ca HTTP/1.1
 
 ###
 POST http://localhost:8080/transaction HTTP/1.1
