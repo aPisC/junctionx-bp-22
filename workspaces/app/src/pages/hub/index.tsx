@@ -20,7 +20,7 @@ export default function HubPage({}: HubPageProps) {
             <Button variant="hub" onClick={() => navigate('/saving-selection')}>
               <H1>Plan</H1>
             </Button>
-            <Button variant="hub">
+            <Button variant="hub" onClick={() => navigate('/abroad-dashboard')}>
               <H1>Move</H1>
             </Button>
           </div>

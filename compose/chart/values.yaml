@@ -4,7 +4,7 @@ deployment:
   imagePullPolicy: Always
 
 ingress:
-  host: junctionx-bp-22.apisc.host
+  host: travelwise.apisc.host
 
 api:
   name: api
