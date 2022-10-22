@@ -20,6 +20,9 @@ export default class TransactionModel extends Model {
   declare category: string
 
   @Column
+  declare name: string
+
+  @Column
   declare timestamp: Date
 
   @ForeignKey(() => UserModel)

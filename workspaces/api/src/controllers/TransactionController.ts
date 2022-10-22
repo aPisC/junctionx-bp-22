@@ -76,6 +76,7 @@ export default class TransactionController {
         await this.transactionRepository.create({
           user: user.id,
           account: mainAccount.id,
+          name: body.name,
           category: body.category,
           amount: -body.amount,
           timestamp: new Date(),
@@ -85,6 +86,7 @@ export default class TransactionController {
           user: user.id,
           account: mainAccount.id,
           category: 'saving',
+          name: 'Saving money',
           amount: -predicted + body.amount,
           timestamp: new Date(),
           id: uuid(),
@@ -97,6 +99,7 @@ export default class TransactionController {
           user: user.id,
           account: mainAccount.id,
           category: 'saving',
+          name: 'Saving money',
           amount: predicted - body.amount,
           timestamp: new Date(),
           id: uuid(),
@@ -113,6 +116,7 @@ export default class TransactionController {
       user: user.id,
       account: mainAccount.id,
       category: body.category,
+      name: body.name,
       amount: -body.amount,
       timestamp: new Date(),
       id: uuid(),
@@ -126,4 +130,5 @@ interface CreateTransactionRequest {
   amount: number
   userId: string
   category: string
+  name: string
 }
