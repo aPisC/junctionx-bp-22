@@ -8,6 +8,8 @@ packages = [{include = "junctionx_bp_22"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pandas = "^1.5.1"
+ipykernel = "^6.16.1"
 
 
 [build-system]
