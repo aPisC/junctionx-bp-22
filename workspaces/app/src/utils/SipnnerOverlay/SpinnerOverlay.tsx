@@ -24,7 +24,7 @@ export function SpinnerOverlay() {
 export function SpinnerOverlayBackend({ children }: PropsWithChildren) {
   const [counter, setCounter] = useState(0)
   const activate = useCallback(() => setCounter((c) => c + 1), [setCounter])
-  const deactivate = useCallback(() => setCounter((c) => c + 1), [setCounter])
+  const deactivate = useCallback(() => setCounter((c) => c - 1), [setCounter])
   const active = counter > 0
 
   const handler = useMemo(() => ({ activate, deactivate, active }), [activate, deactivate, active])

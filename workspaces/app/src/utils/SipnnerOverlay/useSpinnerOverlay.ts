@@ -7,7 +7,7 @@ export function useSpinnerOverlay(active: boolean) {
   useEffect(() => {
     if (active) {
       handler.activate()
-      return handler.deactivate
+      return () => handler.deactivate()
     }
   }, [active, handler])
 }

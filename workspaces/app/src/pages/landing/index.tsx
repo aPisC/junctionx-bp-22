@@ -1,33 +1,52 @@
-import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config/backendUrl'
 import { flags } from '../../config/flags'
 import Button from '../../modules/button'
 import { FlagSelector } from '../../modules/flagSelector'
 import { H1 } from '../../modules/h1'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
+import { useRequest } from '../../utils/useRequest'
+import { useTriggeredRequest } from '../../utils/useTriggeredRequest'
 
 export interface LandingPageProps {}
 
 export default function LandingPage({}: LandingPageProps) {
   const navigate = useNavigate()
   const [flag, setFlag] = useState<typeof flags[0] | null>(flags.find((flag) => flag.country === 'Hungary') ?? null)
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
 
-  useEffect(() => {
-    if (localStorage.getItem('flag')) {
+  const loadUser = async (token: string | null) => {
+    if (!token) return null
+    const response = await axios.get<any>(`${BACKEND_URL}/user/${token}`).catch((e) => null)
+    if (response?.data) {
+      localStorage.setItem('flag', response.data.sourceCountry)
       navigate('/home')
     }
-  }, [])
+    return response?.data
+  }
 
-  const handleClick = () => {
-    localStorage.setItem('flag', flag ? flag.country : '')
+  const createUser = async () => {
+    const response = await axios.post<any>(`${BACKEND_URL}/user`, { country: flag }).catch((e) => null)
+    if (!response?.data) return
+
+    localStorage.setItem('token', response.data.id)
+    localStorage.setItem('flag', response.data.sourceCountry)
     navigate('/home')
   }
+
+  const createUserRequest = useTriggeredRequest(createUser)
+  const loadUserRequest = useRequest(() => loadUser(token), [])
+
+  useSpinnerOverlay(loadUserRequest.isRunning)
+  useSpinnerOverlay(createUserRequest.isRunning)
 
   return (
     <div className="p-4 w-full h-full flex flex-col justify-evenly items-center">
       <H1>Home Country</H1>
       <FlagSelector flag={flag} setFlagCallback={setFlag} />
-      <Button disabled={flag == null} rounded onClick={() => handleClick()}>
+      <Button disabled={flag == null} rounded onClick={() => createUserRequest.run()}>
         Continue
       </Button>
     </div>
