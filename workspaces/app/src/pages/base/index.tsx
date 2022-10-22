@@ -1,12 +1,15 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import Navigation from '../../modules/navigation'
 
-export interface BasePageProps {}
+export interface BasePageProps {
+  children: ReactNode
+}
 
-export default function BasePage({}: BasePageProps) {
+export default function BasePage({ children }: BasePageProps) {
   return (
     <div>
       <Navigation />
+      {children}
     </div>
   )
 }
