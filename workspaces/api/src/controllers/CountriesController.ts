@@ -11,13 +11,13 @@ export default class CountriesController {
 }
 
 export const countries: { [key: string]: CountryDescription } = {
-  es: { id: 'es', currency: 'EUR', image: '/file/es.svg', country: 'Spain' },
-  at: { id: 'at', currency: 'EUR', image: '/file/at.svg', country: 'Austria' },
-  fr: { id: 'fr', currency: 'EUR', image: '/file/fr.svg', country: 'France' },
-  dk: { id: 'dk', currency: 'DKK', image: '/file/dk.svg', country: 'Denmark' },
-  se: { id: 'se', currency: 'SEK', image: '/file/se.svg', country: 'Sweden' },
-  de: { id: 'de', currency: 'EUR', image: '/file/de.svg', country: 'Germany' },
-  hu: { id: 'hu', currency: 'HUF', image: '/file/hu.svg', country: 'Hungary' },
+  es: { id: 'es', currency: 'EUR', image: '/file/es.svg', country: 'Spain', exchange: 1 },
+  at: { id: 'at', currency: 'EUR', image: '/file/at.svg', country: 'Austria', exchange: 1 },
+  fr: { id: 'fr', currency: 'EUR', image: '/file/fr.svg', country: 'France', exchange: 1 },
+  dk: { id: 'dk', currency: 'DKK', image: '/file/dk.svg', country: 'Denmark', exchange: 7.5 },
+  se: { id: 'se', currency: 'SEK', image: '/file/se.svg', country: 'Sweden', exchange: 11 },
+  de: { id: 'de', currency: 'EUR', image: '/file/de.svg', country: 'Germany', exchange: 1 },
+  hu: { id: 'hu', currency: 'HUF', image: '/file/hu.svg', country: 'Hungary', exchange: 410 },
 }
 
 interface CountryDescription {
@@ -25,4 +25,5 @@ interface CountryDescription {
   country: string
   id: string
   image: string
+  exchange: number
 }
