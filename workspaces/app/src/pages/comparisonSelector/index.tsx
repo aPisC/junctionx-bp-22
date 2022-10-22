@@ -15,7 +15,7 @@ export interface ComparisonSelectorPageProps {}
 
 export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) {
   const navigate = useNavigate()
-  const [flag, setFlag] = useState<string>('de')
+  const [flag, setFlag] = useState<string | null>(null)
 
   const userRequest = useSpinneredRequest(
     () =>
