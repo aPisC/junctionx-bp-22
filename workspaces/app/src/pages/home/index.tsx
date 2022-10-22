@@ -8,10 +8,12 @@ import BasePage from '../base'
 import BalanceView from './BalanceView'
 import { BarChartView } from './BarChartView'
 import TransactionItem from './TransactionItem'
+import { useNavigate } from 'react-router-dom'
 
 export interface HomePageProps {}
 
 export default function HomePage({}: HomePageProps) {
+  const navigate = useNavigate()
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -157,11 +159,9 @@ export default function HomePage({}: HomePageProps) {
           </Scrollbars>
         </div>
         <div>
-          <a href="/hub">
-            <Button variant="hub" className="rounded-b-none">
-              <H1>Go to hub!</H1>
-            </Button>
-          </a>
+          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/hub')}>
+            <H1>Go to hub!</H1>
+          </Button>
         </div>
       </div>
     </BasePage>
