@@ -46,17 +46,12 @@ export const FlagSelector = ({ disabled = false, flag, setFlagCallback }: FlagSe
           </FlagButton>
         </div>
       </ModalHandler>
-      <ModalBody>
-        <ModalCloseContainer className="flex w-full justify-end cursor-pointer">
-          <Icon>
-            <FaRegTimesCircle />
-          </Icon>
-        </ModalCloseContainer>
+      <ModalBody title="Select Country">
         {flags.map((flag: any) => (
           <Button
             key={flag.id}
-            variant="hub"
-            className="my-2"
+            variant="none"
+            className="my-2 w-full"
             onClick={() => {
               setFlagCallback(flag.id)
             }}

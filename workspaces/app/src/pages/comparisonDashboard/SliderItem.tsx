@@ -15,7 +15,7 @@ export const SliderItem = ({ datasets, labels, icon }: SliderItemProps) => {
           <GalleryItem icon={icon} labels={labels} datasets={datasets} />
         </div>
       </ModalHandler>
-      <ModalBody>
+      <ModalBody title="Category">
         <ComparisonDashboardPopup>
           {Array.from(Array(7)).map((item, index) => (
             <PricePairItem

@@ -58,21 +58,18 @@ export const ModalStyle = {
   body: {
     w: 'w-full',
     maxW: 'max-w-3xl',
-    h: 'h-fit',
-    minH: 'min-h-[20%]',
-    maxH: 'max-h-[80%]',
+    h: 'h-[80%]',
     flex: 'flex',
     flexDirection: 'flex-col',
     positon: 'items-center',
-    padding: 'p-4',
     overflow: 'overflow-auto',
     cursor: 'cursor-default',
   },
   variants: {
     base: {
-      bg: 'bg-blue-200',
+      bg: 'bg-white',
       border: 'border',
-      borderColor: 'border-blue-600',
+      borderColor: 'border-dark-grey',
     },
   },
 }

@@ -16,10 +16,10 @@ export default function SavingHomePage({}: SavingHomePageProps) {
     <BasePage>
       <div className="h-full flex flex-col">
         <Navigation />
-        <div className="flex flex-grow overflow-hidden">
-          <div className="flex flex-col">
-            <div className="flex w-full flex-col p-2">
-              <div className="bg-pink-400 rounded-lg">
+        <div className="flex-grow overflow-hidden">
+          <Scrollbars>
+            <div className="flex flex-col">
+              <div className="p-2 rounded-lg">
                 <BalanceView currency="Magyar forint" title="Jar account" value={120000} />
               </div>
               <div className="py-2 h-[15rem] overflow-hidden">
@@ -42,7 +42,7 @@ export default function SavingHomePage({}: SavingHomePageProps) {
               <H1>Savings</H1>
               <LineChartView />
             </div>
-          </div>
+          </Scrollbars>
         </div>
       </div>
     </BasePage>

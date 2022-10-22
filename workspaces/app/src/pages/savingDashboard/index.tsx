@@ -38,7 +38,7 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
     <BasePage>
       <div className="h-full flex flex-col">
         <Navigation />
-        <div className="flex flex-grow overflow-hidden items-start">
+        <div className="flex-grow overflow-hidden">
           <Scrollbars>
             <InfoBox
               icon={

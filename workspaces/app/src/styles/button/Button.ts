@@ -60,5 +60,6 @@ export const ButtonStyle = {
         bg: 'active:bg-brand-blue-down',
       },
     },
+    none: {},
   },
 }
