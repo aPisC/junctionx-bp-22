@@ -8,6 +8,7 @@ import ComparisonDashboardPage from './pages/comparisonDashboard'
 import SavingSelectorPage from './pages/savingSelector'
 import SavingTutorialPage from './pages/savingTutorial'
 import SavingDashboardPage from './pages/savingDashboard'
+import SavingHomePage from './pages/savingHome'
 
 export const ModalPortalContext = React.createContext<any>(null)
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="saving-selection" element={<SavingSelectorPage />} />
               <Route path="saving-tutorial" element={<SavingTutorialPage />} />
               <Route path="saving-dashboard" element={<SavingDashboardPage />} />
+              <Route path="saving-home" element={<SavingHomePage />} />
             </Routes>
           </BrowserRouter>
         </div>
