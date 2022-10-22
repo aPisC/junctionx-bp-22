@@ -1,39 +1,21 @@
-import { FaRegSmileBeam, FaUtensils } from 'react-icons/fa'
-import Card, { BaseCard, ExpandedCard } from '../../modules/card'
+import { FaRegSmileBeam } from 'react-icons/fa'
 import Icon from '../../modules/icon'
-import { BarChartView } from '../home/BarChartView'
-import { GalleryItem } from '../home/GalleryItem'
+import Modal, { ModalBody, ModalHandler } from '../../modules/modal'
+import { GalleryItem, GalleryItemProps } from '../home/GalleryItem'
 import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
 import { PricePairItem } from './PricePairItem'
 
-export interface SliderItemProps {}
+export interface SliderItemProps extends GalleryItemProps {}
 
-export const SliderItem = ({}: SliderItemProps) => {
+export const SliderItem = ({ datasets, labels, icon }: SliderItemProps) => {
   return (
-    <Card rounded>
-      <BaseCard layoutId="card-0">
-        <GalleryItem
-          icon={<FaUtensils />}
-          labels={['Food']}
-          datasets={[
-            {
-              label: 'Home',
-              data: [100],
-              barThickness: 10,
-              borderRadius: 8,
-              backgroundColor: '#37517e',
-            },
-            {
-              label: 'Ex.',
-              data: [350],
-              barThickness: 10,
-              borderRadius: 8,
-              backgroundColor: '#A8AAAC',
-            },
-          ]}
-        />
-      </BaseCard>
-      <ExpandedCard layoutId="card-0">
+    <Modal blur rounded>
+      <ModalHandler>
+        <div className="cursor-pointer">
+          <GalleryItem icon={icon} labels={labels} datasets={datasets} />
+        </div>
+      </ModalHandler>
+      <ModalBody>
         <ComparisonDashboardPopup>
           {Array.from(Array(7)).map((item, index) => (
             <PricePairItem
@@ -48,8 +30,8 @@ export const SliderItem = ({}: SliderItemProps) => {
             />
           ))}
         </ComparisonDashboardPopup>
-      </ExpandedCard>
-    </Card>
+      </ModalBody>
+    </Modal>
   )
 }
 
