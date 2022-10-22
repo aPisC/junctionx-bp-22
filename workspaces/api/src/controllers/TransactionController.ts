@@ -4,7 +4,7 @@ import { injectable } from 'tsyringe'
 import TransactionModel from '../models/TransactionModel'
 
 @injectable()
-@Route.Prefix('/transactions')
+@Route.Prefix('/transaction')
 export default class TransactionController {
   private readonly transactionRepository: Repository<TransactionModel>
 
@@ -12,9 +12,9 @@ export default class TransactionController {
     this.transactionRepository = sequelize.getRepository(TransactionModel)
   }
 
-  @Route.Get('/:id')
+  @Route.Get('/transactions/:userId')
   async getTransactions(ctx: any) {
-    const userId = ctx.request.params.id
+    const userId = ctx.request.params.userId
     const transactions = await this.transactionRepository.findAll({ where: { user: userId } })
     return transactions
   }

@@ -2,6 +2,7 @@ import { Raven } from 'raven'
 import { RavenPluginKoa } from 'raven-plugin-koa'
 import RavenPluginKoaAuth from 'raven-plugin-koa-auth'
 import { RavenPluginSequelize } from 'raven-plugin-sequelize'
+import CountriesController from './controllers/CountriesController'
 import TestController from './controllers/TestController'
 import TransactionController from './controllers/TransactionController'
 import UserController from './controllers/UserController'
@@ -32,6 +33,7 @@ server
   .useController(TestController)
   .useController(UserController)
   .useController(TransactionController)
+  .useController(CountriesController)
 
 // Web engine and authorization
 server.usePlugin(RavenPluginKoaAuth).configure({
