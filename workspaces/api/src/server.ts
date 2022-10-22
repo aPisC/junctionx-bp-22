@@ -10,6 +10,7 @@ import AccountModel from './models/AccountModel'
 import TestModel from './models/TestModel'
 import TransactionModel from './models/TransactionModel'
 import UserModel from './models/UserModel'
+import 'sqlite3'
 
 const server = new Raven()
 
