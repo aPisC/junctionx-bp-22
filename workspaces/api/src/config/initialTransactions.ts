@@ -6,6 +6,11 @@ export const initialTransactions = [
     name: 'Mg Ronalds',
   },
   {
+    category: 'it-tech',
+    amount: -50,
+    name: 'Activation Lizzard',
+  },
+  {
     category: 'food-non-alc',
     amount: -20,
     name: 'Burger Queen',
@@ -16,6 +21,11 @@ export const initialTransactions = [
     amount: -20,
 
     name: 'UpSkill',
+  },
+  {
+    category: 'it-tech',
+    amount: -20,
+    name: 'Epick Games',
   },
   {
     category: 'education',
