@@ -60,8 +60,10 @@ export default function ComparisonDashboardPage({}: Props) {
                 },
               ]}
             />
-            <div className="flex w-full justify-center">
-              <H1 className="text-xl">Categories</H1>
+            <div className="p-2">
+              <div className="flex w-full border-b-2 border-ui-grey-body">
+                <H1 variant="large">Categories</H1>
+              </div>
             </div>
             <SliderGallery>
               <SliderGalleryItem>
