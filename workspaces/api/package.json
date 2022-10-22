@@ -28,6 +28,7 @@
     "raven-plugin-koa-auth": "*",
     "raven-plugin-sequelize": "*",
     "sequelize-typescript": "*",
+    "sqlite3": "^5.1.2",
     "tsyringe": "*",
     "uuidv4": "^6.2.13"
   },
