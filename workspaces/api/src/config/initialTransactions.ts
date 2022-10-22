@@ -36,7 +36,7 @@ export const initialTransactions = [
   {
     category: 'clothing',
     amount: 10,
-    name: 'C ^ A',
+    name: 'C^A',
   },
   {
     category: 'clothing',

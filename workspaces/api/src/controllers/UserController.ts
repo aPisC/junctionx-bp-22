@@ -42,7 +42,7 @@ export default class UserController {
       currency: currency,
       expense: initialTransactions.reduce((sum, tr) => sum + tr.amount, 0) * exchange,
       user: user.id,
-      balance: 1000,
+      balance: 1000 * exchange,
       type: 'main',
     })
     await this.accountRepository.create({
