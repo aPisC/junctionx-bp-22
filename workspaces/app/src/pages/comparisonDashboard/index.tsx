@@ -11,17 +11,50 @@ import Card, { BaseCard, ExpandedCard } from '../../modules/card'
 import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
 import Icon from '../../modules/icon'
 import { PricePairItem } from './PricePairItem'
+import PieChart from './PieChart'
+import { useRequest } from '../../utils/useRequest'
+import axios from 'axios'
+import { BACKEND_URL } from '../../config/backendUrl'
+import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 
 type Props = {}
 
 export default function ComparisonDashboardPage({}: Props) {
   const navigate = useNavigate()
+  const userRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+  useSpinnerOverlay(userRequest.isRunning)
+
+  if (userRequest.isRunning) return null
+
+  const user: any = userRequest.data
   return (
     <BasePage>
       <div className="h-full flex flex-col">
         <Navigation />
         <div className="flex-grow overflow-hidden">
-          <MultiSeriesPieChartView />
+          <PieChart
+            homeCountry={user.sourceCountry}
+            targetCountry={user.targetCountry}
+            data={[
+              {
+                backgroundColor: ['#37517e', 'transparent'],
+                data: [79, 21],
+              },
+              {
+                backgroundColor: ['#A8AAAC', 'transparent'],
+                data: [67, 33],
+              },
+            ]}
+          />
           <div className="flex w-full justify-center">
             <H1 className="text-xl">Categories</H1>
           </div>
