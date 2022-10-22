@@ -40,8 +40,8 @@ export const data = {
     {
       label: '',
       data: [1, 2, 3, 2],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderColor: '#00b9ff',
+      backgroundColor: '#00b9ff',
       fill: false,
       tension: 0.4,
     },

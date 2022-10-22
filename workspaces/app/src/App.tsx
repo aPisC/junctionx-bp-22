@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AbroadDashboardPage from './pages/abroadDashboard'
+import AbroadHomePage from './pages/abroadHome'
 import ComparisonDashboardPage from './pages/comparisonDashboard'
 import ComparisonSelectorPage from './pages/comparisonSelector'
 import HomePage from './pages/home'
@@ -38,6 +39,8 @@ function App() {
               <Route path="saving-dashboard" element={<SavingDashboardPage />} />
               <Route path="saving-home" element={<SavingHomePage />} />
               <Route path="abroad-dashboard" element={<AbroadDashboardPage />} />
+              <Route path="abroad-home" element={<AbroadHomePage />} />
+              abroad-home
             </Routes>
           </BrowserRouter>
         </div>

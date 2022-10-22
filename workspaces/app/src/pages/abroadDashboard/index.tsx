@@ -137,17 +137,22 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
             <ModalBody title="Recommendation">
               <div className="h-full w-full p-4">
                 <div className="flex flex-col w-full h-[50%] items-center justify-center">
-                  <div className="text-center pb-2">Mitigate your expenses by using up Your saving Jar!</div>
-                  <Button variant="primary" rounded className="bg-wise-navy-blue text-white">
-                    Mitigate expenses!
-                  </Button>
-                </div>
-                <div className="flex flex-col w-full h-[50%] items-center justify-center">
                   <div className="text-center pb-2">
                     Accumulate savings by artifically adjusting prices to your home country!
                   </div>
-                  <Button variant="primary" rounded className="bg-wise-navy-blue text-white">
+                  <Button
+                    variant="primary"
+                    rounded
+                    className="bg-wise-navy-blue text-white"
+                    onClick={() => navigate('/abroad-home')}
+                  >
                     Create a Jar!
+                  </Button>
+                </div>
+                <div className="flex flex-col w-full h-[50%] items-center justify-center">
+                  <div className="text-center pb-2">Mitigate your expenses by using up Your saving Jar!</div>
+                  <Button variant="primary" disabled rounded className="bg-wise-navy-blue text-white">
+                    Mitigate expenses!
                   </Button>
                 </div>
               </div>
