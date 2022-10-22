@@ -1,19 +1,19 @@
+import axios from 'axios'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 import { FaBalanceScale, FaUtensils } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
+import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
-import BasePage from '../base'
-import { useNavigate } from 'react-router-dom'
-import PieChart from './PieChart'
-import { useRequest } from '../../utils/useRequest'
-import axios from 'axios'
-import { BACKEND_URL } from '../../config/backendUrl'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
+import { useRequest } from '../../utils/useRequest'
+import BasePage from '../base'
 import { InfoBox } from './InfoBox'
-import { Scrollbars } from 'react-custom-scrollbars-2'
+import PieChart from './PieChart'
 import SliderItem from './SliderItem'
-import Icon from '../../modules/icon'
 
 type Props = {}
 
@@ -104,7 +104,7 @@ export default function ComparisonDashboardPage({}: Props) {
         </div>
         <div>
           <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-dashboard')}>
-            <H1>Spend like a local!</H1>
+            <H1 variant="medium">Spend like a local!</H1>
           </Button>
         </div>
       </div>

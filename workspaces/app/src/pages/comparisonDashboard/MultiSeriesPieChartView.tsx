@@ -1,4 +1,4 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -63,7 +63,7 @@ export const MultiSeriesPieChartView = ({ labels, data }: MultiSeriesPieChartVie
     datasets: populatedData,
   }
   return (
-    <div className="w-full h-[15rem]">
+    <div className="w-full h-[15em]">
       <Pie options={options} data={finalData} />
     </div>
   )
