@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars-2'
+import { FaSocks, FaUtensils } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
@@ -11,7 +12,7 @@ import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useRequest } from '../../utils/useRequest'
 import BasePage from '../base'
 import BalanceView from './BalanceView'
-import { BarChartView } from './BarChartView'
+import { GalleryItem } from './GalleryItem'
 import TransactionItem from './TransactionItem'
 
 export interface HomePageProps {}
@@ -57,133 +58,121 @@ export default function HomePage({}: HomePageProps) {
         <div className="flex-grow overflow-hidden">
           <Scrollbars>
             <Tabs value="account">
-              <TabsHeader>
-                <Tab key="account" value="account">
-                  <H1 variant="medium">Account</H1>
-                </Tab>
-                <Tab key="jar" value="jar">
-                  <H1 variant="medium">Jar</H1>
-                </Tab>
-              </TabsHeader>
-              <TabsBody>
-                <TabsPanel key="account" value="account">
-                  <BalanceView title="Account Balance" value={mainAccount.balance} currency="Magyar Forint" />
-                </TabsPanel>
-                <TabsPanel key="jar" value="jar">
-                  <BalanceView title="Jar Balance" value={saveAccount.balance} currency="Magyar Forint" />
-                </TabsPanel>
-              </TabsBody>
+              <div className="p-2 pb-0">
+                <TabsHeader>
+                  <Tab key="account" value="account">
+                    <H1 variant="medium">Account</H1>
+                  </Tab>
+                  <Tab key="jar" value="jar">
+                    <H1 variant="medium">Jar</H1>
+                  </Tab>
+                </TabsHeader>
+              </div>
+              <div className="px-2 py-1">
+                <TabsBody>
+                  <TabsPanel key="account" value="account">
+                    <BalanceView title="Account Balance" value={120000} currency="Magyar Forint" />
+                  </TabsPanel>
+                  <TabsPanel key="jar" value="jar">
+                    <BalanceView title="Jar Balance" value={38000} currency="Magyar Forint" />
+                  </TabsPanel>
+                </TabsBody>
+              </div>
             </Tabs>
-            <div className="bg-wise-navy-dark p-2">
-              <BalanceView title="Monthly Expense" value={mainAccount.expense} currency="Magyar Forint" />
+            <div className="p-2 pt-0">
+              <BalanceView title="Monthly Expense" value={100900} currency="Magyar Forint" />
             </div>
-            <div className="flex w-full justify-center">
-              <H1 className="text-xl">Categories</H1>
+            <div className="p-2">
+              <div className="flex w-full border-b-2 border-ui-grey-body">
+                <H1 variant="large">Categories</H1>
+              </div>
             </div>
+
             <SliderGallery>
               <SliderGalleryItem>
-                <BarChartView
-                  labels={['Food']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
+                <GalleryItem
+                  icon={<FaUtensils />}
+                  label={'Food'}
+                  dataset={{
+                    borderRadius: 8,
+                    label: '',
+                    data: [100],
+                    barThickness: 10,
+                    backgroundColor: '#a8aaac',
+                  }}
                 />
               </SliderGalleryItem>
               <SliderGalleryItem>
-                <BarChartView
-                  labels={['Food']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
+                <GalleryItem
+                  icon={<FaSocks />}
+                  label={'Food'}
+                  dataset={{
+                    borderRadius: 8,
+                    label: '',
+                    data: [100],
+                    barThickness: 10,
+                    backgroundColor: '#a8aaac',
+                  }}
                 />
               </SliderGalleryItem>
               <SliderGalleryItem>
-                <BarChartView
-                  labels={['Games']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
+                <GalleryItem
+                  icon={<FaSocks />}
+                  label={'Food'}
+                  dataset={{
+                    borderRadius: 8,
+                    label: '',
+                    data: [100],
+                    barThickness: 10,
+                    backgroundColor: '#a8aaac',
+                  }}
                 />
               </SliderGalleryItem>
               <SliderGalleryItem>
-                <BarChartView
-                  labels={['PC']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
+                <GalleryItem
+                  icon={<FaSocks />}
+                  label={'Food'}
+                  dataset={{
+                    borderRadius: 8,
+                    label: '',
+                    data: [100],
+                    barThickness: 10,
+                    backgroundColor: '#a8aaac',
+                  }}
                 />
               </SliderGalleryItem>
               <SliderGalleryItem>
-                <BarChartView
-                  labels={['Drinks']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
+                <GalleryItem
+                  icon={<FaSocks />}
+                  label={'Food'}
+                  dataset={{
+                    borderRadius: 8,
+                    label: '',
+                    data: [100],
+                    barThickness: 10,
+                    backgroundColor: '#a8aaac',
+                  }}
                 />
               </SliderGalleryItem>
               <SliderGalleryItem>
-                <BarChartView
-                  labels={['Other']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
+                <GalleryItem
+                  icon={<FaSocks />}
+                  label={'Food'}
+                  dataset={{
+                    borderRadius: 8,
+                    label: '',
+                    data: [100],
+                    barThickness: 10,
+                    backgroundColor: '#a8aaac',
+                  }}
                 />
               </SliderGalleryItem>
             </SliderGallery>
+            <div className="p-2">
+              <div className="flex w-full border-b-2 border-ui-grey-body">
+                <H1 variant="large">Transactions</H1>
+              </div>
+            </div>
             <div className="p-2 flex flex-col gap-2">
               {transactionsRequest.data
                 ?.filter((tr: any) => tr.amount < 0)
@@ -194,8 +183,8 @@ export default function HomePage({}: HomePageProps) {
           </Scrollbars>
         </div>
         <div>
-          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/hub')}>
-            <H1>Go to hub!</H1>
+          <Button variant="hub" className="rounded-none" onClick={() => navigate('/hub')}>
+            <H1 variant="large">Begin Your journey!</H1>
           </Button>
         </div>
       </div>

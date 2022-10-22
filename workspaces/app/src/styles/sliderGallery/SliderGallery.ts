@@ -14,7 +14,7 @@ export const SliderGalleryStyle = {
     p: 'p-4',
     overflow: 'overflow-hidden',
     minH: 'h-[12rem]',
-    maxW: 'w-[5rem]',
+    maxW: 'w-[4rem]',
     w: 'w-full',
   },
 }

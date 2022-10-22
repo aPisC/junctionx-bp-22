@@ -28,7 +28,7 @@ export const TabsHeader = forwardRef<HTMLUListElement, TabsHeaderProps>(
           role="tablist"
           className={cls(`${objectsToString(TabsStyle.tabsHeader.base)}
           ${objectsToString(TabsStyle.variants[variant].tabsHeader)}
-          ${rounded ?? objectsToString(TabsStyle.rounded)}`)}
+          ${rounded && objectsToString(TabsStyle.rounded)}`)}
         >
           {children}
         </ul>

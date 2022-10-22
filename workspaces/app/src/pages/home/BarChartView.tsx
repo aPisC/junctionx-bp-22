@@ -10,6 +10,26 @@ export const options = {
   scales: {
     y: {
       display: false,
+      ticks: {
+        display: false,
+        beginAtZero: true,
+      },
+      grid: {
+        drawBorder: false,
+        display: false,
+      },
+    },
+    x: {
+      barPercentage: 0.1,
+      display: false,
+      ticks: {
+        display: false,
+        beginAtZero: true,
+      },
+      grid: {
+        drawBorder: false,
+        display: false,
+      },
     },
   },
   plugins: {
@@ -18,6 +38,9 @@ export const options = {
     },
     legend: {
       display: false,
+    },
+    y: {
+      drawborder: false,
     },
   },
 }

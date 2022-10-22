@@ -29,25 +29,25 @@ export const TabsStyle = {
       right: 'right-0',
       zIndex: 'z-[1]',
       height: 'h-full',
-      bg: 'bg-white',
+      bg: 'bg-brand-blue',
       borderRadius: 'rounded-md',
       boxShadow: 'shadow',
     },
   },
   tabsBody: {
     base: {
-      padding: 'p-2',
       display: 'block',
       width: 'w-full',
       position: 'relative',
       oferflow: 'overflow-hidden',
+      rounded: 'rounded-lg',
     },
   },
   tabsHeader: {
     base: {
       display: 'flex',
       position: 'relative',
-      p: 'p-1',
+      rounded: 'rounded-lg',
     },
   },
   tabsPanel: {
@@ -62,11 +62,11 @@ export const TabsStyle = {
   variants: {
     base: {
       tabsBody: {
-        bg: 'bg-wise-navy-blue',
         textColor: 'text-white',
+        bg: 'bg-keyline-grey',
       },
       tabsHeader: {
-        bg: 'bg-brand-blue-down',
+        bg: 'bg-keyline-grey',
       },
       tabsPanel: {
         color: 'text-white',

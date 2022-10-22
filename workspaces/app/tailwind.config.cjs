@@ -12,6 +12,11 @@ module.exports = {
         'ui-grey': '#f2f5f7',
         'ui-grey-disabled': '#a8aaac',
         'ui-grey-body': '#5d7079',
+        'slate-grey': '#5D7079',
+        'dark-grey': '#A8AAAC',
+        'disabled-grey': '#D3D5D8',
+        'keyline-grey': '#E2E6E8',
+        'background-grey': '#F2F5F7',
       },
       fontFamily: {
         averta: ['Averta', 'sans-serif'],
