@@ -26,7 +26,7 @@ export default class UserController {
     const body: IUserCreateRequest = ctx.request.body
 
     const currency = countries[body.country]?.currency
-
+    const exchange = countries[body.country]?.exchange
     if (!currency) throw new Error('Unable to resolve country')
 
     const user = await this.userRepository.create({
@@ -40,9 +40,9 @@ export default class UserController {
       id: uuidv4(),
       name: 'Base',
       currency: currency,
-      expense: 1500,
+      expense: -initialTransactions.reduce((sum, tr) => sum + tr.amount, 0) * exchange,
       user: user.id,
-      balance: 1000,
+      balance: 1000 * exchange,
       type: 'main',
     })
     await this.accountRepository.create({
@@ -58,6 +58,7 @@ export default class UserController {
     for (const tr of initialTransactions) {
       const tri = await this.transactionRepository.create({
         ...tr,
+        amount: tr.amount * exchange,
         id: uuidv4(),
         account: mainAccount.id,
         user: user.id,
