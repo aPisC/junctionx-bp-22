@@ -2,7 +2,6 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
-import { flags } from '../../config/flags'
 import Button from '../../modules/button'
 import { FlagSelector } from '../../modules/flagSelector'
 import { H1 } from '../../modules/h1'
@@ -14,12 +13,11 @@ export interface LandingPageProps {}
 
 export default function LandingPage({}: LandingPageProps) {
   const navigate = useNavigate()
-  const [flag, setFlag] = useState<typeof flags[0] | null>(flags.find((flag) => flag.country === 'Hungary') ?? null)
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
+  const [flag, setFlag] = useState<string>('hu')
 
   const loadUser = async (token: string | null) => {
     if (!token) return null
-    const response = await axios.get<any>(`${BACKEND_URL}/user/${token}`).catch((e) => null)
+    const response = await axios.get<any>(`${BACKEND_URL}/api/user/${token}`).catch((e) => null)
     if (response?.data) {
       localStorage.setItem('flag', response.data.sourceCountry)
       navigate('/home')
@@ -28,7 +26,7 @@ export default function LandingPage({}: LandingPageProps) {
   }
 
   const createUser = async () => {
-    const response = await axios.post<any>(`${BACKEND_URL}/user/create`, { country: flag }).catch((e) => null)
+    const response = await axios.post<any>(`${BACKEND_URL}/api/user/create`, { country: flag }).catch((e) => null)
     if (!response?.data) return
 
     localStorage.setItem('token', response.data.id)
@@ -37,7 +35,7 @@ export default function LandingPage({}: LandingPageProps) {
   }
 
   const createUserRequest = useTriggeredRequest(createUser)
-  const loadUserRequest = useRequest(() => loadUser(token), [])
+  const loadUserRequest = useRequest(() => loadUser(localStorage.getItem('token')), [])
 
   useSpinnerOverlay(loadUserRequest.isRunning)
   useSpinnerOverlay(createUserRequest.isRunning)
