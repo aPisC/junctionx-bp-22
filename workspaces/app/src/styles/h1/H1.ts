@@ -7,6 +7,7 @@ export const H1Style = {
     base: {
       text: 'text-wise-navy-mid',
       textSize: 'text-3xl',
+      textCenter: 'text-center',
     },
     'base-white': {
       text: 'text-white',
