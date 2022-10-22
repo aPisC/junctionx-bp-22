@@ -40,5 +40,19 @@ export const ButtonStyle = {
         bg: 'active:bg-brand-blue-down',
       },
     },
+    hub: {
+      base: {
+        w: 'w-full',
+        color: 'text-white',
+        gb: 'bg-brand-blue',
+        rounded: 'rounded-lg',
+      },
+      hover: {
+        bg: 'hover:bg-brand-blue-hover',
+      },
+      active: {
+        bg: 'active:bg-brand-blue-down',
+      },
+    },
   },
 }
