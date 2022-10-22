@@ -1,7 +1,6 @@
 import Button from '../../modules/button'
-import { FlagButton } from '../../modules/button/FlagButton'
+import { FlagSelector } from '../../modules/flagSelector'
 import { H1 } from '../../modules/h1'
-import Modal, { ModalBody, ModalHandler } from '../../modules/modal'
 
 export interface LandingPageProps {}
 
