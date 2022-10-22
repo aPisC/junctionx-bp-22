@@ -41,7 +41,3 @@ def calc(exchange_rate_home: float,
     eu27_to_price = ppp_foreign/exchange_rate_foreign
 
     return price_to_eu27 * eu27_to_price
-    
-
-if __name__ == "__main__":
-    x = calc(500, 1, 250, 1)
