@@ -4,13 +4,23 @@ import { flags } from '../../config/flags'
 import FlagOption from '../../pages/landing/FlagOption'
 import Button from '../button'
 import { FlagButton } from '../button/FlagButton'
-import { H1 } from '../h1'
 import Icon from '../icon'
 import Modal, { ModalHandler, ModalBody, ModalCloseContainer } from '../modal'
 
-export const FlagSelector = () => {
-  const [flag, setFlag] = useState(flags.find((flag) => flag.country === 'Hungary'))
-  return (
+export interface FlagSelectorProps {
+  disabled?: boolean
+  flag?: typeof flags[0] | null
+  setFlagCallback: Function
+}
+
+export const FlagSelector = ({ disabled = false, flag = null, setFlagCallback }: FlagSelectorProps) => {
+  return disabled ? (
+    <div className="w-full flex items-center justify-center">
+      <FlagButton disabled={disabled} className="w-[50%] overflow-hidden" flag="asdf">
+        <img className="object-fill scale-150" src={flag?.flag} alt={flag?.flag} />
+      </FlagButton>
+    </div>
+  ) : (
     <Modal blur rounded>
       <ModalHandler>
         <div className="w-full flex items-center justify-center">
@@ -30,7 +40,7 @@ export const FlagSelector = () => {
             variant="hub"
             className="my-2"
             onClick={() => {
-              setFlag(flag)
+              setFlagCallback(flag)
             }}
           >
             <ModalCloseContainer>

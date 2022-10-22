@@ -12,9 +12,11 @@ export default function HubPage({}: HubPageProps) {
         <Navigation />
         <div className="flex-grow overflow-hidden">
           <div className="flex flex-col gap-2 p-2">
-            <Button variant="hub">
-              <H1>Compare</H1>
-            </Button>
+            <a href="comparison-selector">
+              <Button variant="hub">
+                <H1>Compare</H1>
+              </Button>
+            </a>
             <Button variant="hub">
               <H1>Plan</H1>
             </Button>
