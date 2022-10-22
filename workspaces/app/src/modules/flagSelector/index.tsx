@@ -1,9 +1,8 @@
-import axios from 'axios'
 import { FaRegTimesCircle } from 'react-icons/fa'
+import { FlagsRequest } from '../../cache/flagRequest'
 import { BACKEND_URL } from '../../config/backendUrl'
 import FlagOption from '../../pages/landing/FlagOption'
-import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
-import { useRequest } from '../../utils/useRequest'
+import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import Button from '../button'
 import { FlagButton } from '../button/FlagButton'
 import Icon from '../icon'
@@ -16,13 +15,10 @@ export interface FlagSelectorProps {
 }
 
 export const FlagSelector = ({ disabled = false, flag, setFlagCallback }: FlagSelectorProps) => {
-  const flagsRequest = useRequest(() => axios.get(`${BACKEND_URL}/api/countries`).then((r) => r.data), [])
-  useSpinnerOverlay(flagsRequest.isRunning)
+  const { data: flags, error } = useSpinneredRequest(() => FlagsRequest, [])
+  if (error) return <div>flagsRequest.error.message</div>
+  if (!flags) return null
 
-  if (flagsRequest.isRunning) return null
-  if (flagsRequest.error) return <div>flagsRequest.error.message</div>
-
-  const flags: any[] = flagsRequest.data
   const selectedFlag = flags.find((x) => x.id == flag)
 
   return disabled ? (

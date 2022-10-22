@@ -5,6 +5,8 @@ services:
       context: ingress
     ports:
       - "8080:8080"
+    logging:
+      driver: none
   api:
     build:
       context: ..

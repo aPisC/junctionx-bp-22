@@ -6,6 +6,7 @@ import AccountModel from '../models/AccountModel'
 import TransactionModel from '../models/TransactionModel'
 import UserModel from '../models/UserModel'
 import PPPPredictor from '../services/PPPPredictor'
+import { categories } from './CategoriesController'
 
 @injectable()
 @Route.Prefix('/transaction')
@@ -123,6 +124,38 @@ export default class TransactionController {
     })
 
     return this.userRepository.findOne({ include: [this.accountRepository], where: { id: body.userId } })
+  }
+
+  @Route.Get('/summary/:userId')
+  async summary(ctx: any) {
+    const userId = ctx.request.params.userId
+    const user = await this.userRepository.findOne({ where: { id: userId } })
+    const mainAccount = await this.accountRepository.findOne({ where: { user: userId, type: 'main' } })
+
+    if (!user || !mainAccount) throw new Error('User or account not found')
+
+    const predictor = user.targetCountry ? new PPPPredictor(user.sourceCountry, user.targetCountry) : null
+    const transactions = await this.transactionRepository.findAll({
+      order: [['timestamp', 'DESC']],
+      where: { user: userId },
+    })
+
+    const summary: any = {}
+
+    Object.keys(categories).forEach((cat) => {
+      const amount = -transactions
+        .filter((tr) => tr.category == cat && tr.account == mainAccount.id && tr.amount < 0)
+        .reduce((sum, tr) => sum + tr.amount, 0)
+      summary[cat] = {
+        ...categories[cat],
+        amount: amount,
+        predicted: predictor?.getPrice(cat, amount),
+      }
+    })
+
+    const summaryEntries = Object.values(summary).sort((a: any, b: any) => b.amount - a.amount)
+
+    return summaryEntries
   }
 }
 

@@ -1,4 +1,4 @@
-POST https://junctionx-bp-22.apisc.host/api/user/create HTTP/1.1
+POST http://localhost:8080/user/create HTTP/1.1
 Content-type: application/json
 
 {
@@ -17,6 +17,9 @@ GET http://localhost:8080/transaction/predictions/a766e6d6-15f5-45ac-8be4-a92b72
 
 ###
 GET https://junctionx-bp-22.apisc.host/api/transaction/transactions/8b8a6ca1-63fa-4dab-8f5f-60c1f5d7a5ca HTTP/1.1
+
+###
+GET http://localhost:8080/transaction/summary/8b8a6ca1-63fa-4dab-8f5f-60c1f5d7a5ca HTTP/1.1
 
 ###
 POST http://localhost:8080/transaction HTTP/1.1

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars-2'
-import { FaSocks, FaUtensils } from 'react-icons/fa'
+import { FaUtensils } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
@@ -71,16 +71,16 @@ export default function HomePage({}: HomePageProps) {
               <div className="px-2 py-1">
                 <TabsBody>
                   <TabsPanel key="account" value="account">
-                    <BalanceView title="Account Balance" value={120000} currency="Magyar Forint" />
+                    <BalanceView title="Account Balance" value={mainAccount.balance} currency="Magyar Forint" />
                   </TabsPanel>
                   <TabsPanel key="jar" value="jar">
-                    <BalanceView title="Jar Balance" value={38000} currency="Magyar Forint" />
+                    <BalanceView title="Jar Balance" value={saveAccount.balance} currency="Magyar Forint" />
                   </TabsPanel>
                 </TabsBody>
               </div>
             </Tabs>
             <div className="p-2 pt-0">
-              <BalanceView title="Monthly Expense" value={100900} currency="Magyar Forint" />
+              <BalanceView title="Monthly Expense" value={mainAccount.expense || ''} currency="Magyar Forint" />
             </div>
             <div className="p-2">
               <div className="flex w-full border-b-2 border-ui-grey-body">
@@ -92,71 +92,6 @@ export default function HomePage({}: HomePageProps) {
               <SliderGalleryItem>
                 <GalleryItem
                   icon={<FaUtensils />}
-                  label={'Food'}
-                  dataset={{
-                    borderRadius: 8,
-                    label: '',
-                    data: [100],
-                    barThickness: 10,
-                    backgroundColor: '#a8aaac',
-                  }}
-                />
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <GalleryItem
-                  icon={<FaSocks />}
-                  label={'Food'}
-                  dataset={{
-                    borderRadius: 8,
-                    label: '',
-                    data: [100],
-                    barThickness: 10,
-                    backgroundColor: '#a8aaac',
-                  }}
-                />
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <GalleryItem
-                  icon={<FaSocks />}
-                  label={'Food'}
-                  dataset={{
-                    borderRadius: 8,
-                    label: '',
-                    data: [100],
-                    barThickness: 10,
-                    backgroundColor: '#a8aaac',
-                  }}
-                />
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <GalleryItem
-                  icon={<FaSocks />}
-                  label={'Food'}
-                  dataset={{
-                    borderRadius: 8,
-                    label: '',
-                    data: [100],
-                    barThickness: 10,
-                    backgroundColor: '#a8aaac',
-                  }}
-                />
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <GalleryItem
-                  icon={<FaSocks />}
-                  label={'Food'}
-                  dataset={{
-                    borderRadius: 8,
-                    label: '',
-                    data: [100],
-                    barThickness: 10,
-                    backgroundColor: '#a8aaac',
-                  }}
-                />
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <GalleryItem
-                  icon={<FaSocks />}
                   label={'Food'}
                   dataset={{
                     borderRadius: 8,
