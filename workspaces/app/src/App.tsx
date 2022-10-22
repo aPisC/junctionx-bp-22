@@ -4,6 +4,7 @@ import HubPage from './pages/hub'
 import LandingPage from './pages/landing'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ComparisonSelectorPage from './pages/comparisonSelector'
+import ComparisonDashboardPage from './pages/comparisonDashboard'
 
 export const ModalPortalContext = React.createContext<any>(null)
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="home" element={<HomePage />} />
               <Route path="hub" element={<HubPage />} />
               <Route path="comparison-selector" element={<ComparisonSelectorPage />} />
+              <Route path="comparison-dashboard" element={<ComparisonDashboardPage />} />
             </Routes>
           </BrowserRouter>
         </div>
