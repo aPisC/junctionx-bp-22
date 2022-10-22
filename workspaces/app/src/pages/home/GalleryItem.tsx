@@ -4,14 +4,14 @@ import { BarChartView } from './BarChartView'
 
 export interface GalleryItemProps {
   icon: ReactNode
-  label: string
-  dataset: any
+  labels: string[]
+  datasets: any
 }
 
-export const GalleryItem = ({ icon, label, dataset }: GalleryItemProps) => {
+export const GalleryItem = ({ icon, labels, datasets }: GalleryItemProps) => {
   return (
     <div className="flex flex-col justify-center">
-      <BarChartView labels={[label]} datasets={[dataset]} />
+      <BarChartView labels={labels} datasets={datasets} />
       <div className="text-wise-navy-dark w-full h-auto flex justify-center p-2">{icon}</div>
     </div>
   )

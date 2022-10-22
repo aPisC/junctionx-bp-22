@@ -1,21 +1,18 @@
-import { FaRegSmileBeam } from 'react-icons/fa'
+import { FaUtensils } from 'react-icons/fa'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
 import BasePage from '../base'
-import { BarChartView } from '../home/BarChartView'
-import { MultiSeriesPieChartView } from './MultiSeriesPieChartView'
 import { useNavigate } from 'react-router-dom'
-import Card, { BaseCard, ExpandedCard } from '../../modules/card'
-import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
-import Icon from '../../modules/icon'
-import { PricePairItem } from './PricePairItem'
 import PieChart from './PieChart'
 import { useRequest } from '../../utils/useRequest'
 import axios from 'axios'
 import { BACKEND_URL } from '../../config/backendUrl'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
+import { InfoBox } from './InfoBox'
+import { Scrollbars } from 'react-custom-scrollbars-2'
+import SliderItem from './SliderItem'
 
 type Props = {}
 
@@ -41,211 +38,58 @@ export default function ComparisonDashboardPage({}: Props) {
       <div className="h-full flex flex-col">
         <Navigation />
         <div className="flex-grow overflow-hidden">
-          <PieChart
-            homeCountry={user.sourceCountry}
-            targetCountry={user.targetCountry}
-            data={[
-              {
-                backgroundColor: ['#37517e', 'transparent'],
-                data: [79, 21],
-              },
-              {
-                backgroundColor: ['#A8AAAC', 'transparent'],
-                data: [67, 33],
-              },
-            ]}
-          />
-          <div className="flex w-full justify-center">
-            <H1 className="text-xl">Categories</H1>
-          </div>
-          <SliderGallery>
-            <SliderGalleryItem>
-              <Card rounded>
-                <BaseCard layoutId="card-0">
-                  <BarChartView
+          <Scrollbars>
+            <InfoBox>asdf</InfoBox>
+            <PieChart
+              homeCountry={user.sourceCountry}
+              targetCountry={user.targetCountry}
+              data={[
+                {
+                  backgroundColor: ['#37517e', 'transparent'],
+                  data: [79, 21],
+                },
+                {
+                  backgroundColor: ['#A8AAAC', 'transparent'],
+                  data: [67, 33],
+                },
+              ]}
+            />
+            <div className="p-2">
+              <div className="flex w-full border-b-2 border-ui-grey-body">
+                <H1 variant="large">Categories</H1>
+              </div>
+            </div>
+            <SliderGallery>
+              {Array.from(Array(7)).map((item, index) => (
+                <SliderGalleryItem key={index}>
+                  <SliderItem
+                    icon={<FaUtensils />}
                     labels={['Food']}
                     datasets={[
                       {
                         label: 'Home',
                         data: [100],
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        barThickness: 10,
+                        borderRadius: 8,
+                        backgroundColor: '#37517e',
                       },
                       {
                         label: 'Ex.',
                         data: [350],
-                        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                        barThickness: 10,
+                        borderRadius: 8,
+                        backgroundColor: '#A8AAAC',
                       },
                     ]}
                   />
-                </BaseCard>
-                <ExpandedCard layoutId="card-0">
-                  <ComparisonDashboardPopup>
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                    <PricePairItem
-                      homePrice={500}
-                      icon={
-                        <Icon>
-                          <FaRegSmileBeam />
-                        </Icon>
-                      }
-                      destinationPrice={1200}
-                    />
-                  </ComparisonDashboardPopup>
-                </ExpandedCard>
-              </Card>
-            </SliderGalleryItem>
-            <SliderGalleryItem>
-              <BarChartView
-                labels={['Food']}
-                datasets={[
-                  {
-                    label: 'Home',
-                    data: [100],
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                  },
-                  {
-                    label: 'Ex.',
-                    data: [350],
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  },
-                ]}
-              />
-            </SliderGalleryItem>
-            <SliderGalleryItem>
-              <BarChartView
-                labels={['Games']}
-                datasets={[
-                  {
-                    label: 'Home',
-                    data: [100],
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                  },
-                  {
-                    label: 'Ex.',
-                    data: [350],
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  },
-                ]}
-              />
-            </SliderGalleryItem>
-            <SliderGalleryItem>
-              <BarChartView
-                labels={['PC']}
-                datasets={[
-                  {
-                    label: 'Home',
-                    data: [100],
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                  },
-                  {
-                    label: 'Ex.',
-                    data: [350],
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  },
-                ]}
-              />
-            </SliderGalleryItem>
-            <SliderGalleryItem>
-              <BarChartView
-                labels={['Drinks']}
-                datasets={[
-                  {
-                    label: 'Home',
-                    data: [100],
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                  },
-                  {
-                    label: 'Ex.',
-                    data: [350],
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  },
-                ]}
-              />
-            </SliderGalleryItem>
-            <SliderGalleryItem>
-              <BarChartView
-                labels={['Other']}
-                datasets={[
-                  {
-                    label: 'Home',
-                    data: [100],
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                  },
-                  {
-                    label: 'Ex.',
-                    data: [350],
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  },
-                ]}
-              />
-            </SliderGalleryItem>
-          </SliderGallery>
+                </SliderGalleryItem>
+              ))}
+            </SliderGallery>
+          </Scrollbars>
         </div>
         <div>
-          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/saving-dashboard')}>
-            <H1>Create saving plan!</H1>
+          <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-dashboard')}>
+            <H1>Spend like a local!</H1>
           </Button>
         </div>
       </div>

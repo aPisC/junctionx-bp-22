@@ -92,14 +92,16 @@ export default function HomePage({}: HomePageProps) {
               <SliderGalleryItem>
                 <GalleryItem
                   icon={<FaUtensils />}
-                  label={'Food'}
-                  dataset={{
-                    borderRadius: 8,
-                    label: '',
-                    data: [100],
-                    barThickness: 10,
-                    backgroundColor: '#a8aaac',
-                  }}
+                  labels={['Food']}
+                  datasets={[
+                    {
+                      borderRadius: 8,
+                      label: '',
+                      data: [100],
+                      barThickness: 10,
+                      backgroundColor: '#a8aaac',
+                    },
+                  ]}
                 />
               </SliderGalleryItem>
             </SliderGallery>

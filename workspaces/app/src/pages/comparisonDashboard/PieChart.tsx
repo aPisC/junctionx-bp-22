@@ -21,16 +21,23 @@ export const PieChart = ({ data, labels, homeCountry, targetCountry }: PieChartP
 
   const homeFlag = flagsRequest.data?.find((item: any) => item.id === homeCountry)
   const targetFlag = flagsRequest.data?.find((item: any) => item.id === targetCountry)
-  console.log(homeFlag)
   return (
     <div className="relative w-full h-[15rem]">
       <MultiSeriesPieChartView labels={labels} data={data} />
       <div className="absolute flex top-0 left-0 w-full h-full text-black items-center justify-center">
-        <div className="flex">
-          <div>
-            <img src={`${BACKEND_URL}/${homeFlag?.image}`} />
+        <div className="flex flex-col text-lg">
+          <div className="flex items-center w-full justify-center text-dark-grey">
+            <div className="p-1">
+              <img className="w-5" src={`${BACKEND_URL}/${homeFlag?.image}`} />
+            </div>
+            <div className="p-1">100 000 {homeFlag?.currency}</div>
           </div>
-          <div>money</div>
+          <div className="flex items-center w-full justify-center text-wise-navy-blue">
+            <div className="p-1">
+              <img className="w-5" src={`${BACKEND_URL}/${targetFlag?.image}`} />
+            </div>
+            <div className="p-1">100 000 {targetFlag?.currency}</div>
+          </div>
         </div>
       </div>
     </div>

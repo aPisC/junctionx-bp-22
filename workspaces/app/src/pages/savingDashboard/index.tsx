@@ -1,223 +1,87 @@
-import { FaRegSmileBeam } from 'react-icons/fa'
+import { FaUtensils } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
-import Card, { BaseCard, ExpandedCard } from '../../modules/card'
-import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
+import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
+import { useRequest } from '../../utils/useRequest'
 import BasePage from '../base'
-import { ComparisonDashboardPopup } from '../comparisonDashboard/ComparisonDashboardPopup'
-import { MultiSeriesPieChartView } from '../comparisonDashboard/MultiSeriesPieChartView'
-import { PricePairItem } from '../comparisonDashboard/PricePairItem'
-import { BarChartView } from '../home/BarChartView'
+import PieChart from '../comparisonDashboard/PieChart'
+import axios from 'axios'
+import SliderItem from '../comparisonDashboard/SliderItem'
+import { H1 } from '../../modules/h1'
 
 export interface SavingDashboardPageProps {}
 
 export default function SavingDashboardPage({}: SavingDashboardPageProps) {
   const navigate = useNavigate()
+  const userRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+  useSpinnerOverlay(userRequest.isRunning)
+
+  if (userRequest.isRunning) return null
+
+  const user: any = userRequest.data
   return (
     <BasePage>
       <div className="h-full flex flex-col">
         <Navigation />
         <div className="flex flex-grow overflow-hidden items-start">
           <div className="flex flex-col w-full justify-center">
-            <MultiSeriesPieChartView />
+            <PieChart
+              homeCountry={user.sourceCountry}
+              targetCountry={user.targetCountry}
+              data={[
+                {
+                  backgroundColor: ['#37517e', 'transparent'],
+                  data: [79, 21],
+                },
+                {
+                  backgroundColor: ['#A8AAAC', 'transparent'],
+                  data: [67, 33],
+                },
+              ]}
+            />
             <SliderGallery>
-              <SliderGalleryItem>
-                <Card rounded>
-                  <BaseCard layoutId="card-0">
-                    <BarChartView
-                      labels={['Food']}
-                      datasets={[
-                        {
-                          label: 'Home',
-                          data: [100],
-                          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        },
-                        {
-                          label: 'Ex.',
-                          data: [350],
-                          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                        },
-                      ]}
-                    />
-                    <div className="w-full text-center">5%</div>
-                  </BaseCard>
-                  <ExpandedCard layoutId="card-0">
-                    <ComparisonDashboardPopup>
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                      <PricePairItem
-                        homePrice={500}
-                        icon={
-                          <Icon>
-                            <FaRegSmileBeam />
-                          </Icon>
-                        }
-                        destinationPrice={1200}
-                      />
-                    </ComparisonDashboardPopup>
-                  </ExpandedCard>
-                </Card>
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <BarChartView
-                  labels={['Food']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
-                />
-
-                <div className="w-full text-center">5%</div>
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <BarChartView
-                  labels={['Games']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
-                />
-                <div className="w-full text-center">5%</div>
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <BarChartView
-                  labels={['PC']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
-                />
-                <div className="w-full text-center">5%</div>
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <BarChartView
-                  labels={['Drinks']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
-                />
-                <div className="w-full text-center">5%</div>
-              </SliderGalleryItem>
-              <SliderGalleryItem>
-                <BarChartView
-                  labels={['Other']}
-                  datasets={[
-                    {
-                      label: 'Home',
-                      data: [100],
-                      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                      label: 'Ex.',
-                      data: [350],
-                      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                    },
-                  ]}
-                />
-                <div className="w-full text-center">5%</div>
-              </SliderGalleryItem>
+              {Array.from(Array(7)).map((item, index) => (
+                <SliderGalleryItem key={index}>
+                  <SliderItem
+                    icon={<FaUtensils />}
+                    labels={['Food']}
+                    datasets={[
+                      {
+                        label: 'Home',
+                        data: [100],
+                        barThickness: 10,
+                        borderRadius: 8,
+                        backgroundColor: '#37517e',
+                      },
+                      {
+                        label: 'Ex.',
+                        data: [350],
+                        barThickness: 10,
+                        borderRadius: 8,
+                        backgroundColor: '#A8AAAC',
+                      },
+                    ]}
+                  />
+                </SliderGalleryItem>
+              ))}
             </SliderGallery>
           </div>
         </div>
         <div>
-          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/saving-home')}>
-            Start
+          <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-home')}>
+            <H1>Start</H1>
           </Button>
         </div>
       </div>
