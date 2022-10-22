@@ -8,8 +8,7 @@ import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
 import Tabs, { Tab, TabsBody, TabsHeader, TabsPanel } from '../../modules/tabs'
-import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
-import { useRequest } from '../../utils/useRequest'
+import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
 import BalanceView from './BalanceView'
 import { GalleryItem } from './GalleryItem'
@@ -19,7 +18,7 @@ export interface HomePageProps {}
 
 export default function HomePage({}: HomePageProps) {
   const navigate = useNavigate()
-  const userRequest = useRequest(
+  const userRequest = useSpinneredRequest(
     () =>
       axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
         .then((d) => d.data)
@@ -30,7 +29,7 @@ export default function HomePage({}: HomePageProps) {
     []
   )
 
-  const transactionsRequest = useRequest(
+  const transactionsRequest = useSpinneredRequest(
     () =>
       axios(`${BACKEND_URL}/api/transaction/transactions/${localStorage.getItem('token')}`)
         .then((d) => d.data)
@@ -40,16 +39,24 @@ export default function HomePage({}: HomePageProps) {
         }),
     []
   )
+  const summaryRequest = useSpinneredRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/transaction/summary/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
 
-  useSpinnerOverlay(userRequest.isRunning)
-  useSpinnerOverlay(transactionsRequest.isRunning)
-
-  if (userRequest.isRunning) return null
+  if (userRequest.isRunning || summaryRequest.isRunning || transactionsRequest.isRunning) return null
 
   const user: any = userRequest.data
-  console.log(user)
   const mainAccount = user.accounts.find((a: any) => a.type == 'main')
   const saveAccount = user.accounts.find((a: any) => a.type == 'save')
+  const summaryMax = Math.max.apply(Math, summaryRequest.data?.map((s: any) => s.amount) || [0])
+  console.log(summaryMax)
 
   return (
     <BasePage>
@@ -89,21 +96,24 @@ export default function HomePage({}: HomePageProps) {
             </div>
 
             <SliderGallery>
-              <SliderGalleryItem>
-                <GalleryItem
-                  icon={<FaUtensils />}
-                  labels={['Food']}
-                  datasets={[
-                    {
-                      borderRadius: 8,
-                      label: '',
-                      data: [100],
-                      barThickness: 10,
-                      backgroundColor: '#a8aaac',
-                    },
-                  ]}
-                />
-              </SliderGalleryItem>
+              {summaryRequest.data?.map((sum: any) => (
+                <SliderGalleryItem>
+                  <GalleryItem
+                    max={summaryMax}
+                    icon={<FaUtensils />}
+                    labels={[sum.name]}
+                    datasets={[
+                      {
+                        borderRadius: 8,
+                        label: '',
+                        data: [sum.amount],
+                        barThickness: 10,
+                        backgroundColor: '#a8aaac',
+                      },
+                    ]}
+                  />
+                </SliderGalleryItem>
+              ))}
             </SliderGallery>
             <div className="p-2">
               <div className="flex w-full border-b-2 border-ui-grey-body">
