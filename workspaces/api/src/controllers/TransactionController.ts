@@ -23,7 +23,10 @@ export default class TransactionController {
   @Route.Get('/transactions/:userId')
   async getTransactions(ctx: any) {
     const userId = ctx.request.params.userId
-    const transactions = await this.transactionRepository.findAll({ where: { user: userId } })
+    const transactions = await this.transactionRepository.findAll({
+      order: ['timestamp', 'DESC'],
+      where: { user: userId },
+    })
     return transactions
   }
 
@@ -36,7 +39,10 @@ export default class TransactionController {
     if (!user.targetCountry) throw new Error('No target country selected')
 
     const predictor = new PPPPredictor(user.sourceCountry, user.targetCountry)
-    const transactions = await this.transactionRepository.findAll({ where: { user: userId } })
+    const transactions = await this.transactionRepository.findAll({
+      order: ['timestamp', 'DESC'],
+      where: { user: userId },
+    })
     const predictions = transactions.map((tr) => ({
       ...tr.toJSON(),
       amount: predictor.getPrice(tr.category, tr.amount),
