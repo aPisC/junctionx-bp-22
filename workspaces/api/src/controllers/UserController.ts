@@ -68,7 +68,7 @@ export default class UserController {
   @Route.Get('/:id')
   async getUser(ctx: any) {
     const userId = ctx.request.params.id
-    const user = await this.userRepository.findOne({ where: { id: userId } })
+    const user = await this.userRepository.findOne({ include: [this.accountRepository], where: { id: userId } })
     return user
   }
 
