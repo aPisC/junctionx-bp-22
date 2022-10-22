@@ -9,16 +9,24 @@ export const H1Style = {
       textSize: 'text-3xl',
       textCenter: 'text-center',
     },
-    'base-white': {
-      text: 'text-white',
+    'base-brand-blue': {
+      text: 'text-brand-blue',
       textSize: 'text-3xl',
+    },
+    large: {
+      text: 'text-wise-navy-mid',
+      textSize: 'text-2xl',
     },
     medium: {
       text: 'text-wise-navy-mid',
       textSize: 'text-lg',
     },
-    'medium-white': {
-      text: 'text-white',
+    'medium-black': {
+      text: 'text-black',
+      textSize: 'text-lg',
+    },
+    'medium-brand-blue': {
+      text: 'text-brand-blue',
       textSize: 'text-lg',
     },
     'medium-transparent': {
