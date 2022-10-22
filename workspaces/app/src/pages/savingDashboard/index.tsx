@@ -8,8 +8,7 @@ import { H1 } from '../../modules/h1'
 import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
-import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
-import { useRequest } from '../../utils/useRequest'
+import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
 import { InfoBox } from '../comparisonDashboard/InfoBox'
 import PieChart from '../comparisonDashboard/PieChart'
@@ -19,7 +18,7 @@ export interface SavingDashboardPageProps {}
 
 export default function SavingDashboardPage({}: SavingDashboardPageProps) {
   const navigate = useNavigate()
-  const userRequest = useRequest(
+  const userRequest = useSpinneredRequest(
     () =>
       axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
         .then((d) => d.data)
@@ -29,9 +28,19 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
         }),
     []
   )
-  useSpinnerOverlay(userRequest.isRunning)
 
-  if (userRequest.isRunning) return null
+  const summaryRequest = useSpinneredRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/transaction/summary/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
+  if (userRequest.isRunning || summaryRequest.isRunning) return null
 
   const user: any = userRequest.data
   return (
@@ -50,18 +59,17 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
             />
             <div className="flex flex-col w-full justify-center">
               <PieChart
+                currency={user.accounts[0].currency}
+                homeAmount={Object.keys(summaryRequest.data || {}).reduce(
+                  (sum, key) => sum + summaryRequest.data[key].amount,
+                  0
+                )}
+                targetAmount={Object.keys(summaryRequest.data || {}).reduce(
+                  (sum, key) => sum + (summaryRequest.data[key].predicted || 0),
+                  0
+                )}
                 homeCountry={user.sourceCountry}
                 targetCountry={user.targetCountry}
-                data={[
-                  {
-                    backgroundColor: ['#37517e', 'transparent'],
-                    data: [79, 21],
-                  },
-                  {
-                    backgroundColor: ['#A8AAAC', 'transparent'],
-                    data: [67, 33],
-                  },
-                ]}
               />
               <div className="p-2">
                 <div className="flex w-full border-b-2 border-ui-grey-body">

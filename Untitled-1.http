@@ -1,4 +1,4 @@
-POST https://junctionx-bp-22.apisc.host/api/user/create HTTP/1.1
+POST https://travelwise.apisc.host/api/user/create HTTP/1.1
 Content-type: application/json
 
 {

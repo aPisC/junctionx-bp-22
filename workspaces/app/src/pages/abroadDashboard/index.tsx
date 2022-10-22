@@ -1,5 +1,4 @@
 import axios from 'axios'
-import React from 'react'
 import Scrollbars from 'react-custom-scrollbars-2'
 import { FaArchive, FaUtensils } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
@@ -12,6 +11,7 @@ import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useRequest } from '../../utils/useRequest'
+import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
 import { InfoBox } from '../comparisonDashboard/InfoBox'
 import PieChart from '../comparisonDashboard/PieChart'
@@ -33,6 +33,17 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
   )
   useSpinnerOverlay(userRequest.isRunning)
 
+  const summaryRequest = useSpinneredRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/transaction/summary/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
   if (userRequest.isRunning) return null
 
   const user: any = userRequest.data
@@ -53,18 +64,17 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
             />
             <div className="flex flex-col w-full justify-center">
               <PieChart
+                currency={user.accounts[0].currency}
                 homeCountry={user.sourceCountry}
                 targetCountry={user.targetCountry}
-                data={[
-                  {
-                    backgroundColor: ['#37517e', 'transparent'],
-                    data: [79, 21],
-                  },
-                  {
-                    backgroundColor: ['#A8AAAC', 'transparent'],
-                    data: [67, 33],
-                  },
-                ]}
+                homeAmount={Object.keys(summaryRequest.data || {}).reduce(
+                  (sum, key) => sum + summaryRequest.data[key].amount,
+                  0
+                )}
+                targetAmount={Object.keys(summaryRequest.data || {}).reduce(
+                  (sum, key) => sum + (summaryRequest.data[key].predicted || 0),
+                  0
+                )}
               />
               <SliderGallery>
                 {Array.from(Array(7)).map((item, index) => {
