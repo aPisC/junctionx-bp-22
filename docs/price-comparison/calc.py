@@ -1,4 +1,8 @@
-def calc(exchange_rate_home: float,
+import numpy as np
+import pandas as pd
+
+
+def calc_rel_prices(exchange_rate_home: float,
         exchange_rate_foreign: float,
         ppp_home: float,
         ppp_foreign: float
@@ -41,3 +45,30 @@ def calc(exchange_rate_home: float,
     eu27_to_price = ppp_foreign/exchange_rate_foreign
 
     return price_to_eu27 * eu27_to_price
+
+
+def calc_category_index(values, weights=None) -> float:
+    """
+    Function to calculate multi-category index
+
+    Inputs:
+    values: price index value for subcategory
+
+    weights: list/numpy array of weights in index subitems
+    (subcategories, optional)
+    - if no weights are given, simple average will be calculated
+
+    Returns:
+    cat_index: (float) calculated index for
+    main category
+    => sum(weight_i * value_i)
+    """
+
+    # Deal with no weights
+    if weights is None:
+        weights = np.full(len(values), 1/len(values))
+
+    # Ensure all values are given weights
+    assert len(weights) == len(values)
+
+    return np.dot(weights, values)
