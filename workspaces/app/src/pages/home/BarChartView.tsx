@@ -13,6 +13,9 @@ export const options = {
     },
   },
   plugins: {
+    tooltip: {
+      enabled: false,
+    },
     legend: {
       display: false,
     },
@@ -30,7 +33,7 @@ export const BarChartView = ({ labels, datasets }: BarChartViewProps) => {
     datasets,
   }
   return (
-    <div className="w-1/3">
+    <div className="w-full">
       <Bar options={options} data={data} />
     </div>
   )
