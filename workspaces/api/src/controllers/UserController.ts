@@ -40,6 +40,7 @@ export default class UserController {
       id: uuidv4(),
       name: 'Base',
       currency: currency,
+      expense: 1500,
       user: user.id,
       balance: 1000,
       type: 'main',
@@ -49,6 +50,7 @@ export default class UserController {
       name: 'Jar',
       currency: currency,
       user: user.id,
+      expense: 0,
       balance: 0,
       type: 'save',
     })
