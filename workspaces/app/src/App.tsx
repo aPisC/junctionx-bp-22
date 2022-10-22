@@ -28,7 +28,7 @@ function App() {
               <Route path="hub" element={<HubPage />} />
               <Route path="comparison-selector" element={<ComparisonSelectorPage />} />
               <Route path="comparison-dashboard" element={<ComparisonDashboardPage />} />
-              <Route path="saving-selector" element={<SavingSelectorPage />} />
+              <Route path="saving-selection" element={<SavingSelectorPage />} />
             </Routes>
           </BrowserRouter>
         </div>
