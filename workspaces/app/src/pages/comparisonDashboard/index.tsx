@@ -1,4 +1,4 @@
-import React from 'react'
+import { FaRegSmileBeam } from 'react-icons/fa'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
@@ -7,6 +7,10 @@ import BasePage from '../base'
 import { BarChartView } from '../home/BarChartView'
 import { MultiSeriesPieChartView } from './MultiSeriesPieChartView'
 import { useNavigate } from 'react-router-dom'
+import Card, { BaseCard, ExpandedCard } from '../../modules/card'
+import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
+import Icon from '../../modules/icon'
+import { PricePairItem } from './PricePairItem'
 
 type Props = {}
 
@@ -23,21 +27,101 @@ export default function ComparisonDashboardPage({}: Props) {
           </div>
           <SliderGallery>
             <SliderGalleryItem>
-              <BarChartView
-                labels={['Food']}
-                datasets={[
-                  {
-                    label: 'Home',
-                    data: [100],
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                  },
-                  {
-                    label: 'Ex.',
-                    data: [350],
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  },
-                ]}
-              />
+              <Card rounded>
+                <BaseCard layoutId="card-0">
+                  <BarChartView
+                    labels={['Food']}
+                    datasets={[
+                      {
+                        label: 'Home',
+                        data: [100],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                      },
+                      {
+                        label: 'Ex.',
+                        data: [350],
+                        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                      },
+                    ]}
+                  />
+                </BaseCard>
+                <ExpandedCard layoutId="card-0">
+                  <ComparisonDashboardPopup>
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                    <PricePairItem
+                      homePrice={500}
+                      icon={
+                        <Icon>
+                          <FaRegSmileBeam />
+                        </Icon>
+                      }
+                      destinationPrice={1200}
+                    />
+                  </ComparisonDashboardPopup>
+                </ExpandedCard>
+              </Card>
             </SliderGalleryItem>
             <SliderGalleryItem>
               <BarChartView

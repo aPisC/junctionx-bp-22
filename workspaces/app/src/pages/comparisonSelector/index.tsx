@@ -30,6 +30,7 @@ export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) 
               disabled={flag == null}
               rounded
               onClick={() => {
+                localStorage.setItem('destination', flag?.country ?? '')
                 navigate('/comparison-dashboard')
               }}
             >

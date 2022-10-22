@@ -16,7 +16,7 @@ export interface FlagSelectorProps {
 export const FlagSelector = ({ disabled = false, flag = null, setFlagCallback }: FlagSelectorProps) => {
   return disabled ? (
     <div className="w-full flex items-center justify-center">
-      <FlagButton disabled={disabled} className="w-[50%] overflow-hidden" flag="asdf">
+      <FlagButton disabled={disabled} className="w-[50%]">
         <img className="object-fill scale-150" src={flag?.flag} alt={flag?.flag} />
       </FlagButton>
     </div>
@@ -24,7 +24,7 @@ export const FlagSelector = ({ disabled = false, flag = null, setFlagCallback }:
     <Modal blur rounded>
       <ModalHandler>
         <div className="w-full flex items-center justify-center">
-          <FlagButton className="w-[50%] overflow-hidden" flag="asdf">
+          <FlagButton className="w-[50%]">
             <img className="object-fill scale-150" src={flag?.flag} alt={flag?.flag} />
           </FlagButton>
         </div>
