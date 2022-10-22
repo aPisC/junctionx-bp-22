@@ -21,7 +21,6 @@ export const PieChart = ({ data, labels, homeCountry, targetCountry }: PieChartP
 
   const homeFlag = flagsRequest.data?.find((item: any) => item.id === homeCountry)
   const targetFlag = flagsRequest.data?.find((item: any) => item.id === targetCountry)
-  console.log(homeFlag)
   return (
     <div className="relative w-full h-[15rem]">
       <MultiSeriesPieChartView labels={labels} data={data} />

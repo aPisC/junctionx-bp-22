@@ -1,16 +1,10 @@
-import { FaRegSmileBeam } from 'react-icons/fa'
+import { FaUtensils } from 'react-icons/fa'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
 import BasePage from '../base'
-import { BarChartView } from '../home/BarChartView'
-import { MultiSeriesPieChartView } from './MultiSeriesPieChartView'
 import { useNavigate } from 'react-router-dom'
-import Card, { BaseCard, ExpandedCard } from '../../modules/card'
-import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
-import Icon from '../../modules/icon'
-import { PricePairItem } from './PricePairItem'
 import PieChart from './PieChart'
 import { useRequest } from '../../utils/useRequest'
 import axios from 'axios'
@@ -60,16 +54,34 @@ export default function ComparisonDashboardPage({}: Props) {
                 },
               ]}
             />
-            <div className="flex w-full justify-center">
-              <H1 className="text-xl">Categories</H1>
+            <div className="p-2">
+              <div className="flex w-full border-b-2 border-ui-grey-body">
+                <H1 variant="large">Categories</H1>
+              </div>
             </div>
             <SliderGallery>
-              <SliderGalleryItem>
-                <SliderItem />
-              </SliderGalleryItem>
               {Array.from(Array(7)).map((item, index) => (
                 <SliderGalleryItem key={index}>
-                  <SliderItem />
+                  <SliderItem
+                    icon={<FaUtensils />}
+                    labels={['Food']}
+                    datasets={[
+                      {
+                        label: 'Home',
+                        data: [100],
+                        barThickness: 10,
+                        borderRadius: 8,
+                        backgroundColor: '#37517e',
+                      },
+                      {
+                        label: 'Ex.',
+                        data: [350],
+                        barThickness: 10,
+                        borderRadius: 8,
+                        backgroundColor: '#A8AAAC',
+                      },
+                    ]}
+                  />
                 </SliderGalleryItem>
               ))}
             </SliderGallery>
