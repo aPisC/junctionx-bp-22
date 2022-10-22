@@ -26,8 +26,6 @@ export interface BarChartViewProps {
   datasets?: any
 }
 
-const DATA_COUNT = 5
-
 const data = {
   labels: ['Overall Yay', 'Overall Nay'],
   datasets: [
