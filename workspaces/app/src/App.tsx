@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import ComparisonDashboardPage from './pages/comparisonDashboard'
+import ComparisonSelectorPage from './pages/comparisonSelector'
 import HomePage from './pages/home'
 import HubPage from './pages/hub'
 import LandingPage from './pages/landing'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ComparisonSelectorPage from './pages/comparisonSelector'
-import ComparisonDashboardPage from './pages/comparisonDashboard'
-import SavingSelectorPage from './pages/savingSelector'
-import SavingTutorialPage from './pages/savingTutorial'
 import SavingDashboardPage from './pages/savingDashboard'
 import SavingHomePage from './pages/savingHome'
+import SavingSelectorPage from './pages/savingSelector'
+import SavingTutorialPage from './pages/savingTutorial'
+import { SpinnerOverlay, SpinnerOverlayBackend } from './utils/SipnnerOverlay/SpinnerOverlay'
 
 export const ModalPortalContext = React.createContext<any>(null)
 
 function App() {
   const [modalPortalElement, setModalPortalElement] = useState<any>(null)
   return (
-    <>
+    <SpinnerOverlayBackend>
       <div
         id="modalPortal"
         ref={(e) => {
@@ -39,7 +40,8 @@ function App() {
           </BrowserRouter>
         </div>
       </ModalPortalContext.Provider>
-    </>
+      <SpinnerOverlay />
+    </SpinnerOverlayBackend>
   )
 }
 
