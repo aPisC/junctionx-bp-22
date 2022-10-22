@@ -15,6 +15,12 @@ export default class UserModel extends Model {
   @Column
   declare name: string
 
+  @Column
+  declare sourceCountry: string
+
+  @Column
+  declare targetCountry: string
+
   @HasMany(() => AccountModel)
   declare accounts: AccountModel[]
 }

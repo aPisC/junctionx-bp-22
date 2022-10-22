@@ -16,7 +16,7 @@ export default class AccountModel extends Model {
   declare name: string
 
   @Column
-  declare type: string
+  declare type: string /* save | main */
 
   @Column
   declare balance: number

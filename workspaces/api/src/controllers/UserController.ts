@@ -29,14 +29,19 @@ export default class UserController {
 
     if (!currency) throw new Error('Unable to resolve country')
 
-    const user = await this.userRepository.create({ ...body, id: uuidv4(), name: 'John Doe' })
+    const user = await this.userRepository.create({
+      ...body,
+      id: uuidv4(),
+      name: 'John Doe',
+      sourceCountry: body.country,
+    })
 
     const mainAccount = await this.accountRepository.create({
       id: uuidv4(),
       name: 'Base',
       currency: currency,
       user: user.id,
-      balance: 0,
+      balance: 1000,
       type: 'main',
     })
     await this.accountRepository.create({
@@ -45,7 +50,7 @@ export default class UserController {
       currency: currency,
       user: user.id,
       balance: 0,
-      type: 'savings',
+      type: 'save',
     })
 
     for (const tr of initialTransactions) {
@@ -64,6 +69,20 @@ export default class UserController {
   async getUser(ctx: any) {
     const userId = ctx.request.params.id
     const user = await this.userRepository.findOne({ where: { id: userId } })
+    return user
+  }
+
+  @Route.Post('/setTarget/:country/:userId')
+  async setTarget(ctx: any) {
+    const { userId, country } = ctx.request.params
+
+    const user = await this.userRepository.findOne({ where: { id: userId } })
+    if (!user) throw new Error('User not found')
+    if (!countries[country]) throw new Error('Country not found')
+
+    user.targetCountry = country
+    await user.save()
+
     return user
   }
 }
