@@ -28,7 +28,7 @@ export default function LandingPage({}: LandingPageProps) {
   }
 
   const createUser = async () => {
-    const response = await axios.post<any>(`${BACKEND_URL}/user`, { country: flag }).catch((e) => null)
+    const response = await axios.post<any>(`${BACKEND_URL}/user/create`, { country: flag }).catch((e) => null)
     if (!response?.data) return
 
     localStorage.setItem('token', response.data.id)
