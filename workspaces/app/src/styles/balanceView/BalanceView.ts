@@ -8,15 +8,4 @@ export const BalanceViewStyle = {
     w: 'w-full',
     xPosition: 'justify-center',
   },
-  variants: {
-    base: {
-      default: {
-        color: 'text-white',
-        textSize: 'text-xl',
-      },
-      value: {
-        color: 'text-white',
-      },
-    },
-  },
 }
