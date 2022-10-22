@@ -7,12 +7,12 @@ import { PricePairItem } from './PricePairItem'
 
 export interface SliderItemProps extends GalleryItemProps {}
 
-export const SliderItem = ({ datasets, labels, icon }: SliderItemProps) => {
+export const SliderItem = ({ datasets, labels, icon, unit, value }: SliderItemProps) => {
   return (
     <Modal blur rounded>
       <ModalHandler>
         <div className="cursor-pointer">
-          <GalleryItem icon={icon} labels={labels} datasets={datasets} />
+          <GalleryItem unit={unit} value={value} icon={icon} labels={labels} datasets={datasets} />
         </div>
       </ModalHandler>
       <ModalBody title="Category">

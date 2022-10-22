@@ -110,6 +110,8 @@ export default function HomePage({}: HomePageProps) {
               {summaryRequest.data?.map((sum: any) => (
                 <SliderGalleryItem>
                   <GalleryItem
+                    value={200}
+                    unit="km"
                     max={summaryMax}
                     icon={BarIconMap[sum.id] || <FaQuestion />}
                     labels={[sum.name]}
