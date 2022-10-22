@@ -21,17 +21,23 @@ export default class UserController {
   }
 
   @Route.Post('/create')
-  async create() {
-    const user = await this.userRepository.create({ id: uuidv4(), name: 'John Doe' })
+  async create(ctx: any) {
+    const body: IUserCreateRequest = ctx.request.body
+
+    const user = await this.userRepository.create({ ...body, id: uuidv4(), name: 'John Doe' })
 
     const mainAccount = await this.accountRepository.create({
       id: uuidv4(),
+      name: 'Base',
+      currency: body.currency,
       user: user.id,
       balance: 0,
       type: 'main',
     })
     await this.accountRepository.create({
       id: uuidv4(),
+      name: 'Jar',
+      currency: body.currency,
       user: user.id,
       balance: 0,
       type: 'savings',
@@ -44,11 +50,9 @@ export default class UserController {
         account: mainAccount.id,
         user: user.id,
       })
-
-      console.log(tri.toJSON())
     }
 
-    return user
+    return this.userRepository.findOne({ include: [this.accountRepository], where: { id: user.id } })
   }
 
   @Route.Get('/:id')
@@ -57,4 +61,8 @@ export default class UserController {
     const user = await this.userRepository.findOne({ where: { id: userId } })
     return user
   }
+}
+
+interface IUserCreateRequest {
+  currency: string
 }

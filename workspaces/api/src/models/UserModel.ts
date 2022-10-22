@@ -1,4 +1,5 @@
-import { Column, Model, Table } from 'sequelize-typescript'
+import { Column, HasMany, Model, Table } from 'sequelize-typescript'
+import AccountModel from './AccountModel'
 
 @Table({
   createdAt: false,
@@ -13,4 +14,7 @@ export default class UserModel extends Model {
 
   @Column
   declare name: string
+
+  @HasMany(() => AccountModel)
+  declare accounts: AccountModel[]
 }

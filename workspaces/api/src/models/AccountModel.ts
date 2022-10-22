@@ -21,6 +21,10 @@ export default class AccountModel extends Model {
   @Column
   declare balance: number
 
+  @Column
+  declare currency: number
+
+  @Column
   @ForeignKey(() => UserModel)
-  declare user: UserModel
+  declare user: string
 }
