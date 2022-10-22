@@ -28,7 +28,11 @@ export const FlagSelector = ({ disabled = false, flag, setFlagCallback }: FlagSe
   return disabled ? (
     <div className="w-full flex items-center justify-center">
       <FlagButton disabled={disabled} className="w-[50%]">
-        <img className="object-fill scale-150" src={selectedFlag?.image} alt={selectedFlag?.country} />
+        <img
+          className="object-fill scale-150"
+          src={`${BACKEND_URL}/${selectedFlag?.image}`}
+          alt={selectedFlag?.country}
+        />
       </FlagButton>
     </div>
   ) : (
@@ -36,7 +40,11 @@ export const FlagSelector = ({ disabled = false, flag, setFlagCallback }: FlagSe
       <ModalHandler>
         <div className="w-full flex items-center justify-center">
           <FlagButton className="w-[50%]">
-            <img className="object-fill scale-150" src={selectedFlag?.image} alt={selectedFlag?.country} />
+            <img
+              className="object-fill scale-150"
+              src={`${BACKEND_URL}/${selectedFlag?.image}`}
+              alt={selectedFlag?.country}
+            />
           </FlagButton>
         </div>
       </ModalHandler>

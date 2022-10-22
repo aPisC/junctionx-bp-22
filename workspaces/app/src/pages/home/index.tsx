@@ -1,19 +1,55 @@
+import axios from 'axios'
+import { Scrollbars } from 'react-custom-scrollbars-2'
+import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
-import Tabs, { TabsHeader, Tab, TabsBody, TabsPanel } from '../../modules/tabs'
-import { Scrollbars } from 'react-custom-scrollbars-2'
+import Tabs, { Tab, TabsBody, TabsHeader, TabsPanel } from '../../modules/tabs'
+import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
+import { useRequest } from '../../utils/useRequest'
 import BasePage from '../base'
 import BalanceView from './BalanceView'
 import { BarChartView } from './BarChartView'
 import TransactionItem from './TransactionItem'
-import { useNavigate } from 'react-router-dom'
 
 export interface HomePageProps {}
 
 export default function HomePage({}: HomePageProps) {
   const navigate = useNavigate()
+  const userRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
+  const transactionsRequest = useRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/transaction/transactions/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
+  useSpinnerOverlay(userRequest.isRunning)
+  useSpinnerOverlay(transactionsRequest.isRunning)
+
+  if (userRequest.isRunning) return null
+
+  const user: any = userRequest.data
+  console.log(user)
+  const mainAccount = user.accounts.find((a: any) => a.type == 'main')
+  const saveAccount = user.accounts.find((a: any) => a.type == 'save')
+
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -31,15 +67,15 @@ export default function HomePage({}: HomePageProps) {
               </TabsHeader>
               <TabsBody>
                 <TabsPanel key="account" value="account">
-                  <BalanceView title="Account Balance" value={120000} currency="Magyar Forint" />
+                  <BalanceView title="Account Balance" value={mainAccount.balance} currency="Magyar Forint" />
                 </TabsPanel>
                 <TabsPanel key="jar" value="jar">
-                  <BalanceView title="Jar Balance" value={38000} currency="Magyar Forint" />
+                  <BalanceView title="Jar Balance" value={saveAccount.balance} currency="Magyar Forint" />
                 </TabsPanel>
               </TabsBody>
             </Tabs>
             <div className="bg-wise-navy-dark p-2">
-              <BalanceView title="Monthly Expense" value={100900} currency="Magyar Forint" />
+              <BalanceView title="Monthly Expense" value={mainAccount.expense} currency="Magyar Forint" />
             </div>
             <div className="flex w-full justify-center">
               <H1 className="text-xl">Categories</H1>
@@ -149,12 +185,11 @@ export default function HomePage({}: HomePageProps) {
               </SliderGalleryItem>
             </SliderGallery>
             <div className="p-2 flex flex-col gap-2">
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
-              <TransactionItem shop="Spar megacorp." expense={38000} />
+              {transactionsRequest.data
+                ?.filter((tr: any) => tr.amount < 0)
+                .map((tr: any) => (
+                  <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
+                ))}
             </div>
           </Scrollbars>
         </div>
