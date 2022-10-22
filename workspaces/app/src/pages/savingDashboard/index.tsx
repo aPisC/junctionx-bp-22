@@ -217,7 +217,7 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
           </div>
         </div>
         <div>
-          <Button variant="hub" className="rounded-b-none">
+          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/saving-home')}>
             Start
           </Button>
         </div>

@@ -1,0 +1,50 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import Navigation from '../../modules/navigation'
+import BasePage from '../base'
+import BalanceView from '../home/BalanceView'
+import TransactionItem from '../home/TransactionItem'
+import { Scrollbars } from 'react-custom-scrollbars-2'
+import { H1 } from '../../modules/h1'
+import { LineChartView } from './LineChartView'
+
+interface SavingHomePageProps {}
+
+export default function SavingHomePage({}: SavingHomePageProps) {
+  const navigate = useNavigate()
+  return (
+    <BasePage>
+      <div className="h-full flex flex-col">
+        <Navigation />
+        <div className="flex flex-grow overflow-hidden">
+          <div className="flex flex-col">
+            <div className="flex w-full flex-col p-2">
+              <div className="bg-pink-400 rounded-lg">
+                <BalanceView currency="Magyar forint" title="Jar account" value={120000} />
+              </div>
+              <div className="py-2 h-[15rem] overflow-hidden">
+                <Scrollbars>
+                  <div className="flex flex-col gap-2">
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                  </div>
+                </Scrollbars>
+              </div>
+            </div>
+            <div>
+              <H1>Savings</H1>
+              <LineChartView />
+            </div>
+          </div>
+        </div>
+      </div>
+    </BasePage>
+  )
+}
