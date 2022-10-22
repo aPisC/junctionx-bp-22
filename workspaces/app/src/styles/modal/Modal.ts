@@ -7,6 +7,7 @@ export const ModalStyle = {
     left: 'left-0',
     top: 'top-0',
     overflow: 'overflow-hidden',
+    p: 'p-4',
     z: 'z-[999]',
     cursor: 'cursor-pointer',
   },
