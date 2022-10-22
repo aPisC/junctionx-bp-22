@@ -1,11 +1,9 @@
-import { FaRegTimesCircle } from 'react-icons/fa'
 import { FlagsRequest } from '../../cache/flagRequest'
 import { BACKEND_URL } from '../../config/backendUrl'
 import FlagOption from '../../pages/landing/FlagOption'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import Button from '../button'
 import { FlagButton } from '../button/FlagButton'
-import Icon from '../icon'
 import Modal, { ModalBody, ModalCloseContainer, ModalHandler } from '../modal'
 
 export interface FlagSelectorProps {
@@ -38,11 +36,13 @@ export const FlagSelector = ({ disabled = false, flag, setFlagCallback }: FlagSe
       <ModalHandler>
         <div className="w-full flex items-center justify-center">
           <FlagButton className="w-[50%]">
-            <img
-              className="object-fill scale-150"
-              src={`${BACKEND_URL}/${selectedFlag?.image}`}
-              alt={selectedFlag?.country}
-            />
+            {selectedFlag && (
+              <img
+                className="object-fill scale-150"
+                src={`${BACKEND_URL}/${selectedFlag?.image}`}
+                alt={selectedFlag?.country}
+              />
+            )}
           </FlagButton>
         </div>
       </ModalHandler>
