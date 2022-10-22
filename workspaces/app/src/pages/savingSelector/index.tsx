@@ -31,7 +31,7 @@ export default function SavingSelectorPage({}: SavingSelectorPageProps) {
               rounded
               onClick={() => {
                 localStorage.setItem('destination', flag?.country ?? '')
-                navigate('/saving-dashboard')
+                navigate('/saving-tutorial')
               }}
             >
               Continue
