@@ -1,7 +1,9 @@
+import cors from '@koa/cors'
 import { Raven } from 'raven'
-import { RavenPluginKoa } from 'raven-plugin-koa'
+import { MiddlewarePriority, RavenPluginKoa } from 'raven-plugin-koa'
 import RavenPluginKoaAuth from 'raven-plugin-koa-auth'
 import { RavenPluginSequelize } from 'raven-plugin-sequelize'
+import 'sqlite3'
 import CountriesController from './controllers/CountriesController'
 import TestController from './controllers/TestController'
 import TransactionController from './controllers/TransactionController'
@@ -30,6 +32,7 @@ server
   .configure((opt) => {
     opt.port = 8080
   })
+  .useKoaMiddleware(MiddlewarePriority.PreIngress, cors({ origin: '*' }))
   .useController(TestController)
   .useController(UserController)
   .useController(TransactionController)
