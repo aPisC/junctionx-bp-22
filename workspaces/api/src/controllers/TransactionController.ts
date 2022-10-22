@@ -22,31 +22,21 @@ export default class TransactionController {
   }
 
   @Route.Get('/transactions/:userId')
-  async getTransactions(ctx: any) {
-    const userId = ctx.request.params.userId
-    const transactions = await this.transactionRepository.findAll({
-      order: [['timestamp', 'DESC']],
-      where: { user: userId },
-    })
-    return transactions
-  }
-
-  @Route.Get('/predictions/:userId')
   async getPredictions(ctx: any) {
     const userId = ctx.request.params.userId
     const user = await this.userRepository.findOne({ where: { id: userId } })
 
     if (!user) throw new Error('User not found')
-    if (!user.targetCountry) throw new Error('No target country selected')
 
-    const predictor = new PPPPredictor(user.sourceCountry, user.targetCountry)
+    const predictor = user.targetCountry ? new PPPPredictor(user.sourceCountry, user.targetCountry) : null
     const transactions = await this.transactionRepository.findAll({
       order: [['timestamp', 'DESC']],
       where: { user: userId },
     })
     const predictions = transactions.map((tr) => ({
       ...tr.toJSON(),
-      amount: predictor.getPrice(tr.category, tr.amount),
+      portion: predictor?.getPrice(tr.category, 1),
+      predicted: predictor?.getPrice(tr.category, tr.amount),
     }))
     return predictions
   }
@@ -149,6 +139,7 @@ export default class TransactionController {
       summary[cat] = {
         ...categories[cat],
         amount: amount,
+        portion: predictor?.getPrice(cat, 1),
         predicted: predictor?.getPrice(cat, amount),
       }
     })
