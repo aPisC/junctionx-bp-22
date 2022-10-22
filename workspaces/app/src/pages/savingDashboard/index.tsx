@@ -67,38 +67,56 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
                 {Array.from(Array(7)).map((item, index) => {
                   const home = Math.floor(Math.random() * 200)
                   const abroad = Math.floor(Math.random() * 200)
+
+                  const data = [
+                    {
+                      label: 'Home',
+                      data: [home],
+                      barThickness: 10,
+                      borderRadius: 8,
+                      backgroundColor: '#37517e',
+                      stack: 'stack0',
+                    },
+                  ]
+                  if (home < abroad) {
+                    data.push({
+                      label: 'Home',
+                      data: [Math.abs(home - abroad)],
+                      barThickness: 10,
+                      borderRadius: 8,
+                      backgroundColor: '#00b9ff',
+                      stack: `${home > abroad ? 'stack1' : 'stack0'}`,
+                    })
+                    data.push({
+                      label: 'Ex.',
+                      data: [abroad],
+                      barThickness: 10,
+                      borderRadius: 8,
+                      backgroundColor: '#A8AAAC',
+                      stack: 'stack1',
+                    })
+                  } else {
+                    data.push({
+                      label: 'Ex.',
+                      data: [abroad],
+                      barThickness: 10,
+                      borderRadius: 8,
+                      backgroundColor: '#A8AAAC',
+                      stack: 'stack1',
+                    })
+                    data.push({
+                      label: 'Home',
+                      data: [Math.abs(home - abroad)],
+                      barThickness: 10,
+                      borderRadius: 8,
+                      backgroundColor: '#00b9ff',
+                      stack: `${home > abroad ? 'stack1' : 'stack0'}`,
+                    })
+                  }
+
                   return (
                     <SliderGalleryItem key={index}>
-                      <SliderItem
-                        icon={<FaUtensils />}
-                        labels={['Food']}
-                        datasets={[
-                          {
-                            label: 'Home',
-                            data: [home],
-                            barThickness: 10,
-                            borderRadius: 8,
-                            backgroundColor: '#37517e',
-                            stack: 'stack0',
-                          },
-                          {
-                            label: 'Home',
-                            data: [Math.abs(home - abroad)],
-                            barThickness: 10,
-                            borderRadius: 8,
-                            backgroundColor: '#00b9ff',
-                            stack: `${home > abroad ? 'stack1' : 'stack0'}`,
-                          },
-                          {
-                            label: 'Ex.',
-                            data: [abroad],
-                            barThickness: 10,
-                            borderRadius: 8,
-                            backgroundColor: '#A8AAAC',
-                            stack: 'stack1',
-                          },
-                        ]}
-                      />
+                      <SliderItem icon={<FaUtensils />} labels={['Food']} datasets={data} />
                     </SliderGalleryItem>
                   )
                 })}
