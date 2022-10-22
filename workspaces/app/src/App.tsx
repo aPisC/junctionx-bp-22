@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import BasePage from './pages/base'
-import LandingPage from './pages/landing'
+import HomePage from './pages/home'
 
 export const ModalPortalContext = React.createContext<any>(null)
 
@@ -16,7 +15,7 @@ function App() {
       ></div>
       <ModalPortalContext.Provider value={modalPortalElement}>
         <div className="w-full h-full  relative">
-          <BasePage />
+          <HomePage />
         </div>
       </ModalPortalContext.Provider>
     </>
