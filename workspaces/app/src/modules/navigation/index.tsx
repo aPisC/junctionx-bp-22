@@ -10,8 +10,12 @@ export const Navigation = ({}: NavigationProps) => {
       <Icon>
         <FaHouseUser />
       </Icon>
-      <H1 className="h-full text-center text-xl">Username</H1>
-      <H1 className="h-full text-center text-xl">WISE</H1>
+      <H1 variant="medium" className="h-full text-center">
+        Username
+      </H1>
+      <H1 variant="medium" className="h-full text-center">
+        WISE
+      </H1>
     </div>
   )
 }
