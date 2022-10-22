@@ -6,7 +6,7 @@ def master_calculator(source_id: str,
                       category: str,
                       currencies_by_country: dict,
                       exchange_rate_info: list,
-                      country_category_ppp_data) -> float:
+                      country_category_ppp_data: pd.DataFrame) -> float:
     """
     Function to calculate living costs in different countries
     
@@ -33,21 +33,15 @@ def master_calculator(source_id: str,
     """
 
     # Retrieve PPP values
-    home_ppp = country_category_ppp_data[
-        country_category_ppp_data["country_id"] == source_id
-        & country_category_ppp_data["category"] == category]["value"].iloc[0]
+    home_ppp = country_category_ppp_data.query(f"country_id == '{source_id}' & category == '{category}'")["value"].iloc[0]
 
-    foreign_ppp = country_category_ppp_data[
-        country_category_ppp_data["country_id"] == target_id
-        & country_category_ppp_data["category"] == category]["value"].iloc[0]
+    foreign_ppp = country_category_ppp_data.query(f"country_id == '{target_id}' & category == '{category}'")["value"].iloc[0]
 
     # Retrieve currency conversion info
-    exchange_ratio = exchange_rate_finder(exchange_rate_info,
-        currencies_by_country[target_id],
-        currencies_by_country[source_id])
+    exchange_ratio = exchange_rate_finder(exchange_rate_info, currencies_by_country[source_id], currencies_by_country[target_id])
 
     # Do calculation
-    price_ratio = home_ppp / foreign_ppp * exchange_ratio
+    price_ratio = foreign_ppp / home_ppp / exchange_ratio
     return price_ratio
 
 def calc_category_index(values, weights=None) -> float:
@@ -88,60 +82,15 @@ def exchange_rate_finder(data: list, source: str, target: str):
     
     target: Target currency code e.g.: EUR"""
 
+    # Handle special case of EUR to EUR conversion
+    if source == target:
+        return 1
+
     # Iterate over currency data till we find exchange rate we need
     for exchange_info in data:
         if exchange_info["source"] == source and exchange_info["target"] == target:
             return exchange_info["rate"]
 
     # Raise error if not found
+    print(f"Source: {source} , Target: {target}")
     raise ValueError("Target and/or source currency exchange information doesn't exist in data")
-
-
-def master_calculator(source_id: str,
-                      target_id: str,
-                      category: str,
-                      currencies_by_country: dict,
-                      exchange_rate_info: list,
-                      country_category_ppp_data: pd.Dataframe) -> float:
-    """
-    Function to calculate living costs in different countries
-    
-    Inputs:
-    source_id: Source country identifier e.g.: 'hu'
-    
-    target_id: Target country identifier e.g.: 'at'
-    
-    category: Living expense category to be compared
-    
-    currencies_by_country: Dictionary listing currency
-    unit in each country. Keys are country IDs
-    
-    exchange_rate_info: Wise API response, listing
-    exchange rates in different currencies/countries
-    
-    country_category_ppp_data: Dataframe containing
-    the PPP (compared to EU27 avg) in each country
-    
-    Returns:
-    price_ratio: (float) multiplier for living expenses
-    price_ratio > 1: home country more expensive
-    price_ratio < 1: home country cheaper
-    """
-
-    # Retrieve PPP values
-    home_ppp = country_category_ppp_data[
-        country_category_ppp_data["country_id"] == source_id
-        & country_category_ppp_data["category"] == category]["value"].iloc[0]
-
-    foreign_ppp = country_category_ppp_data[
-        country_category_ppp_data["country_id"] == target_id
-        & country_category_ppp_data["category"] == category]["value"].iloc[0]
-
-    # Retrieve currency conversion info
-    exchange_ratio = exchange_rate_finder(exchange_rate_info,
-        currencies_by_country[target_id],
-        currencies_by_country[source_id])
-
-    # Do calculation
-    price_ratio = home_ppp / foreign_ppp * exchange_ratio
-    return price_ratio
