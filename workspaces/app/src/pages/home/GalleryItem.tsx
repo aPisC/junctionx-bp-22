@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { commify } from '../../utils/Utils'
 import { BarChartView } from './BarChartView'
 
 export interface GalleryItemProps {
@@ -6,13 +7,18 @@ export interface GalleryItemProps {
   labels: string[]
   max?: number
   datasets: any
+  value: number
+  unit: string
 }
 
-export const GalleryItem = ({ icon, labels, datasets, max }: GalleryItemProps) => {
+export const GalleryItem = ({ icon, labels, datasets, max, value, unit }: GalleryItemProps) => {
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col h-full justify-center">
       <BarChartView max={max} labels={labels} datasets={datasets} />
-      <div className="text-wise-navy-dark w-full h-auto flex justify-center p-2">{icon}</div>
+      <div className="text-xs text-center">{`${
+        datasets.length == 2 && datasets[0].data > datasets[1].data ? '-' : datasets.length == 2 ? '+' : ''
+      }${commify(value)} ${unit}`}</div>
+      <div className="text-wise-navy-dark w-full h-auto flex justify-center p-1">{icon}</div>
     </div>
   )
 }

@@ -78,6 +78,8 @@ export default function ComparisonDashboardPage({}: Props) {
               {Array.from(Array(7)).map((item, index) => (
                 <SliderGalleryItem key={index}>
                   <SliderItem
+                    unit="km"
+                    value={200}
                     icon={<FaUtensils />}
                     labels={['Food']}
                     datasets={[

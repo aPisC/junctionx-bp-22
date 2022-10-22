@@ -67,7 +67,7 @@ export const BarChartView = ({ labels, datasets, max }: BarChartViewProps) => {
     },
   }
   return (
-    <div className="w-full">
+    <div className="w-full max-h-[8rem]">
       <Bar options={_options} data={data} />
     </div>
   )

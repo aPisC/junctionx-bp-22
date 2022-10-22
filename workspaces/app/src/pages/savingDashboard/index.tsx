@@ -116,7 +116,7 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
 
                   return (
                     <SliderGalleryItem key={index}>
-                      <SliderItem icon={<FaUtensils />} labels={['Food']} datasets={data} />
+                      <SliderItem unit="km" value={200} icon={<FaUtensils />} labels={['Food']} datasets={data} />
                     </SliderGalleryItem>
                   )
                 })}

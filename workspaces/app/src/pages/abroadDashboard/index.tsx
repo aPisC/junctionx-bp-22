@@ -119,7 +119,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
 
                   return (
                     <SliderGalleryItem key={index}>
-                      <SliderItem icon={<FaUtensils />} labels={['Food']} datasets={data} />
+                      <SliderItem value={200} unit="km" icon={<FaUtensils />} labels={['Food']} datasets={data} />
                     </SliderGalleryItem>
                   )
                 })}
