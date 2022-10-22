@@ -14,8 +14,8 @@ export const countries: { [key: string]: CountryDescription } = {
   es: { currency: 'EUR' },
   at: { currency: 'EUR' },
   fr: { currency: 'EUR' },
-  dk: { currency: 'EUR' },
-  se: { currency: 'EUR' },
+  dk: { currency: 'DKK' },
+  se: { currency: 'SEK' },
   de: { currency: 'EUR' },
   hu: { currency: 'HUF' },
 }
