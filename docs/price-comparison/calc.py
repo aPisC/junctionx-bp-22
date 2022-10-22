@@ -72,3 +72,23 @@ def calc_category_index(values, weights=None) -> float:
     assert len(weights) == len(values)
 
     return np.dot(weights, values)
+
+
+def exchange_rate_finder(data: list, source: str, target: str):
+    """
+    Function to find exchange rates between two countries
+    
+    Inputs:
+    data: json response read-in as list of dicts from Wise
+    
+    source: Source currency code e.g.: HUF
+    
+    target: Target currency code e.g.: EUR"""
+
+    # Iterate over currency data till we find exchange rate we need
+    for exchange_info in data:
+        if data["source"] == source and data["target"] == target:
+            return data["rate"]
+
+    # Raise error if not found
+    raise ValueError("Target and/or source currency exchange information doesn't exist in data")
