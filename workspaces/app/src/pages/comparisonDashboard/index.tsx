@@ -211,8 +211,8 @@ export default function ComparisonDashboardPage({}: Props) {
           </SliderGallery>
         </div>
         <div>
-          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/travelplan')}>
-            <H1>Create travel plan!</H1>
+          <Button variant="hub" className="rounded-b-none" onClick={() => navigate('/saving-dashboard')}>
+            <H1>Create saving plan!</H1>
           </Button>
         </div>
       </div>
