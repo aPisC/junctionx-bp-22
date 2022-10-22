@@ -6,20 +6,19 @@ export interface BalanceViewProps {
   title: string
   value: number
   currency: string
-  variant?: keyof typeof BalanceViewStyle.variants
 }
 
-export const BalanceView = ({ title, value, currency, variant = 'base' }: BalanceViewProps) => {
+export const BalanceView = ({ title, value, currency }: BalanceViewProps) => {
   return (
     <div className={objectsToString(BalanceViewStyle.container)}>
       <div className={objectsToString(BalanceViewStyle.item)}>
-        <H1 className={objectsToString(BalanceViewStyle.variants[variant].default)}>{title}</H1>
+        <H1 variant="medium-transparent">{title}</H1>
       </div>
       <div className={objectsToString(BalanceViewStyle.item)}>
-        <H1 className={objectsToString(BalanceViewStyle.variants[variant].value)}>{value}</H1>
+        <H1 variant="base-white">{value}</H1>
       </div>
       <div className={objectsToString(BalanceViewStyle.item)}>
-        <div className={objectsToString(BalanceViewStyle.variants[variant].default)}>{currency}</div>
+        <H1 variant="medium-transparent">{currency}</H1>
       </div>
     </div>
   )
