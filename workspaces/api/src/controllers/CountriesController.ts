@@ -10,7 +10,7 @@ export default class CountriesController {
   }
 }
 
-export const countries = {
+export const countries: { [key: string]: CountryDescription } = {
   es: { currency: 'EUR' },
   at: { currency: 'EUR' },
   fr: { currency: 'EUR' },
@@ -18,4 +18,8 @@ export const countries = {
   se: { currency: 'EUR' },
   de: { currency: 'EUR' },
   hu: { currency: 'HUF' },
+}
+
+interface CountryDescription {
+  currency: string
 }

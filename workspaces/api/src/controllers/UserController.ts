@@ -6,6 +6,7 @@ import { initialTransactions } from '../config/initialTransactions'
 import AccountModel from '../models/AccountModel'
 import TransactionModel from '../models/TransactionModel'
 import UserModel from '../models/UserModel'
+import { countries } from './CountriesController'
 
 @injectable()
 @Route.Prefix('/user')
@@ -24,12 +25,16 @@ export default class UserController {
   async create(ctx: any) {
     const body: IUserCreateRequest = ctx.request.body
 
+    const currency = countries[body.country]?.currency
+
+    if (!currency) throw new Error('Unable to resolve country')
+
     const user = await this.userRepository.create({ ...body, id: uuidv4(), name: 'John Doe' })
 
     const mainAccount = await this.accountRepository.create({
       id: uuidv4(),
       name: 'Base',
-      currency: body.currency,
+      currency: currency,
       user: user.id,
       balance: 0,
       type: 'main',
@@ -37,7 +42,7 @@ export default class UserController {
     await this.accountRepository.create({
       id: uuidv4(),
       name: 'Jar',
-      currency: body.currency,
+      currency: currency,
       user: user.id,
       balance: 0,
       type: 'savings',
@@ -64,5 +69,5 @@ export default class UserController {
 }
 
 interface IUserCreateRequest {
-  currency: string
+  country: string
 }
