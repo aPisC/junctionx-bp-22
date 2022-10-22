@@ -81,9 +81,9 @@ export default class UserController {
 
     const user = await this.userRepository.findOne({ where: { id: userId } })
     if (!user) throw new Error('User not found')
-    if (!countries[country]) throw new Error('Country not found')
+    if (!countries[country] && country != 'null') throw new Error('Country not found')
 
-    user.targetCountry = country
+    user.targetCountry = country == 'null' ? null : country
     await user.save()
 
     return user
