@@ -1,8 +1,17 @@
 import { Column, ForeignKey, Model, Table } from 'sequelize-typescript'
-import UserModel from './User'
+import UserModel from './UserModel'
 
-@Table
+@Table({
+  createdAt: false,
+  updatedAt: false,
+})
 export default class AccountModel extends Model {
+  @Column({
+    autoIncrement: false,
+    primaryKey: true,
+  })
+  declare id: string
+
   @Column
   declare name: string
 

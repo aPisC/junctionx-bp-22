@@ -2,9 +2,13 @@ import { Raven } from 'raven'
 import { RavenPluginKoa } from 'raven-plugin-koa'
 import RavenPluginKoaAuth from 'raven-plugin-koa-auth'
 import { RavenPluginSequelize } from 'raven-plugin-sequelize'
-import 'sqlite3'
 import TestController from './controllers/TestController'
+import TransactionController from './controllers/TransactionController'
+import UserController from './controllers/UserController'
+import AccountModel from './models/AccountModel'
 import TestModel from './models/TestModel'
+import TransactionModel from './models/TransactionModel'
+import UserModel from './models/UserModel'
 
 const server = new Raven()
 
@@ -16,6 +20,9 @@ server
     storage: ':memory:',
   })
   .useModel(TestModel)
+  .useModel(UserModel)
+  .useModel(AccountModel)
+  .useModel(TransactionModel)
 
 server
   .usePlugin(RavenPluginKoa)
@@ -23,6 +30,8 @@ server
     opt.port = 8080
   })
   .useController(TestController)
+  .useController(UserController)
+  .useController(TransactionController)
 
 // Web engine and authorization
 server.usePlugin(RavenPluginKoaAuth).configure({

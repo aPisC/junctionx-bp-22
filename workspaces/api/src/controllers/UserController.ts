@@ -1,11 +1,14 @@
 import { Route } from 'raven-plugin-koa'
 import { Repository, Sequelize } from 'sequelize-typescript'
 import { injectable } from 'tsyringe'
-import AccountModel from '../models/Account'
-import TransactionModel from '../models/Transaction'
-import UserModel from '../models/User'
+import { uuid as uuidv4 } from 'uuidv4'
+import { initialTransactions } from '../config/initialTransactions'
+import AccountModel from '../models/AccountModel'
+import TransactionModel from '../models/TransactionModel'
+import UserModel from '../models/UserModel'
 
 @injectable()
+@Route.Prefix('/user')
 export default class UserController {
   private readonly userRepository: Repository<UserModel>
   private readonly accountRepository: Repository<AccountModel>
@@ -19,16 +22,39 @@ export default class UserController {
 
   @Route.Post('/create')
   async create() {
-    const user = await this.userRepository.create({})
+    const user = await this.userRepository.create({ id: uuidv4(), name: 'John Doe' })
 
-    const mainAccount = await this.accountRepository.create({ user: user, balance: 0, type: 'main' })
-    const savingsAccount = await this.accountRepository.create({ user: user, balance: 0, type: 'savings' })
-
-    await this.transactionRepository.create({
-      account: savingsAccount,
-      user: user,
+    const mainAccount = await this.accountRepository.create({
+      id: uuidv4(),
+      user: user.id,
+      balance: 0,
+      type: 'main',
+    })
+    await this.accountRepository.create({
+      id: uuidv4(),
+      user: user.id,
+      balance: 0,
+      type: 'savings',
     })
 
+    for (const tr of initialTransactions) {
+      const tri = await this.transactionRepository.create({
+        ...tr,
+        id: uuidv4(),
+        account: mainAccount.id,
+        user: user.id,
+      })
+
+      console.log(tri.toJSON())
+    }
+
+    return user
+  }
+
+  @Route.Get('/:id')
+  async getUser(ctx: any) {
+    const userId = ctx.request.params.id
+    const user = await this.userRepository.findOne({ where: { id: userId } })
     return user
   }
 }

@@ -1,8 +1,14 @@
 import { Column, Model, Table } from 'sequelize-typescript'
 
-@Table
+@Table({
+  createdAt: false,
+  updatedAt: false,
+})
 export default class UserModel extends Model {
-  @Column
+  @Column({
+    autoIncrement: false,
+    primaryKey: true,
+  })
   declare id: string
 
   @Column

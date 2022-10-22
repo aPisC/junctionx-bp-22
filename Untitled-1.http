@@ -1,0 +1,7 @@
+POST http://localhost:8080/user/create HTTP/1.1
+
+###
+GET http://localhost:8080/user/0a47d4a3-76fc-4c03-9f1c-41e7adc09261 HTTP/1.1
+
+###
+GET http://localhost:8080/transactions/1953156e-1bf4-4062-8225-117b00a91506 HTTP/1.1
