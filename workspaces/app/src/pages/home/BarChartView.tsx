@@ -48,7 +48,7 @@ export const options = {
 export interface BarChartViewProps {
   labels: string[]
   datasets: any
-  max: number
+  max?: number
 }
 
 export const BarChartView = ({ labels, datasets, max }: BarChartViewProps) => {

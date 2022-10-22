@@ -4,7 +4,7 @@ import { BarChartView } from './BarChartView'
 export interface GalleryItemProps {
   icon: ReactNode
   labels: string[]
-  max: number
+  max?: number
   datasets: any
 }
 
