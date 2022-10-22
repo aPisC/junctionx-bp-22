@@ -1,8 +1,8 @@
 export const initialTransactions = [
-  { category: 'food-non-alc', amount: -30, name: 'Corner ABC' },
+  { category: 'food-non-alc', amount: -130, name: 'Corner ABC' },
   {
     category: 'food-non-alc',
-    amount: -15,
+    amount: -75,
     name: 'Mg Ronalds',
   },
   {
@@ -12,10 +12,10 @@ export const initialTransactions = [
   },
   {
     category: 'food-non-alc',
-    amount: -20,
+    amount: -60,
     name: 'Burger Queen',
   },
-  { category: 'leisure', amount: -15, name: 'OnlyFans Subscription' },
+  { category: 'leisure', amount: -45, name: 'OnlyFans Subscription' },
   {
     category: 'education',
     amount: -20,
@@ -29,28 +29,29 @@ export const initialTransactions = [
   },
   {
     category: 'education',
-    amount: -16,
+    amount: -36,
 
     name: 'iDemy',
   },
   {
     category: 'alc-tobaco',
-    amount: -10,
+    amount: -30,
     name: 'Karlboro',
   },
   {
     category: 'health',
-    amount: -10,
+    amount: -100,
     name: 'St. Theresa Hospital',
   },
   {
     category: 'clothing',
-    amount: -10,
+    amount: -20,
+
     name: 'C^A',
   },
   {
     category: 'clothing',
-    amount: -10,
+    amount: -20,
     name: 'Old Yorker',
   },
   {
@@ -70,7 +71,7 @@ export const initialTransactions = [
   },
 
   { name: 'Nikea', category: 'clothing', amount: -53 },
-  { name: 'Media Market', category: 'it-tech', amount: -200 },
+  { name: 'Media Market', category: 'it-tech', amount: -30 },
   { name: 'Pumba', category: 'clothing', amount: -25 },
   { name: 'eOff', category: 'util-bills', amount: -15 },
   { name: 'AlTáv', category: 'util-bills', amount: -10 },
