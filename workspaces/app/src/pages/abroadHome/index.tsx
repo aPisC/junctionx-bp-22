@@ -81,7 +81,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                 {transactionsRequest.data
                   ?.filter((tr: any) => tr.amount < 0)
                   .map((tr: any) => (
-                    <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
+                    <TransactionItem currency={mainAccount.currency} key={tr.id} shop={tr.name} expense={-tr.amount} />
                   ))}
               </Scrollbars>
             </div>

@@ -9,6 +9,7 @@ export interface BalanceViewProps {
 }
 
 export const BalanceView = ({ title, value, currency }: BalanceViewProps) => {
+  console.log(currency)
   return (
     <div className={objectsToString(BalanceViewStyle.container)}>
       <div className={objectsToString(BalanceViewStyle.item)}>
@@ -18,7 +19,7 @@ export const BalanceView = ({ title, value, currency }: BalanceViewProps) => {
       </div>
       <div className={objectsToString(BalanceViewStyle.item)}>
         <H1 variant="base" className="pt-0">
-          {commify(value)} Ft
+          {commify(value)} {currency}
         </H1>
       </div>
     </div>

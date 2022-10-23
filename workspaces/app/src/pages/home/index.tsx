@@ -89,16 +89,16 @@ export default function HomePage({}: HomePageProps) {
               <div className="px-2 py-1">
                 <TabsBody>
                   <TabsPanel key="account" value="account">
-                    <BalanceView title="Account Balance" value={mainAccount.balance} currency="Magyar Forint" />
+                    <BalanceView title="Account Balance" value={mainAccount.balance} currency={mainAccount.currency} />
                   </TabsPanel>
                   <TabsPanel key="jar" value="jar">
-                    <BalanceView title="Jar Balance" value={saveAccount.balance} currency="Magyar Forint" />
+                    <BalanceView title="Jar Balance" value={saveAccount.balance} currency={saveAccount.currency} />
                   </TabsPanel>
                 </TabsBody>
               </div>
             </Tabs>
             <div className="p-2 pt-0">
-              <BalanceView title="Monthly Expense" value={mainAccount.expense || ''} currency="Magyar Forint" />
+              <BalanceView title="Monthly Expense" value={mainAccount.expense || ''} currency={mainAccount.currency} />
             </div>
             <div className="p-2">
               <div className="flex w-full border-b-2 border-ui-grey-body">
@@ -111,7 +111,7 @@ export default function HomePage({}: HomePageProps) {
                 <SliderGalleryItem>
                   <GalleryItem
                     value={Math.round(sum.amount)}
-                    unit=""
+                    unit={mainAccount.currency}
                     max={summaryMax}
                     icon={BarIconMap[sum.id] || <FaQuestion />}
                     labels={[sum.name]}
@@ -138,7 +138,7 @@ export default function HomePage({}: HomePageProps) {
                 {transactionsRequest.data
                   ?.filter((tr: any) => tr.amount < 0)
                   .map((tr: any) => (
-                    <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
+                    <TransactionItem currency={mainAccount.currency} key={tr.id} shop={tr.name} expense={-tr.amount} />
                   ))}
               </Scrollbars>
             </div>
