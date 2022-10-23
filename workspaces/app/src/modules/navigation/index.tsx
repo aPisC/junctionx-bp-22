@@ -1,7 +1,7 @@
-import { FaAngleLeft, FaArrowLeft, FaUserCircle } from 'react-icons/fa'
+import { FaArrowLeft, FaUserCircle } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 import { H1 } from '../h1'
 import Icon from '../icon'
-import { useNavigate } from 'react-router-dom'
 import Logo from './Logo.svg'
 
 export interface NavigationProps {}
@@ -13,7 +13,7 @@ export const Navigation = ({}: NavigationProps) => {
       <Icon onClick={() => navigate(-1)}>
         <FaArrowLeft className="cursor-pointer" />
       </Icon>
-      <H1 variant="medium" className="h-full text-center">
+      <H1 variant="medium" className="h-full flex-1 text-center">
         <div className="h-full p-2">
           <img className="h-full" src={Logo} />
         </div>
