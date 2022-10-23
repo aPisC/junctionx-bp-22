@@ -165,7 +165,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                 0
               )
                 ? `Let's save some money!`
-                : `Start subsidzing from your Jar!`}
+                : `Start subsidizing from your Jar!`}
             </div>
           </H1>
         </Button>
