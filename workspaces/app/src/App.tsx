@@ -34,7 +34,6 @@ function App() {
               <Route path="comparison-dashboard" element={<ComparisonDashboardPage />} />
               <Route path="saving-selection" element={<ComparisonSelectorPage redirect="/saving-dashboard" />} />
               <Route path="saving-dashboard" element={<SavingDashboardPage />} />
-              <Route path="saving-home" element={<SavingHomePage />} />
               <Route path="abroad-selection" element={<ComparisonSelectorPage redirect="/abroad-dashboard" />} />
               <Route path="abroad-dashboard" element={<AbroadDashboardPage />} />
               <Route path="abroad-home" element={<AbroadHomePage />} />

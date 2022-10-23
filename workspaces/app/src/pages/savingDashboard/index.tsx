@@ -147,7 +147,7 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
           </Scrollbars>
         </div>
         <div>
-          <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-home')}>
+          <Button variant="hub" className="rounded-none" onClick={() => navigate('/abroad-home')}>
             <H1>Start</H1>
           </Button>
         </div>
