@@ -12,7 +12,6 @@ export interface GalleryItemProps {
 }
 
 export const GalleryItem = ({ icon, labels, datasets, max, value, unit }: GalleryItemProps) => {
-  console.log(datasets[0]?.data[0], datasets[1]?.data[0], datasets[0]?.data[0] > datasets[1]?.data[0])
   return (
     <div className="flex flex-col h-full justify-center">
       <BarChartView max={max} labels={labels} datasets={datasets} />
