@@ -107,6 +107,7 @@ export default function ComparisonDashboardPage({}: Props) {
                     value={Math.abs(Math.round(sum.amount - sum.predicted))}
                     icon={BarIconMap[sum.id] || <FaQuestion />}
                     labels={['Food']}
+                    currency={userRequest.data?.accounts[0].currency}
                     transactions={transactionsRequest.data?.filter((tr: any) => tr.category == sum.id) || []}
                     sourceCountry={userRequest.data?.sourceCountry}
                     targetCountry={userRequest.data?.targetCountry}
