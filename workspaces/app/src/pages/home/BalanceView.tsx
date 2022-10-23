@@ -1,5 +1,6 @@
 import { H1 } from '../../modules/h1'
 import { BalanceViewStyle } from '../../styles/balanceView/BalanceView'
+import { round } from '../../utils/round'
 import { commify, objectsToString } from '../../utils/Utils'
 
 export interface BalanceViewProps {
@@ -19,7 +20,7 @@ export const BalanceView = ({ title, value, currency }: BalanceViewProps) => {
       </div>
       <div className={objectsToString(BalanceViewStyle.item)}>
         <H1 variant="base" className="pt-0">
-          {commify(value)} {currency}
+          {commify(round(value))} {currency}
         </H1>
       </div>
     </div>

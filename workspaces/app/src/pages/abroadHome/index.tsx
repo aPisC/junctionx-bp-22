@@ -20,6 +20,7 @@ import { LineChartView } from '../savingHome/LineChartView'
 export interface AbroadHomePageProps {}
 
 export default function AbroadHomePage({}: AbroadHomePageProps) {
+  const [trigger, setTrigger] = useState(false)
   const navigate = useNavigate()
   const userRequest = useSpinneredRequest(
     () =>
@@ -29,7 +30,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
           localStorage.removeItem('token')
           navigate('/')
         }),
-    []
+    [trigger]
   )
 
   const transactionsRequest = useSpinneredRequest(
@@ -40,12 +41,11 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
           localStorage.removeItem('token')
           navigate('/')
         }),
-    []
+    [trigger]
   )
   const flagsRequest = useRequest(() => FlagsRequest, [])
-  if (userRequest.isRunning || transactionsRequest.isRunning) return null
 
-  const [trigger, setTrigger] = useState(false)
+  if (userRequest.isRunning || transactionsRequest.isRunning) return null
   const user: any = userRequest.data
   const mainAccount = user.accounts.find((a: any) => a.type == 'main')
   const saveAccount = user.accounts.find((a: any) => a.type == 'save')
@@ -123,7 +123,9 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                         className="flex w-full justify-between px-4 py-2 border-b border-dark-grey"
                       >
                         <div>{item.title}</div>
-                        <div>{item.price}</div>
+                        <div>
+                          {item.price * (flagsRequest.data?.find((x) => x.id === user.sourceCountry)?.exchange ?? 1)}
+                        </div>
                       </div>
                     </div>
                   ))}

@@ -6,6 +6,7 @@ interface FlagDescription {
   country: string
   id: string
   image: string
+  exchange: number
 }
 
 export const FlagsRequest = axios.get<FlagDescription[]>(`${BACKEND_URL}/api/countries`).then((r) => r.data)
