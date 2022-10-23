@@ -1,7 +1,5 @@
 import { Route } from 'raven-plugin-koa'
-import { injectable } from 'tsyringe'
 
-@injectable()
 @Route.Prefix('/trace')
 export default class TraceController {
   @Route.Post('/')
