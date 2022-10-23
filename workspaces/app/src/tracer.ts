@@ -12,7 +12,7 @@ function loop() {
   const traces = (window as any).traces
   ;(window as any).traces = []
 
-  if (traces.length > 0) axios.post(`${BACKEND_URL}/api/traces`, traces).catch(() => {})
+  if (traces.length > 0) axios.post(`${BACKEND_URL}/api/trace`, traces).catch(() => {})
 }
 
 export function useComponentTracing(key: string) {
