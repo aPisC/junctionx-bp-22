@@ -1,5 +1,6 @@
 import { FlagsRequest } from '../../cache/flagRequest'
 import { BACKEND_URL } from '../../config/backendUrl'
+import { round } from '../../utils/round'
 import { useRequest } from '../../utils/useRequest'
 import { MultiSeriesPieChartView, MultiSeriesPieChartViewProps } from './MultiSeriesPieChartView'
 
@@ -39,22 +40,22 @@ export const PieChart = ({ labels, homeAmount, targetAmount, currency, homeCount
       <MultiSeriesPieChartView labels={labels} data={data} />
       <div className="absolute flex top-0 left-0 w-full h-full text-black items-center justify-center">
         <div className="flex flex-col text-lg">
-          <div className="text-xs text-dark-grey">Original country:</div>
+          <div className="text-xs pl-4 text-dark-grey">Original country:</div>
           <div className="flex items-center w-full justify-center text-wise-navy-blue">
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${homeFlag?.image}`} />
             </div>
             <div className="p-1">
-              {Math.round(homeAmount * 100) / 100} {currency}
+              {round(homeAmount)} {currency}
             </div>
           </div>
-          <div className="text-xs text-dark-grey">Choosen country:</div>
+          <div className="text-xs pl-4 text-dark-grey">Choosen country:</div>
           <div className="flex items-center w-full justify-center text-ui-grey-body">
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${targetFlag?.image}`} />
             </div>
             <div className="p-1">
-              {Math.round(targetAmount * 100) / 100} {currency}
+              {round(targetAmount)} {currency}
             </div>
           </div>
         </div>
