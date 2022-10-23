@@ -86,7 +86,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
             <div className="p-2 flex flex-col gap-2 h-full max-h-[10rem] overflow-hidden">
               <Scrollbars>
                 {transactions
-                  ?.filter((tr: any) => tr.amount > 0 && tr.accout === saveAccount.id)
+                  ?.filter((tr: any) => tr.accout === saveAccount.id)
                   .map((tr: any) => (
                     <Modal>
                       <ModalHandler>
@@ -99,17 +99,17 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                       </ModalHandler>
                       <ModalBody title="History details">
                         <div className="w-full text-center">{tr.name}</div>
-                        <div className="w-full justify-between">
+                        <div className="flex w-full justify-between">
                           <div className="text-ui-grey-body">Original price</div>
-                          <div className=""></div>
+                          <div className="">{tr.baseAmount}</div>
                         </div>
-                        <div className="w-full justify-between">
+                        <div className="flex w-full justify-between">
                           <div className="text-ui-grey-body">Corrected price</div>
-                          <div className=""></div>
+                          <div className="">{tr.basePredicted}</div>
                         </div>
-                        <div className="w-full justify-between">
+                        <div className="flex w-full justify-between">
                           <div className="text-ui-grey-body">Jar</div>
-                          <div className=""></div>
+                          <div className="">{tr.basePredicted - tr.baseAmount}</div>
                         </div>
                       </ModalBody>
                     </Modal>
@@ -148,7 +148,8 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                       >
                         <div>{item.title}</div>
                         <div>
-                          {item.price * (flagsRequest.data?.find((x) => x.id === user.sourceCountry)?.exchange ?? 1)}
+                          {`${item.price * (flagsRequest.data?.find((x) => x.id === user.sourceCountry)?.exchange ?? 1)}
+                          ${' '}${mainAccount.currency}`}
                         </div>
                       </div>
                     </div>
