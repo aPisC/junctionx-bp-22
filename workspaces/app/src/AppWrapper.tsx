@@ -13,8 +13,8 @@ function AppWrapper({ children }: AppWrapperProps) {
   const [windowSize, setWindowSize] = useState<WindowSizeProps>({ height: 0, width: 0 })
   useEffect(() => {
     const handleResize = () => {
-      let newHeight = window.innerHeight * 0.8
-      let newWidth = newHeight * 0.45
+      let newHeight = window.innerHeight * 1
+      let newWidth = newHeight * 0.5
       if (newWidth > window.innerWidth) {
         const scale = window.innerWidth / newWidth
         newHeight = newHeight * scale
