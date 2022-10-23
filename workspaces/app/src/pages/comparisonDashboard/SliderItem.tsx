@@ -11,6 +11,7 @@ export interface SliderItemProps extends GalleryItemProps {
   targetCountry: string
   sourceCountry: string
   hideModal: boolean
+  currency?: string
 }
 
 export const SliderItem = ({
@@ -23,6 +24,7 @@ export const SliderItem = ({
   icon,
   unit,
   value,
+  currency = '',
 }: SliderItemProps) => {
   if (hideModal) {
     return (
@@ -42,6 +44,7 @@ export const SliderItem = ({
         <ComparisonDashboardPopup sourceCountry={sourceCountry} targetCountry={targetCountry}>
           {transactions?.map((tr, index) => (
             <PricePairItem
+              currency={currency}
               key={index}
               title={tr.name}
               homePrice={round(-tr.amount)}
