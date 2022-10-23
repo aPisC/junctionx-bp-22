@@ -11,9 +11,11 @@ import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import { useTriggeredRequest } from '../../utils/useTriggeredRequest'
 import BasePage from '../base'
 
-export interface ComparisonSelectorPageProps {}
+export interface ComparisonSelectorPageProps {
+  redirect: string
+}
 
-export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) {
+export default function ComparisonSelectorPage({ redirect }: ComparisonSelectorPageProps) {
   const navigate = useNavigate()
   const [flag, setFlag] = useState<string | null>(null)
 
@@ -21,7 +23,7 @@ export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) 
     () =>
       axios(`${BACKEND_URL}/api/user/${localStorage.getItem('token')}`)
         .then((d) => {
-          if (d.data.targetCountry) navigate('/comparison-dashboard')
+          if (d.data.targetCountry) navigate(redirect)
           return d.data
         })
         .catch((e) => {
@@ -33,7 +35,7 @@ export default function ComparisonSelectorPage({}: ComparisonSelectorPageProps) 
 
   const setTargetCountryRequest = useTriggeredRequest(async () => {
     axios.post(`${BACKEND_URL}/api/user/setTarget/${flag}/${userRequest.data.id}`)
-    navigate('/comparison-dashboard')
+    navigate(redirect)
   })
   useSpinnerOverlay(setTargetCountryRequest.isRunning)
 

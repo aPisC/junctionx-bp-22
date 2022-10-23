@@ -1,11 +1,10 @@
+import { FaArchive, FaBalanceScale, FaCalendar } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 import Button from '../../modules/button'
-import { H1 } from '../../modules/h1'
+import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import BasePage from '../base'
-import { useNavigate } from 'react-router-dom'
 import { InfoBox } from '../comparisonDashboard/InfoBox'
-import { FaArchive, FaBalanceScale, FaCalendar } from 'react-icons/fa'
-import Icon from '../../modules/icon'
 
 export interface HubPageProps {}
 
@@ -37,7 +36,7 @@ export default function HubPage({}: HubPageProps) {
                 title="Start spending like a local!"
               />
             </Button>
-            <Button variant="none" onClick={() => navigate('/abroad-dashboard')}>
+            <Button variant="none" onClick={() => navigate('/abroad-selection')}>
               <InfoBox
                 icon={
                   <Icon>
