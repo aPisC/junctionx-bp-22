@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
 import { FlagSelector } from '../../modules/flagSelector'
 import { H1 } from '../../modules/h1'
+import { useComponentTracing } from '../../tracer'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useRequest } from '../../utils/useRequest'
 import { useTriggeredRequest } from '../../utils/useTriggeredRequest'
@@ -12,6 +13,7 @@ import { useTriggeredRequest } from '../../utils/useTriggeredRequest'
 export interface LandingPageProps {}
 
 export default function LandingPage({}: LandingPageProps) {
+  useComponentTracing('landing')
   const navigate = useNavigate()
   const [flag, setFlag] = useState<string>('hu')
 

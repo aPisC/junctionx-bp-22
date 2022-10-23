@@ -6,6 +6,7 @@ import Button from '../../modules/button'
 import { FlagSelector } from '../../modules/flagSelector'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
+import { useComponentTracing } from '../../tracer'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import { useTriggeredRequest } from '../../utils/useTriggeredRequest'
@@ -16,6 +17,7 @@ export interface ComparisonSelectorPageProps {
 }
 
 export default function ComparisonSelectorPage({ redirect }: ComparisonSelectorPageProps) {
+  useComponentTracing('comparison-selector')
   const navigate = useNavigate()
   const [flag, setFlag] = useState<string | null>(null)
 

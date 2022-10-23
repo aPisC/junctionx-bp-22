@@ -19,6 +19,7 @@ import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
 import Tabs, { Tab, TabsBody, TabsHeader, TabsPanel } from '../../modules/tabs'
+import { useComponentTracing } from '../../tracer'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
 import BalanceView from './BalanceView'
@@ -28,6 +29,8 @@ import TransactionItem from './TransactionItem'
 export interface HomePageProps {}
 
 export default function HomePage({}: HomePageProps) {
+  useComponentTracing('home')
+
   const navigate = useNavigate()
   const userRequest = useSpinneredRequest(
     () =>
