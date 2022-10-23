@@ -1,11 +1,10 @@
 import cors from '@koa/cors'
-import 'mysql2'
 import { Raven } from 'raven'
 import { MiddlewarePriority, RavenPluginKoa } from 'raven-plugin-koa'
+import RavenPluginKoaAuth from 'raven-plugin-koa-auth'
 import { RavenPluginSequelize } from 'raven-plugin-sequelize'
 import 'sqlite3'
 import CountriesController from './controllers/CountriesController'
-import TestController from './controllers/TestController'
 import TraceController from './controllers/TraceController'
 import TransactionController from './controllers/TransactionController'
 import UserController from './controllers/UserController'
@@ -37,10 +36,16 @@ server
     opt.port = 8080
   })
   .useKoaMiddleware(MiddlewarePriority.PreIngress, cors({ origin: '*' }))
-  .useController(TestController)
   .useController(UserController)
   .useController(TransactionController)
   .useController(CountriesController)
   .useController(TraceController)
+
+// Web engine and authorization
+server.usePlugin(RavenPluginKoaAuth).configure({
+  blockWithoutToken: false,
+  defaultAuthorized: false,
+  secret: 'jwt-secret',
+})
 
 export default server
