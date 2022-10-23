@@ -145,7 +145,9 @@ export default function HomePage({}: HomePageProps) {
         </div>
         <div>
           <Button variant="hub" className="rounded-none" onClick={() => navigate('/hub')}>
-            <H1 variant="large">Begin Your journey!</H1>
+            <H1 variant="large">
+              <div className="text-white">Begin Your journey!</div>
+            </H1>
           </Button>
         </div>
       </div>
