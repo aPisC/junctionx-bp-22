@@ -1,5 +1,5 @@
 import cors from '@koa/cors'
-import 'mysql'
+import 'mysql2'
 import { Raven } from 'raven'
 import { MiddlewarePriority, RavenPluginKoa } from 'raven-plugin-koa'
 import { RavenPluginSequelize } from 'raven-plugin-sequelize'

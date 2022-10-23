@@ -36,7 +36,7 @@ RUN yarn pkg
 FROM node:16 as runtime
 WORKDIR /app
 
-RUN yarn add sqlite3 mysql
+RUN yarn add sqlite3 mysql2
 COPY --from=build /src/workspaces/api/bin .
 
 CMD /app/api
