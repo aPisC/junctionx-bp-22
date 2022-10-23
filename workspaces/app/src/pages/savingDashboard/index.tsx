@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Scrollbars from 'react-custom-scrollbars-2'
-import { FaCalendar, FaUtensils } from 'react-icons/fa'
+import { FaCalendar, FaQuestion, FaUtensils } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
@@ -8,8 +8,10 @@ import { H1 } from '../../modules/h1'
 import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
+import { round } from '../../utils/round'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
+import { BarIconMap } from '../comparisonDashboard'
 import { InfoBox } from '../comparisonDashboard/InfoBox'
 import PieChart from '../comparisonDashboard/PieChart'
 import SliderItem from '../comparisonDashboard/SliderItem'
@@ -77,66 +79,63 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
                 </div>
               </div>
               <SliderGallery>
-                {Array.from(Array(7)).map((item, index) => {
-                  const home = Math.floor(Math.random() * 200)
-                  const abroad = Math.floor(Math.random() * 200)
-
+                {summaryRequest.data?.map((sum: any, index: number) => {
                   const data = [
                     {
                       label: 'Home',
-                      data: [home],
+                      data: [sum.amount],
                       barThickness: 10,
                       borderRadius: 8,
                       backgroundColor: '#37517e',
                       stack: 'stack0',
                     },
                   ]
-                  if (home < abroad) {
+                  if (sum.amount < sum.predicted) {
                     data.push({
                       label: 'Home',
-                      data: [Math.abs(home - abroad)],
-                      barThickness: 10,
-                      borderRadius: 8,
-                      backgroundColor: '#00b9ff',
-                      stack: `${home > abroad ? 'stack1' : 'stack0'}`,
-                    })
-                    data.push({
-                      label: 'Ex.',
-                      data: [abroad],
+                      data: [Math.abs(sum.amount - sum.predicted)],
                       barThickness: 10,
                       borderRadius: 8,
                       backgroundColor: '#A8AAAC',
+                      stack: `${sum.amount > sum.predicted ? 'stack1' : 'stack0'}`,
+                    })
+                    data.push({
+                      label: 'Ex.',
+                      data: [sum.predicted],
+                      barThickness: 10,
+                      borderRadius: 8,
+                      backgroundColor: '#00b9ff',
                       stack: 'stack1',
                     })
                   } else {
                     data.push({
                       label: 'Ex.',
-                      data: [abroad],
+                      data: [sum.predicted],
                       barThickness: 10,
                       borderRadius: 8,
-                      backgroundColor: '#A8AAAC',
+                      backgroundColor: '#00b9ff',
                       stack: 'stack1',
                     })
                     data.push({
                       label: 'Home',
-                      data: [Math.abs(home - abroad)],
+                      data: [Math.abs(sum.amount - sum.predicted)],
                       barThickness: 10,
                       borderRadius: 8,
-                      backgroundColor: '#00b9ff',
-                      stack: `${home > abroad ? 'stack1' : 'stack0'}`,
+                      backgroundColor: '#A8AAAC',
+                      stack: `${sum.amount > sum.predicted ? 'stack1' : 'stack0'}`,
                     })
                   }
 
                   return (
                     <SliderGalleryItem key={index}>
                       <SliderItem
-                        sourceCountry=""
-                        targetCountry=""
+                        sourceCountry={userRequest.data?.sourceCountry}
+                        targetCountry={userRequest.data?.targetCountry}
                         transactions={[]}
                         hideModal
-                        unit="km"
-                        value={200}
-                        icon={<FaUtensils />}
+                        unit="%"
+                        value={round((sum.portion - 1) * 100)}
+                        icon={BarIconMap[sum.id] || <FaQuestion />}
                         labels={['Food']}
                         datasets={data}
                       />

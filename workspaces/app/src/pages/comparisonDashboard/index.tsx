@@ -142,7 +142,7 @@ export default function ComparisonDashboardPage({}: Props) {
   )
 }
 
-const BarIconMap: { [key: string]: JSX.Element } = {
+export const BarIconMap: { [key: string]: JSX.Element } = {
   'food-non-alc': <FaUtensils />,
   clothing: <FaSocks />,
   health: <FaPills />,

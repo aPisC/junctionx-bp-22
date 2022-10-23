@@ -7,7 +7,7 @@ export interface GalleryItemProps {
   labels: string[]
   max?: number
   datasets: any
-  value: number
+  value: number | string
   unit: string
 }
 
@@ -17,7 +17,7 @@ export const GalleryItem = ({ icon, labels, datasets, max, value, unit }: Galler
       <BarChartView max={max} labels={labels} datasets={datasets} />
       <div className="text-xs text-center">{`${
         datasets.length == 2 ? (datasets[0].data[0] > datasets[1].data[0] ? '-' : '+') : ''
-      }${commify(value)} ${unit}`}</div>
+      }${value} ${unit}`}</div>
       <div className="text-wise-navy-dark w-full h-auto flex justify-center p-1">{icon}</div>
     </div>
   )

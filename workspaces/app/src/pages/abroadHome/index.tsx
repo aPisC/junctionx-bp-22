@@ -89,7 +89,31 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                 {transactions
                   ?.filter((tr: any) => tr.amount > 0 && tr.accout === saveAccount.id)
                   .map((tr: any) => (
-                    <TransactionItem currency={mainAccount.currency} key={tr.id} shop={tr.name} expense={-tr.amount} />
+                    <Modal>
+                      <ModalHandler>
+                        <TransactionItem
+                          currency={mainAccount.currency}
+                          key={tr.id}
+                          shop={tr.name}
+                          expense={-tr.amount}
+                        />
+                      </ModalHandler>
+                      <ModalBody title="History details">
+                        <div className="w-full text-center">{tr.name}</div>
+                        <div className="w-full justify-between">
+                          <div className="text-ui-grey-body">Original price</div>
+                          <div className=""></div>
+                        </div>
+                        <div className="w-full justify-between">
+                          <div className="text-ui-grey-body">Corrected price</div>
+                          <div className=""></div>
+                        </div>
+                        <div className="w-full justify-between">
+                          <div className="text-ui-grey-body">Jar</div>
+                          <div className=""></div>
+                        </div>
+                      </ModalBody>
+                    </Modal>
                   ))}
               </Scrollbars>
             </div>
