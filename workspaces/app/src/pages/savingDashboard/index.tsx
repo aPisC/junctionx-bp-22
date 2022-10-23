@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Scrollbars from 'react-custom-scrollbars-2'
-import { FaCalendar, FaQuestion, FaUtensils } from 'react-icons/fa'
+import { FaCalendar, FaQuestion } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
@@ -8,6 +8,7 @@ import { H1 } from '../../modules/h1'
 import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
+import { useComponentTracing } from '../../tracer'
 import { round } from '../../utils/round'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
@@ -19,6 +20,7 @@ import SliderItem from '../comparisonDashboard/SliderItem'
 export interface SavingDashboardPageProps {}
 
 export default function SavingDashboardPage({}: SavingDashboardPageProps) {
+  useComponentTracing('saving-dashboard')
   const navigate = useNavigate()
   const userRequest = useSpinneredRequest(
     () =>

@@ -20,6 +20,7 @@ import { H1 } from '../../modules/h1'
 import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
+import { useComponentTracing } from '../../tracer'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
 import { InfoBox } from './InfoBox'
@@ -29,6 +30,7 @@ import SliderItem from './SliderItem'
 type Props = {}
 
 export default function ComparisonDashboardPage({}: Props) {
+  useComponentTracing('comparison-dashboard')
   const navigate = useNavigate()
   const userRequest = useSpinneredRequest(
     () =>

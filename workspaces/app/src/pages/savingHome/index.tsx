@@ -2,6 +2,7 @@ import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useNavigate } from 'react-router-dom'
 import { H1 } from '../../modules/h1'
 import Navigation from '../../modules/navigation'
+import { useComponentTracing } from '../../tracer'
 import BasePage from '../base'
 import BalanceView from '../home/BalanceView'
 import TransactionItem from '../home/TransactionItem'
@@ -10,6 +11,7 @@ import { LineChartView } from './LineChartView'
 interface SavingHomePageProps {}
 
 export default function SavingHomePage({}: SavingHomePageProps) {
+  useComponentTracing('saving-home')
   const navigate = useNavigate()
   return (
     <BasePage>

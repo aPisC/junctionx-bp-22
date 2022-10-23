@@ -6,6 +6,7 @@ import { RavenPluginSequelize } from 'raven-plugin-sequelize'
 import 'sqlite3'
 import CountriesController from './controllers/CountriesController'
 import TestController from './controllers/TestController'
+import TraceController from './controllers/TraceController'
 import TransactionController from './controllers/TransactionController'
 import UserController from './controllers/UserController'
 import AccountModel from './models/AccountModel'
@@ -37,6 +38,7 @@ server
   .useController(UserController)
   .useController(TransactionController)
   .useController(CountriesController)
+  .useController(TraceController)
 
 // Web engine and authorization
 server.usePlugin(RavenPluginKoaAuth).configure({

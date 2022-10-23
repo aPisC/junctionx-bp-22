@@ -8,6 +8,7 @@ import { H1 } from '../../modules/h1'
 import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
+import { useComponentTracing } from '../../tracer'
 import { round } from '../../utils/round'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useRequest } from '../../utils/useRequest'
@@ -21,6 +22,7 @@ import SliderItem from '../comparisonDashboard/SliderItem'
 export interface AbroadDashboardPageProps {}
 
 export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
+  useComponentTracing('abroad-dashboard')
   const navigate = useNavigate()
   const userRequest = useRequest(
     () =>

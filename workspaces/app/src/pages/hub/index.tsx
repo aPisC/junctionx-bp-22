@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
 import Icon from '../../modules/icon'
 import Navigation from '../../modules/navigation'
+import { useComponentTracing } from '../../tracer'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
 import { InfoBox } from '../comparisonDashboard/InfoBox'
@@ -12,6 +13,8 @@ import { InfoBox } from '../comparisonDashboard/InfoBox'
 export interface HubPageProps {}
 
 export default function HubPage({}: HubPageProps) {
+  useComponentTracing('hub')
+
   const navigate = useNavigate()
   const userRequest = useSpinneredRequest(
     () =>

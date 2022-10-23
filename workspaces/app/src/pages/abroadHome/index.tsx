@@ -9,6 +9,7 @@ import { H1 } from '../../modules/h1'
 import Modal, { ModalBody, ModalCloseContainer, ModalHandler } from '../../modules/modal'
 import Navigation from '../../modules/navigation'
 import Tabs, { Tab, TabsBody, TabsHeader, TabsPanel } from '../../modules/tabs'
+import { useComponentTracing } from '../../tracer'
 import { round } from '../../utils/round'
 import { useRequest } from '../../utils/useRequest'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
@@ -20,6 +21,7 @@ import { LineChartView } from '../savingHome/LineChartView'
 export interface AbroadHomePageProps {}
 
 export default function AbroadHomePage({}: AbroadHomePageProps) {
+  useComponentTracing('abroad-home')
   const [trigger, setTrigger] = useState(false)
   const navigate = useNavigate()
   const userRequest = useSpinneredRequest(
