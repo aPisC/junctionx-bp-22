@@ -113,7 +113,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                             <div className="">{`${round(tr.basePredicted)} ${mainAccount.currency}`}</div>
                           </div>
                           <div className="flex w-full justify-between">
-                            <div className="text-ui-grey-body">Jar</div>
+                            <div className="text-ui-grey-body">Jar balance change</div>
                             <div className="">{`${round(tr.basePredicted - tr.baseAmount)} ${
                               mainAccount.currency
                             }`}</div>

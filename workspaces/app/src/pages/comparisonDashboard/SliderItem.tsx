@@ -40,7 +40,7 @@ export const SliderItem = ({
           <GalleryItem unit={unit} value={value} icon={icon} labels={labels} datasets={datasets} />
         </div>
       </ModalHandler>
-      <ModalBody title="Transactions">
+      <ModalBody title="Transaction history">
         <ComparisonDashboardPopup sourceCountry={sourceCountry} targetCountry={targetCountry}>
           {transactions?.map((tr, index) => (
             <PricePairItem
