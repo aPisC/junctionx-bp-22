@@ -150,7 +150,9 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
         </div>
         <div>
           <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-home')}>
-            <H1>Start</H1>
+            <H1 variant="large">
+              <div className="text-white">Start</div>
+            </H1>
           </Button>
         </div>
       </div>

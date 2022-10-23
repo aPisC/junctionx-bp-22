@@ -137,7 +137,9 @@ export default function ComparisonDashboardPage({}: Props) {
         </div>
         <div>
           <Button variant="hub" className="rounded-none" onClick={() => navigate('/saving-dashboard')}>
-            <H1 variant="medium">Spend like a local!</H1>
+            <H1 variant="large">
+              <div className="text-white">Spend like a local!</div>
+            </H1>
           </Button>
         </div>
       </div>
