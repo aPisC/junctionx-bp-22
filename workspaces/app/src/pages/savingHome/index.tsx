@@ -24,15 +24,15 @@ export default function SavingHomePage({}: SavingHomePageProps) {
               <div className="py-2 h-[15em] overflow-hidden">
                 <Scrollbars>
                   <div className="flex flex-col gap-2">
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
-                    <TransactionItem shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
+                    <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
                   </div>
                 </Scrollbars>
               </div>
