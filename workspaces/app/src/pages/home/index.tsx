@@ -133,12 +133,14 @@ export default function HomePage({}: HomePageProps) {
                 <H1 variant="large">Transactions</H1>
               </div>
             </div>
-            <div className="p-2 flex flex-col gap-2">
-              {transactionsRequest.data
-                ?.filter((tr: any) => tr.amount < 0)
-                .map((tr: any) => (
-                  <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
-                ))}
+            <div className="p-2 flex flex-col gap-2 h-[12em]">
+              <Scrollbars>
+                {transactionsRequest.data
+                  ?.filter((tr: any) => tr.amount < 0)
+                  .map((tr: any) => (
+                    <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
+                  ))}
+              </Scrollbars>
             </div>
           </Scrollbars>
         </div>

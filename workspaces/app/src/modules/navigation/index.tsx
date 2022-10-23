@@ -11,7 +11,7 @@ export const Navigation = ({}: NavigationProps) => {
   return (
     <div className="flex w-full justify-between bg-ui-grey">
       <Icon onClick={() => navigate(-1)}>
-        <FaArrowLeft />
+        <FaArrowLeft className="cursor-pointer" />
       </Icon>
       <H1 variant="medium" className="h-full text-center">
         <div className="h-full p-2">
@@ -19,7 +19,7 @@ export const Navigation = ({}: NavigationProps) => {
         </div>
       </H1>
       <Icon onClick={() => navigate('/home')}>
-        <FaUserCircle />
+        <FaUserCircle className="cursor-pointer" />
       </Icon>
     </div>
   )
