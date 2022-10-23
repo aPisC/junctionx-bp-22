@@ -63,7 +63,7 @@ export const MultiSeriesPieChartView = ({ labels, data }: MultiSeriesPieChartVie
     datasets: populatedData,
   }
   return (
-    <div className="w-full h-[15em]">
+    <div className="w-full h-[15rem]">
       <Pie options={options} data={finalData} />
     </div>
   )
