@@ -97,6 +97,32 @@ export default class TransactionController {
         })
 
         return this.userRepository.findOne({ include: [this.accountRepository], where: { id: body.userId } })
+      } else {
+        const fund = Math.min(saveAccount.balance, body.amount - predicted)
+        if (fund > 0) {
+          saveAccount.balance -= fund
+          saveAccount.expense += fund
+          await saveAccount.save()
+          await this.transactionRepository.create({
+            user: user.id,
+            account: saveAccount.id,
+            name: 'Subside',
+            category: 'subside',
+            amount: -fund,
+            timestamp: new Date(),
+            id: uuid(),
+          })
+          await this.transactionRepository.create({
+            user: user.id,
+            account: mainAccount.id,
+            name: 'Subside',
+            category: 'subside',
+            amount: fund,
+            timestamp: new Date(),
+            id: uuid(),
+          })
+          mainAccount.expense -= fund
+        }
       }
     }
 
