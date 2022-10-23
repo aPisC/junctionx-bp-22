@@ -19,11 +19,8 @@ const server = new Raven()
 server
   .usePlugin(RavenPluginSequelize)
   .configure({
-    dialect: 'mysql',
-    host: process.env['DATABASE_HOST'],
-    database: process.env['DATABASE_DATABASE'],
-    username: process.env['DATABASE_USERNAME'],
-    password: process.env['DATABASE_PASSWORD'],
+    dialect: 'sqlite',
+    storage: ':memory:',
   })
   .useModel(TestModel)
   .useModel(UserModel)
