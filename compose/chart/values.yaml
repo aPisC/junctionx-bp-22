@@ -32,7 +32,7 @@ file:
   resources: {}
 
 db:
-  host: mysql.default.svc.cluster.local:3306
+  host: mysql.default.svc.cluster.local
   database: junctionx-bp-22
   username: root
   password: use-pipeline
