@@ -155,7 +155,15 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
             navigate('/abroad-home')
           }}
         >
-          <H1>{localStorage.getItem('hasJar') === 'true' ? `My Jar` : `What's next?`}</H1>
+          <H1>
+            {Object.keys(summaryRequest.data || {}).reduce((sum, key) => sum + summaryRequest.data[key].amount, 0) >
+            Object.keys(summaryRequest.data || {}).reduce(
+              (sum, key) => sum + (summaryRequest.data[key].predicted || 0),
+              0
+            )
+              ? `Let's save some money!`
+              : `Start subsidzing from your Jar!`}
+          </H1>
         </Button>
       </div>
     </BasePage>
