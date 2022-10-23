@@ -33,6 +33,6 @@ file:
 
 db:
   host: mysql.default.svc.cluster.local
-  database: junctionx-bp-22
+  database: junctionxbp22
   username: root
   password: use-pipeline
