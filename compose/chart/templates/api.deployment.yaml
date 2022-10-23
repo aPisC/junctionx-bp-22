@@ -23,7 +23,7 @@ spec:
               value: "{{ .Values.db.host }}"
             - name: DATABASE_DATABASE
               value: "{{ .Values.db.database }}"
-            - name: DATABASE_USER
+            - name: DATABASE_USERNAME
               value: "{{ .Values.db.user }}"
             - name: DATABASE_PASSWORD
               value: "{{ .Values.db.password }}"
