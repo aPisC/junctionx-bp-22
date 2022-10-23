@@ -1,15 +1,29 @@
-import { FaRegSmileBeam } from 'react-icons/fa'
+import { FaRegSmileBeam, FaRegTired } from 'react-icons/fa'
 import Icon from '../../modules/icon'
 import Modal, { ModalBody, ModalHandler } from '../../modules/modal'
+import { round } from '../../utils/round'
 import { GalleryItem, GalleryItemProps } from '../home/GalleryItem'
 import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
 import { PricePairItem } from './PricePairItem'
 
 export interface SliderItemProps extends GalleryItemProps {
+  transactions: any[]
+  targetCountry: string
+  sourceCountry: string
   hideModal: boolean
 }
 
-export const SliderItem = ({ datasets, labels, icon, unit, value, hideModal }: SliderItemProps) => {
+export const SliderItem = ({
+  sourceCountry,
+  targetCountry,
+  transactions,
+  datasets,
+  labels,
+  hideModal,
+  icon,
+  unit,
+  value,
+}: SliderItemProps) => {
   if (hideModal) {
     return (
       <div>
@@ -24,18 +38,15 @@ export const SliderItem = ({ datasets, labels, icon, unit, value, hideModal }: S
           <GalleryItem unit={unit} value={value} icon={icon} labels={labels} datasets={datasets} />
         </div>
       </ModalHandler>
-      <ModalBody title="Category">
-        <ComparisonDashboardPopup>
-          {Array.from(Array(7)).map((item, index) => (
+      <ModalBody title="Transactions">
+        <ComparisonDashboardPopup sourceCountry={sourceCountry} targetCountry={targetCountry}>
+          {transactions?.map((tr, index) => (
             <PricePairItem
               key={index}
-              homePrice={500}
-              icon={
-                <Icon>
-                  <FaRegSmileBeam />
-                </Icon>
-              }
-              destinationPrice={1200}
+              title={tr.name}
+              homePrice={round(-tr.amount)}
+              destinationPrice={round(-tr.predicted)}
+              icon={<Icon>{tr.amount < tr.predicted ? <FaRegSmileBeam /> : <FaRegTired />}</Icon>}
             />
           ))}
         </ComparisonDashboardPopup>

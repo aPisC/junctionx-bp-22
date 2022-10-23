@@ -52,6 +52,17 @@ export default function ComparisonDashboardPage({}: Props) {
     []
   )
 
+  const transactionsRequest = useSpinneredRequest(
+    () =>
+      axios(`${BACKEND_URL}/api/transaction/transactions/${localStorage.getItem('token')}`)
+        .then((d) => d.data)
+        .catch((e) => {
+          localStorage.removeItem('token')
+          navigate('/')
+        }),
+    []
+  )
+
   if (userRequest.isRunning || summaryRequest.isRunning) return null
 
   const user: any = userRequest.data
@@ -91,10 +102,14 @@ export default function ComparisonDashboardPage({}: Props) {
               {summaryRequest.data?.map((sum: any, index: number) => (
                 <SliderGalleryItem key={index}>
                   <SliderItem
+                    hideModal={false}
                     unit=""
                     value={Math.abs(Math.round(sum.amount - sum.predicted))}
                     icon={BarIconMap[sum.id] || <FaQuestion />}
                     labels={['Food']}
+                    transactions={transactionsRequest.data?.filter((tr: any) => tr.category == sum.id) || []}
+                    sourceCountry={userRequest.data?.sourceCountry}
+                    targetCountry={userRequest.data?.targetCountry}
                     datasets={[
                       {
                         label: 'Home',

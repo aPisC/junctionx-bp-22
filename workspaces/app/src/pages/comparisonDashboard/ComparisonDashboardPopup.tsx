@@ -1,27 +1,25 @@
 import { ReactNode } from 'react'
-import { flags } from '../../config/flags'
-import { FlagButton } from '../../modules/button/FlagButton'
+import { FlagsRequest } from '../../cache/flagRequest'
+import { BACKEND_URL } from '../../config/backendUrl'
+import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 
 export interface ComparisonDashboardPopupProps {
   children: ReactNode
+  targetCountry: string
+  sourceCountry: string
 }
 
-export const ComparisonDashboardPopup = ({ children }: ComparisonDashboardPopupProps) => {
+export const ComparisonDashboardPopup = ({ targetCountry, sourceCountry, children }: ComparisonDashboardPopupProps) => {
+  const { data: flags, error } = useSpinneredRequest(() => FlagsRequest, [])
+
+  const sourceFlag = flags?.find((f) => f.id == sourceCountry)
+  const targetFlag = flags?.find((f) => f.id == targetCountry)
+
   return (
     <div>
-      <div className="flex justify-evenly">
-        <FlagButton variant="flag" className="w-[20%] border-0">
-          <img
-            className="object-fill scale-150"
-            src={flags.find((flag) => localStorage.getItem('flag') === flag.country)?.flag}
-          />
-        </FlagButton>
-        <FlagButton variant="flag" className="w-[20%] border-0">
-          <img
-            className="object-fill scale-150"
-            src={flags.find((flag) => localStorage.getItem('destination') === flag.country)?.flag}
-          />
-        </FlagButton>
+      <div className="flex justify-between pb-8 px-6">
+        {sourceFlag && <img className="w-[15%] object-fill scale-150" src={`${BACKEND_URL}/${sourceFlag.image}`} />}
+        {targetFlag && <img className="w-[15%] object-fill scale-150" src={`${BACKEND_URL}/${targetFlag.image}`} />}
       </div>
       {children}
     </div>
