@@ -67,7 +67,6 @@ export default function HomePage({}: HomePageProps) {
   const mainAccount = user.accounts.find((a: any) => a.type == 'main')
   const saveAccount = user.accounts.find((a: any) => a.type == 'save')
   const summaryMax = Math.max.apply(Math, summaryRequest.data?.map((s: any) => s.amount) || [0])
-  console.log(summaryMax)
 
   return (
     <BasePage>
@@ -107,8 +106,8 @@ export default function HomePage({}: HomePageProps) {
             </div>
 
             <SliderGallery>
-              {summaryRequest.data?.map((sum: any) => (
-                <SliderGalleryItem>
+              {summaryRequest.data?.map((sum: any, index: any) => (
+                <SliderGalleryItem key={index}>
                   <GalleryItem
                     value={Math.round(sum.amount)}
                     unit={mainAccount.currency}

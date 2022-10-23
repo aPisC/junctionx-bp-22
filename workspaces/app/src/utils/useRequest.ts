@@ -11,17 +11,14 @@ export function useRequest<T = unknown>(request: () => Promise<T>, dependencies:
   const [error, setError] = useState<Error>()
 
   useEffect(() => {
-    console.log('Starting request')
     setIsRunning(true)
     request()
       .then((data) => {
-        console.log('Request finished successfully')
         setData(data)
         setError(undefined)
         setIsRunning(false)
       })
       .catch((err) => {
-        console.log('Request finished with error', err)
         setError(err)
         setData(undefined)
         setIsRunning(false)

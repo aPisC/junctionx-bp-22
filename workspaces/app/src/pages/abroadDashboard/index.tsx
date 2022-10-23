@@ -147,17 +147,16 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
             </div>
           </Scrollbars>
         </div>
-        <div>
-          <Button
-            variant="hub"
-            className="rounded-none"
-            onClick={() => {
-              navigate('/abroad-home')
-            }}
-          >
-            <H1>Start saving</H1>
-          </Button>
-        </div>
+        <Button
+          variant="hub"
+          className="rounded-none"
+          onClick={() => {
+            localStorage.setItem('hasJar', 'true')
+            navigate('/abroad-home')
+          }}
+        >
+          <H1>{localStorage.getItem('hasJar') === 'true' ? `My Jar` : `What's next?`}</H1>
+        </Button>
       </div>
     </BasePage>
   )
