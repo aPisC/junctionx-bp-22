@@ -18,6 +18,15 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.deployment.repository }}/{{ .Values.api.image }}:{{ .Values.api.tag }}"
           imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
+          env:
+            - name: DATABASE_HOST
+              value: {.Values.db.host }
+            - name: DATABASE_DATABASE
+              value: {.Values.db.database }
+            - name: DATABASE_USER
+              value: {.Values.db.user }
+            - name: DATABASE_PASSWORD
+              value: {.Values.db.password }
           ports:
             - name: http
               containerPort: {{ .Values.api.port }}

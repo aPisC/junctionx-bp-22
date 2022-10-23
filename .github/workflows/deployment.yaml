@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: run helm
         run: |
+          MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d)
           helm uninstall junctionx-bp-22 --namespace junctionx-bp-22 || true
           helm upgrade \
             junctionx-bp-22 \
@@ -29,5 +30,6 @@ jobs:
             --set api.tag=${{inputs.apiImageTag}} \
             --set app.tag=${{inputs.appImageTag}} \
             --set file.tag=${{inputs.fileImageTag}} \
+            --set db.password=$MYSQL_ROOT_PASSWORD \
             --create-namespace \
             --namespace junctionx-bp-22

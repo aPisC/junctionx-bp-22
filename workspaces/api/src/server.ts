@@ -1,7 +1,7 @@
 import cors from '@koa/cors'
+import 'mysql'
 import { Raven } from 'raven'
 import { MiddlewarePriority, RavenPluginKoa } from 'raven-plugin-koa'
-import RavenPluginKoaAuth from 'raven-plugin-koa-auth'
 import { RavenPluginSequelize } from 'raven-plugin-sequelize'
 import 'sqlite3'
 import CountriesController from './controllers/CountriesController'
@@ -20,8 +20,11 @@ const server = new Raven()
 server
   .usePlugin(RavenPluginSequelize)
   .configure({
-    dialect: 'sqlite',
-    storage: ':memory:',
+    dialect: 'mysql',
+    host: process.env['DATABASE_HOST'],
+    database: process.env['DATABASE_DATABASE'],
+    username: process.env['DATABASE_USERNAME'],
+    password: process.env['DATABASE_PASSWORD'],
   })
   .useModel(TestModel)
   .useModel(UserModel)
@@ -39,12 +42,5 @@ server
   .useController(TransactionController)
   .useController(CountriesController)
   .useController(TraceController)
-
-// Web engine and authorization
-server.usePlugin(RavenPluginKoaAuth).configure({
-  blockWithoutToken: false,
-  defaultAuthorized: false,
-  secret: 'jwt-secret',
-})
 
 export default server
