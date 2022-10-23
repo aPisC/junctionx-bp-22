@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ScaleAnimation } from '../../animations/scaleAnimation'
 import { IntersectionContext } from '../../utils/hooks/intersectionObserver'
 import { commify } from '../../utils/Utils'
+import { round } from '../../utils/round'
 
 export interface TransactionItemProps {
   expense: number
@@ -20,7 +21,7 @@ export const TransactionItem = ({ shop, expense, currency }: TransactionItemProp
       exit="exit"
     >
       <div>{shop}</div>
-      <div>{`-${commify(expense)} ${currency}`}</div>
+      <div>{`${commify(round(expense))} ${currency}`}</div>
     </motion.div>
   )
 }

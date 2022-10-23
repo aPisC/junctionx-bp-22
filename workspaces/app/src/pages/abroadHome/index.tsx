@@ -6,9 +6,10 @@ import { FlagsRequest } from '../../cache/flagRequest'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
 import { H1 } from '../../modules/h1'
-import Modal, { ModalBody, ModalHandler } from '../../modules/modal'
+import Modal, { ModalBody, ModalCloseContainer, ModalHandler } from '../../modules/modal'
 import Navigation from '../../modules/navigation'
 import Tabs, { Tab, TabsBody, TabsHeader, TabsPanel } from '../../modules/tabs'
+import { round } from '../../utils/round'
 import { useRequest } from '../../utils/useRequest'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
@@ -86,30 +87,38 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
             <div className="p-2 flex flex-col gap-2 h-full max-h-[10rem] overflow-hidden">
               <Scrollbars>
                 {transactions
-                  ?.filter((tr: any) => tr.accout === saveAccount.id)
+                  ?.filter((tr: any) => tr.account === saveAccount.id)
                   .map((tr: any) => (
-                    <Modal>
+                    <Modal blur rounded>
                       <ModalHandler>
-                        <TransactionItem
-                          currency={mainAccount.currency}
-                          key={tr.id}
-                          shop={tr.name}
-                          expense={-tr.amount}
-                        />
+                        <div className="cursor-pointer">
+                          <TransactionItem
+                            currency={mainAccount.currency}
+                            key={tr.id}
+                            shop={tr.name}
+                            expense={tr.amount}
+                          />
+                        </div>
                       </ModalHandler>
                       <ModalBody title="History details">
-                        <div className="w-full text-center">{tr.name}</div>
-                        <div className="flex w-full justify-between">
-                          <div className="text-ui-grey-body">Original price</div>
-                          <div className="">{tr.baseAmount}</div>
-                        </div>
-                        <div className="flex w-full justify-between">
-                          <div className="text-ui-grey-body">Corrected price</div>
-                          <div className="">{tr.basePredicted}</div>
-                        </div>
-                        <div className="flex w-full justify-between">
-                          <div className="text-ui-grey-body">Jar</div>
-                          <div className="">{tr.basePredicted - tr.baseAmount}</div>
+                        <div className=" p-4">
+                          <div className="w-full text-center">
+                            <H1 variant="medium">{tr.name}</H1>
+                          </div>
+                          <div className="flex w-full justify-between">
+                            <div className="text-ui-grey-body">Original price</div>
+                            <div className="">{`${round(tr.baseAmount)} ${mainAccount.currency}`}</div>
+                          </div>
+                          <div className="flex w-full justify-between">
+                            <div className="text-ui-grey-body">Corrected price</div>
+                            <div className="">{`${round(tr.basePredicted)} ${mainAccount.currency}`}</div>
+                          </div>
+                          <div className="flex w-full justify-between">
+                            <div className="text-ui-grey-body">Jar</div>
+                            <div className="">{`${round(tr.basePredicted - tr.baseAmount)} ${
+                              mainAccount.currency
+                            }`}</div>
+                          </div>
                         </div>
                       </ModalBody>
                     </Modal>
@@ -136,7 +145,9 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                         onClick={() =>
                           axios
                             .post(`${BACKEND_URL}/api/transaction`, {
-                              amount: item.price,
+                              amount:
+                                item.price *
+                                (flagsRequest.data?.find((x) => x.id === user.sourceCountry)?.exchange ?? 1),
                               userId: user.id,
                               category: item.category,
                               name: item.title,
@@ -158,16 +169,37 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                   ))}
                 </ModalBody>
               </Modal>
-              <Button
-                rounded
-                variant="primary"
-                onClick={() => {
-                  localStorage.clear()
-                  setTrigger(!trigger)
-                }}
-              >
-                Recreate Account
-              </Button>
+              <Modal rounded blur>
+                <ModalHandler>
+                  <Button rounded variant="primary">
+                    Recreate Account
+                  </Button>
+                </ModalHandler>
+                <ModalBody title="">
+                  <div className="w-full h-full flex flex-col items-center justify-center">
+                    <div className="w-full h-[50%] flex text-center">
+                      You are about to delete this account! Are you sure?
+                    </div>
+                    <div className="w-full flex gap-2 justify-evenly">
+                      <Button
+                        variant="primary"
+                        rounded
+                        onClick={() => {
+                          localStorage.clear()
+                          setTrigger(!trigger)
+                        }}
+                      >
+                        Yes
+                      </Button>
+                      <ModalCloseContainer>
+                        <Button variant="primary" rounded>
+                          No
+                        </Button>
+                      </ModalCloseContainer>
+                    </div>
+                  </div>
+                </ModalBody>
+              </Modal>
             </div>
           </Scrollbars>
         </div>
