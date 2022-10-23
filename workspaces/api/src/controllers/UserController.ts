@@ -51,12 +51,12 @@ export default class UserController {
       currency: currency,
       user: user.id,
       expense: 0,
-      balance: 0,
+      balance: 120 * exchange,
       type: 'save',
     })
 
     for (const tr of initialTransactions) {
-      const tri = await this.transactionRepository.create({
+      await this.transactionRepository.create({
         ...tr,
         amount: tr.amount * exchange,
         id: uuidv4(),

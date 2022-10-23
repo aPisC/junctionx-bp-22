@@ -130,6 +130,9 @@ export default function SavingDashboardPage({}: SavingDashboardPageProps) {
                   return (
                     <SliderGalleryItem key={index}>
                       <SliderItem
+                        sourceCountry=""
+                        targetCountry=""
+                        transactions={[]}
                         hideModal
                         unit="km"
                         value={200}
