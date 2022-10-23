@@ -47,20 +47,22 @@ export const FlagSelector = ({ disabled = false, flag, setFlagCallback }: FlagSe
         </div>
       </ModalHandler>
       <ModalBody title="Select Country">
-        {flags.map((flag: any) => (
-          <Button
-            key={flag.id}
-            variant="none"
-            className="my-2 w-full"
-            onClick={() => {
-              setFlagCallback(flag.id)
-            }}
-          >
-            <ModalCloseContainer key={flag.id}>
-              <FlagOption flag={flag} />
-            </ModalCloseContainer>
-          </Button>
-        ))}
+        {flags
+          .filter((x) => x.id !== localStorage.getItem('flag'))
+          .map((flag: any) => (
+            <Button
+              key={flag.id}
+              variant="none"
+              className="my-2 w-full"
+              onClick={() => {
+                setFlagCallback(flag.id)
+              }}
+            >
+              <ModalCloseContainer key={flag.id}>
+                <FlagOption flag={flag} />
+              </ModalCloseContainer>
+            </Button>
+          ))}
       </ModalBody>
     </Modal>
   )
