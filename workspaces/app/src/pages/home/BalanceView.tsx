@@ -10,7 +10,6 @@ export interface BalanceViewProps {
 }
 
 export const BalanceView = ({ title, value, currency }: BalanceViewProps) => {
-  console.log(currency)
   return (
     <div className={objectsToString(BalanceViewStyle.container)}>
       <div className={objectsToString(BalanceViewStyle.item)}>

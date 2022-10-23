@@ -50,7 +50,6 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
   const mainAccount = user.accounts.find((a: any) => a.type == 'main')
   const saveAccount = user.accounts.find((a: any) => a.type == 'save')
   const transactions = transactionsRequest.data
-  console.log(flagsRequest)
   return (
     <BasePage>
       <div className="h-full flex flex-col">
@@ -88,8 +87,8 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
               <Scrollbars>
                 {transactions
                   ?.filter((tr: any) => tr.account === saveAccount.id)
-                  .map((tr: any) => (
-                    <Modal blur rounded>
+                  .map((tr: any, index: any) => (
+                    <Modal key={index} blur rounded>
                       <ModalHandler>
                         <div className="cursor-pointer">
                           <TransactionItem
@@ -140,7 +139,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                 </ModalHandler>
                 <ModalBody title="Imaginary shopping">
                   {shoppingList.map((item, index) => (
-                    <div className="px-2">
+                    <div key={index} className="px-2">
                       <div
                         onClick={() =>
                           axios
