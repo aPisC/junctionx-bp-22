@@ -6,10 +6,11 @@ import { commify } from '../../utils/Utils'
 
 export interface TransactionItemProps {
   expense: number
+  currency: string
   shop: string
 }
 
-export const TransactionItem = ({ shop, expense }: TransactionItemProps) => {
+export const TransactionItem = ({ shop, expense, currency }: TransactionItemProps) => {
   return (
     <motion.div
       className="w-full flex justify-between py-1 px-2 text-ui-grey-body"
@@ -19,7 +20,7 @@ export const TransactionItem = ({ shop, expense }: TransactionItemProps) => {
       exit="exit"
     >
       <div>{shop}</div>
-      <div>-{commify(expense)} Ft</div>
+      <div>{`-${commify(expense)} ${currency}`}</div>
     </motion.div>
   )
 }

@@ -63,17 +63,17 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
               <div className="px-2 py-1">
                 <TabsBody>
                   <TabsPanel key="account" value="account">
-                    <BalanceView title="Account Balance" value={mainAccount.balance} currency="Magyar Forint" />
+                    <BalanceView title="Account Balance" value={mainAccount.balance} currency={mainAccount.currency} />
                   </TabsPanel>
                   <TabsPanel key="jar" value="jar">
-                    <BalanceView title="Jar Balance" value={saveAccount.balance} currency="Magyar Forint" />
+                    <BalanceView title="Jar Balance" value={saveAccount.balance} currency={saveAccount.currency} />
                   </TabsPanel>
                 </TabsBody>
               </div>
             </Tabs>
             <div className="p-2">
               <div className="flex w-full border-b-2 border-ui-grey-body">
-                <H1 variant="large">Categories</H1>
+                <H1 variant="large">Jar History</H1>
               </div>
             </div>
             <div className="p-2 flex flex-col gap-2 h-full max-h-[10em] overflow-hidden">
@@ -81,7 +81,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                 {transactionsRequest.data
                   ?.filter((tr: any) => tr.amount < 0)
                   .map((tr: any) => (
-                    <TransactionItem key={tr.id} shop={tr.name} expense={-tr.amount} />
+                    <TransactionItem currency={mainAccount.currency} key={tr.id} shop={tr.name} expense={-tr.amount} />
                   ))}
               </Scrollbars>
             </div>

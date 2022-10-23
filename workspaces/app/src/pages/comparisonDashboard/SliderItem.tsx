@@ -10,6 +10,7 @@ export interface SliderItemProps extends GalleryItemProps {
   transactions: any[]
   targetCountry: string
   sourceCountry: string
+  hideModal: boolean
 }
 
 export const SliderItem = ({
@@ -18,10 +19,18 @@ export const SliderItem = ({
   transactions,
   datasets,
   labels,
+  hideModal,
   icon,
   unit,
   value,
 }: SliderItemProps) => {
+  if (hideModal) {
+    return (
+      <div>
+        <GalleryItem unit={unit} value={value} icon={icon} labels={labels} datasets={datasets} />
+      </div>
+    )
+  }
   return (
     <Modal blur rounded>
       <ModalHandler>
