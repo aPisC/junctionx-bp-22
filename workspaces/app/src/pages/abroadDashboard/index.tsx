@@ -148,59 +148,16 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
             </div>
           </Scrollbars>
         </div>
-        <div>
-          {localStorage.getItem('hasJar') == 'true' ? (
-            <Button
-              variant="hub"
-              className="rounded-none"
-              onClick={() => {
-                navigate('/abroad-home')
-              }}
-            >
-              <H1>{localStorage.getItem('hasJar') == 'true' ? `My Jar` : `What's next?`}</H1>
-            </Button>
-          ) : (
-            <Modal rounded blur>
-              <ModalHandler>
-                <Button
-                  variant="hub"
-                  className="rounded-none"
-                  onClick={() => {
-                    navigate('/abroad-home')
-                  }}
-                >
-                  <H1>{localStorage.getItem('hasJar') == 'true' ? `My Jar` : `What's next?`}</H1>
-                </Button>
-              </ModalHandler>
-              <ModalBody title="Recommendation">
-                <div className="h-full w-full p-4">
-                  <div className="flex flex-col w-full h-[50%] items-center justify-center">
-                    <div className="text-center pb-2">
-                      Accumulate savings by artifically adjusting prices to your home country!
-                    </div>
-                    <Button
-                      variant="primary"
-                      rounded
-                      className="bg-wise-navy-blue text-white"
-                      onClick={() => {
-                        navigate('/abroad-home')
-                        localStorage.setItem('hasJar', 'true')
-                      }}
-                    >
-                      Create a Jar!
-                    </Button>
-                  </div>
-                  <div className="flex flex-col w-full h-[50%] items-center justify-center">
-                    <div className="text-center pb-2">Mitigate your expenses by using up Your saving Jar!</div>
-                    <Button variant="primary" disabled rounded className="bg-wise-navy-blue text-white">
-                      Mitigate expenses!
-                    </Button>
-                  </div>
-                </div>
-              </ModalBody>
-            </Modal>
-          )}
-        </div>
+        <Button
+          variant="hub"
+          className="rounded-none"
+          onClick={() => {
+            localStorage.setItem('hasJar', 'true')
+            navigate('/abroad-home')
+          }}
+        >
+          <H1>{localStorage.getItem('hasJar') === 'true' ? `My Jar` : `What's next?`}</H1>
+        </Button>
       </div>
     </BasePage>
   )

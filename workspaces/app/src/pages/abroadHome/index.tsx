@@ -122,10 +122,12 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
               </div>
             </div>
             <LineChartView />
-            <div className="w-full flex justify-center p-4">
+            <div className="w-full gap-2 flex justify-center p-4">
               <Modal blur rounded>
                 <ModalHandler>
-                  <Button variant="primary">Imitate shopping</Button>
+                  <Button rounded variant="primary">
+                    Imitate shopping
+                  </Button>
                 </ModalHandler>
                 <ModalBody title="Imaginary shopping">
                   {shoppingList.map((item, index) => (
@@ -156,6 +158,16 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                   ))}
                 </ModalBody>
               </Modal>
+              <Button
+                rounded
+                variant="primary"
+                onClick={() => {
+                  localStorage.clear()
+                  setTrigger(!trigger)
+                }}
+              >
+                Recreate Account
+              </Button>
             </div>
           </Scrollbars>
         </div>
