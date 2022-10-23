@@ -22,7 +22,7 @@ export const H1Style = {
       textSize: 'text-lg',
     },
     'medium-black': {
-      text: 'text-black',
+      text: 'text-ui-grey-body',
       textSize: 'text-lg',
     },
     'medium-brand-blue': {
