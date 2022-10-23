@@ -59,7 +59,9 @@ export default class TransactionController {
 
     if (user.targetCountry) {
       const predictor = new PPPPredictor(user.sourceCountry, user.targetCountry)
-      const predicted = predictor.getPrice(body.category, body.amount)
+      const predicted = body.reversed
+        ? body.amount / predictor.getPrice(body.category, 1)
+        : predictor.getPrice(body.category, body.amount)
       if (predicted > body.amount) {
         mainAccount.balance -= predicted
         mainAccount.expense += predicted
@@ -185,4 +187,5 @@ interface CreateTransactionRequest {
   userId: string
   category: string
   name: string
+  reversed: boolean
 }

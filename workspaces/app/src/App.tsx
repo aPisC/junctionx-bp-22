@@ -8,7 +8,6 @@ import HomePage from './pages/home'
 import HubPage from './pages/hub'
 import LandingPage from './pages/landing'
 import SavingDashboardPage from './pages/savingDashboard'
-import SavingHomePage from './pages/savingHome'
 import { SpinnerOverlay, SpinnerOverlayBackend } from './utils/SipnnerOverlay/SpinnerOverlay'
 
 export const ModalPortalContext = React.createContext<any>(null)
@@ -34,10 +33,10 @@ function App() {
               <Route path="comparison-dashboard" element={<ComparisonDashboardPage />} />
               <Route path="saving-selection" element={<ComparisonSelectorPage redirect="/saving-dashboard" />} />
               <Route path="saving-dashboard" element={<SavingDashboardPage />} />
+              <Route path="saving-home" element={<AbroadHomePage reverseTransact={false} />} />
               <Route path="abroad-selection" element={<ComparisonSelectorPage redirect="/abroad-dashboard" />} />
               <Route path="abroad-dashboard" element={<AbroadDashboardPage />} />
-              <Route path="abroad-home" element={<AbroadHomePage />} />
-              abroad-home
+              <Route path="abroad-home" element={<AbroadHomePage reverseTransact={true} />} />
             </Routes>
           </BrowserRouter>
         </div>

@@ -18,9 +18,11 @@ import BalanceView from '../home/BalanceView'
 import TransactionItem from '../home/TransactionItem'
 import { LineChartView } from '../savingHome/LineChartView'
 
-export interface AbroadHomePageProps {}
+export interface AbroadHomePageProps {
+  reverseTransact: boolean
+}
 
-export default function AbroadHomePage({}: AbroadHomePageProps) {
+export default function AbroadHomePage({ reverseTransact }: AbroadHomePageProps) {
   useComponentTracing('abroad-home')
   const [trigger, setTrigger] = useState(false)
   const navigate = useNavigate()
@@ -37,7 +39,8 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
 
   const transactionsRequest = useSpinneredRequest(
     () =>
-      axios(`${BACKEND_URL}/api/transaction/transactions/${localStorage.getItem('token')}`)
+      axios
+        .get(`${BACKEND_URL}/api/transaction/transactions/${localStorage.getItem('token')}`)
         .then((d) => d.data)
         .catch((e) => {
           localStorage.removeItem('token')
@@ -152,6 +155,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                               userId: user.id,
                               category: item.category,
                               name: item.title,
+                              reversed: !!reverseTransact,
                             })
                             .then(() => {
                               setTrigger(!trigger)

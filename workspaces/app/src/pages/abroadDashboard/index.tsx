@@ -47,7 +47,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
     []
   )
 
-  if (userRequest.isRunning) return null
+  if (userRequest.isRunning || summaryRequest.isRunning) return null
 
   const user: any = userRequest.data
 
