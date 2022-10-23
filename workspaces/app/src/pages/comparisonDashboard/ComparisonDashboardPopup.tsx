@@ -17,7 +17,7 @@ export const ComparisonDashboardPopup = ({ targetCountry, sourceCountry, childre
 
   return (
     <div>
-      <div className="flex justify-between pb-8 px-6">
+      <div className="flex justify-between py-[24px] px-6">
         {sourceFlag && <img className="w-[15%] object-fill scale-150" src={`${BACKEND_URL}/${sourceFlag.image}`} />}
         {targetFlag && <img className="w-[15%] object-fill scale-150" src={`${BACKEND_URL}/${targetFlag.image}`} />}
       </div>
