@@ -80,7 +80,6 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                 {Array.from(Array(7)).map((item, index) => {
                   const home = Math.floor(Math.random() * 200)
                   const abroad = Math.floor(Math.random() * 200)
-
                   const data = [
                     {
                       label: 'Home',
@@ -97,7 +96,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                       data: [Math.abs(home - abroad)],
                       barThickness: 10,
                       borderRadius: 8,
-                      backgroundColor: '#00b9ff',
+                      backgroundColor: '#A8AAAC',
                       stack: `${home > abroad ? 'stack1' : 'stack0'}`,
                     })
                     data.push({
@@ -105,7 +104,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                       data: [abroad],
                       barThickness: 10,
                       borderRadius: 8,
-                      backgroundColor: '#A8AAAC',
+                      backgroundColor: '#00b9ff',
                       stack: 'stack1',
                     })
                   } else {
@@ -114,7 +113,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                       data: [abroad],
                       barThickness: 10,
                       borderRadius: 8,
-                      backgroundColor: '#A8AAAC',
+                      backgroundColor: '#00b9ff',
                       stack: 'stack1',
                     })
                     data.push({
@@ -122,7 +121,7 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                       data: [Math.abs(home - abroad)],
                       barThickness: 10,
                       borderRadius: 8,
-                      backgroundColor: '#00b9ff',
+                      backgroundColor: '#A8AAAC',
                       stack: `${home > abroad ? 'stack1' : 'stack0'}`,
                     })
                   }

@@ -9,12 +9,12 @@ Content-type: application/json
 POST http://localhost:8080/user/setTarget/fr/e9141004-a6b2-4665-ac96-b535de71b224  HTTP/1.1
 
 ###
-GET https://junctionx-bp-22.apisc.host/api/user/ccf9759d-f26a-4d9b-b301-debe121ae509 HTTP/1.1
+GET https://travelwise.apisc.host/api/user/0c36adfe-64bb-4b90-8548-e2f008477c40 HTTP/1.1
 
 
 
 ###
-GET https://junctionx-bp-22.apisc.host/api/transaction/transactions/8b8a6ca1-63fa-4dab-8f5f-60c1f5d7a5ca HTTP/1.1
+GET https://travelwise.apisc.host/api/transaction/transactions/0c36adfe-64bb-4b90-8548-e2f008477c40 HTTP/1.1
 
 ###
 GET http://localhost:8080/transaction/summary/175d95e6-a1eb-414d-b5cb-0d8809bdd603 HTTP/1.1
