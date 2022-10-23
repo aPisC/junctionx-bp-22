@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Scrollbars from 'react-custom-scrollbars-2'
-import { FaArchive, FaUtensils } from 'react-icons/fa'
+import { FaArchive, FaQuestion, FaUtensils } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL } from '../../config/backendUrl'
 import Button from '../../modules/button'
@@ -9,10 +9,12 @@ import Icon from '../../modules/icon'
 import Modal, { ModalBody, ModalHandler } from '../../modules/modal'
 import Navigation from '../../modules/navigation'
 import SliderGallery, { SliderGalleryItem } from '../../modules/sliderGallery'
+import { round } from '../../utils/round'
 import { useSpinnerOverlay } from '../../utils/SipnnerOverlay/useSpinnerOverlay'
 import { useRequest } from '../../utils/useRequest'
 import { useSpinneredRequest } from '../../utils/useSpinneredRequest'
 import BasePage from '../base'
+import { BarIconMap } from '../comparisonDashboard'
 import { InfoBox } from '../comparisonDashboard/InfoBox'
 import PieChart from '../comparisonDashboard/PieChart'
 import SliderItem from '../comparisonDashboard/SliderItem'
@@ -77,9 +79,9 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                 )}
               />
               <SliderGallery>
-                {Array.from(Array(7)).map((item, index) => {
-                  const home = Math.floor(Math.random() * 200)
-                  const abroad = Math.floor(Math.random() * 200)
+                {summaryRequest.data?.map((sum: any, index: number) => {
+                  const home = sum.amount
+                  const abroad = sum.predicted
                   const data = [
                     {
                       label: 'Home',
@@ -129,13 +131,13 @@ export default function AbroadDashboardPage({}: AbroadDashboardPageProps) {
                   return (
                     <SliderGalleryItem key={index}>
                       <SliderItem
-                        sourceCountry=""
-                        targetCountry=""
+                        sourceCountry={userRequest.data?.sourceCountry}
+                        targetCountry={userRequest.data?.targetCountry}
                         transactions={[]}
                         hideModal={true}
-                        value={200}
-                        unit="km"
-                        icon={<FaUtensils />}
+                        value={round((sum.portion - 1) * 100)}
+                        unit="%"
+                        icon={BarIconMap[sum.id] || <FaQuestion />}
                         labels={['Food']}
                         datasets={data}
                       />

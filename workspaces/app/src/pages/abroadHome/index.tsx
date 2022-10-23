@@ -86,9 +86,33 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
             <div className="p-2 flex flex-col gap-2 h-full max-h-[10rem] overflow-hidden">
               <Scrollbars>
                 {transactions
-                  ?.filter((tr: any) => tr.amount > 0 && tr.accout === saveAccount.id)
+                  ?.filter((tr: any) => tr.accout === saveAccount.id)
                   .map((tr: any) => (
-                    <TransactionItem currency={mainAccount.currency} key={tr.id} shop={tr.name} expense={-tr.amount} />
+                    <Modal>
+                      <ModalHandler>
+                        <TransactionItem
+                          currency={mainAccount.currency}
+                          key={tr.id}
+                          shop={tr.name}
+                          expense={-tr.amount}
+                        />
+                      </ModalHandler>
+                      <ModalBody title="History details">
+                        <div className="w-full text-center">{tr.name}</div>
+                        <div className="flex w-full justify-between">
+                          <div className="text-ui-grey-body">Original price</div>
+                          <div className="">{tr.baseAmount}</div>
+                        </div>
+                        <div className="flex w-full justify-between">
+                          <div className="text-ui-grey-body">Corrected price</div>
+                          <div className="">{tr.basePredicted}</div>
+                        </div>
+                        <div className="flex w-full justify-between">
+                          <div className="text-ui-grey-body">Jar</div>
+                          <div className="">{tr.basePredicted - tr.baseAmount}</div>
+                        </div>
+                      </ModalBody>
+                    </Modal>
                   ))}
               </Scrollbars>
             </div>
@@ -113,6 +137,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                               amount: item.price,
                               userId: user.id,
                               category: item.category,
+                              name: item.title,
                             })
                             .then(() => {
                               setTrigger(!trigger)
@@ -123,7 +148,8 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                       >
                         <div>{item.title}</div>
                         <div>
-                          {item.price * (flagsRequest.data?.find((x) => x.id === user.sourceCountry)?.exchange ?? 1)}
+                          {`${item.price * (flagsRequest.data?.find((x) => x.id === user.sourceCountry)?.exchange ?? 1)}
+                          ${' '}${mainAccount.currency}`}
                         </div>
                       </div>
                     </div>
