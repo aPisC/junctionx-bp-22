@@ -103,7 +103,7 @@ export default function ComparisonDashboardPage({}: Props) {
                 <SliderGalleryItem key={index}>
                   <SliderItem
                     hideModal={false}
-                    unit=""
+                    unit={user.accounts[0].currency}
                     value={Math.abs(Math.round(sum.amount - sum.predicted))}
                     icon={BarIconMap[sum.id] || <FaQuestion />}
                     labels={['Food']}
