@@ -15,7 +15,7 @@ export default function HubPage({}: HubPageProps) {
       <div className="h-full flex flex-col">
         <Navigation />
         <div className="flex-grow overflow-hidden">
-          <div className="flex flex-col gap-2 w-full h-full items-center justify-center">
+          <div className="flex flex-col gap-2 w-full h-full items-stretch px-4 justify-center">
             <Button variant="none" onClick={() => navigate('/comparison-selector')}>
               <InfoBox
                 icon={
