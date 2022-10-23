@@ -17,6 +17,12 @@ export default class TransactionModel extends Model {
   declare amount: number
 
   @Column
+  declare baseAmount: number
+
+  @Column
+  declare basePredicted: number
+
+  @Column
   declare category: string
 
   @Column
