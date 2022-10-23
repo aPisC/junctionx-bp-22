@@ -49,7 +49,7 @@ export const PieChart = ({ labels, homeAmount, targetAmount, currency, homeCount
               {round(homeAmount)} {currency}
             </div>
           </div>
-          <div className="text-xs pl-4 text-dark-grey">Choosen country:</div>
+          <div className="text-xs pl-4 text-dark-grey">Chosen country:</div>
           <div className="flex items-center w-full justify-center text-ui-grey-body">
             <div className="p-1">
               <img className="w-5" src={`${BACKEND_URL}/${targetFlag?.image}`} />
