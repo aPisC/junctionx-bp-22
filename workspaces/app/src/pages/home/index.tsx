@@ -133,7 +133,7 @@ export default function HomePage({}: HomePageProps) {
                 <H1 variant="large">Transactions</H1>
               </div>
             </div>
-            <div className="p-2 flex flex-col gap-2 h-[12em]">
+            <div className="p-2 flex flex-col gap-2 h-[12rem]">
               <Scrollbars>
                 {transactionsRequest.data
                   ?.filter((tr: any) => tr.amount < 0)

@@ -35,7 +35,7 @@ export const PieChart = ({ labels, homeAmount, targetAmount, currency, homeCount
     },
   ]
   return (
-    <div className="relative w-full h-[15em]">
+    <div className="relative w-full h-[15rem]">
       <MultiSeriesPieChartView labels={labels} data={data} />
       <div className="absolute flex top-0 left-0 w-full h-full text-black items-center justify-center">
         <div className="flex flex-col text-lg">

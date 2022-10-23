@@ -21,7 +21,7 @@ export default function SavingHomePage({}: SavingHomePageProps) {
               <div className="p-2 rounded-lg">
                 <BalanceView currency="Magyar forint" title="Jar account" value={120000} />
               </div>
-              <div className="py-2 h-[15em] overflow-hidden">
+              <div className="py-2 h-[15rem] overflow-hidden">
                 <Scrollbars>
                   <div className="flex flex-col gap-2">
                     <TransactionItem currency="HUF" shop="Spar megacorp." expense={38000} />
