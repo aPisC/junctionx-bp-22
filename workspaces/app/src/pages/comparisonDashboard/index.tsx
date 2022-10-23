@@ -102,6 +102,7 @@ export default function ComparisonDashboardPage({}: Props) {
               {summaryRequest.data?.map((sum: any, index: number) => (
                 <SliderGalleryItem key={index}>
                   <SliderItem
+                    hideModal={false}
                     unit=""
                     value={Math.abs(Math.round(sum.amount - sum.predicted))}
                     icon={BarIconMap[sum.id] || <FaQuestion />}
