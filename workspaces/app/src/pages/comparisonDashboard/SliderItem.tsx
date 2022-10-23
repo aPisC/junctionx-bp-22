@@ -40,7 +40,7 @@ export const SliderItem = ({
       </ModalHandler>
       <ModalBody title="Transactions">
         <ComparisonDashboardPopup sourceCountry={sourceCountry} targetCountry={targetCountry}>
-          {transactions.map((tr, index) => (
+          {transactions?.map((tr, index) => (
             <PricePairItem
               key={index}
               title={tr.name}
