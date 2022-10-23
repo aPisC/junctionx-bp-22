@@ -136,7 +136,7 @@ export default function HomePage({}: HomePageProps) {
             <div className="p-2 flex flex-col gap-2 h-[12rem]">
               <Scrollbars>
                 {transactionsRequest.data
-                  ?.filter((tr: any) => tr.amount < 0)
+                  ?.filter((tr: any) => tr.amount < 0 && tr.category !== 'saving' && tr.category !== 'subside')
                   .map((tr: any) => (
                     <TransactionItem currency={mainAccount.currency} key={tr.id} shop={tr.name} expense={-tr.amount} />
                   ))}

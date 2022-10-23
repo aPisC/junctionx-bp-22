@@ -137,6 +137,7 @@ export default function AbroadHomePage({}: AbroadHomePageProps) {
                               amount: item.price,
                               userId: user.id,
                               category: item.category,
+                              name: item.title,
                             })
                             .then(() => {
                               setTrigger(!trigger)
