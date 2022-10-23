@@ -5,9 +5,18 @@ import { GalleryItem, GalleryItemProps } from '../home/GalleryItem'
 import { ComparisonDashboardPopup } from './ComparisonDashboardPopup'
 import { PricePairItem } from './PricePairItem'
 
-export interface SliderItemProps extends GalleryItemProps {}
+export interface SliderItemProps extends GalleryItemProps {
+  hideModal: boolean
+}
 
-export const SliderItem = ({ datasets, labels, icon, unit, value }: SliderItemProps) => {
+export const SliderItem = ({ datasets, labels, icon, unit, value, hideModal }: SliderItemProps) => {
+  if (hideModal) {
+    return (
+      <div>
+        <GalleryItem unit={unit} value={value} icon={icon} labels={labels} datasets={datasets} />
+      </div>
+    )
+  }
   return (
     <Modal blur rounded>
       <ModalHandler>
