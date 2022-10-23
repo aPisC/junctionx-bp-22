@@ -32,9 +32,8 @@ RUN yarn build
 
 
 # Create runtime image
-FROM node:16 as runtime
+FROM nginx as server
 WORKDIR /app
 
-RUN yarn add serve
-COPY --from=build /src/workspaces/app/dist dist
-CMD yarn serve -p 8080 -n dist/ 
+COPY --from=build /src/workspaces/app/dist /app
+COPY workspaces/app/nginx.conf /etc/nginx/conf.d/default.conf
